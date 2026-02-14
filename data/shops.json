@@ -1,0 +1,87 @@
+{
+  "town": "Arlington, MA",
+  "street": "Massachusetts Avenue",
+  "center": {
+    "lat": 42.4153,
+    "lng": -71.1569
+  },
+  "defaultHeading": 90,
+  "shops": [
+    {
+      "id": "capitol-theatre",
+      "name": "Capitol Theatre",
+      "category": "Entertainment",
+      "lat": 42.4155,
+      "lng": -71.1563,
+      "description": "Historic single-screen movie theatre showing independent and classic films since 1927.",
+      "hours": "Showtimes vary — see website",
+      "website": "https://capitoltheatreusa.com",
+      "panoFile": "capitol-theatre/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Capitol Theatre — Lobby",
+          "hfov": 120,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-cafe",
+      "name": "Arlington Café",
+      "category": "Café",
+      "lat": 42.4148,
+      "lng": -71.1575,
+      "description": "Neighborhood café serving specialty coffee, fresh pastries, and light bites.",
+      "hours": "Mon–Fri 6:30am–4pm, Sat–Sun 7am–3pm",
+      "website": "#",
+      "panoFile": "arlington-cafe/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Café — Inside",
+          "hfov": 110,
+          "pitch": -3,
+          "yaw": 90
+        }
+      }
+    },
+    {
+      "id": "book-rack",
+      "name": "The Book Rack",
+      "category": "Retail",
+      "lat": 42.4158,
+      "lng": -71.1555,
+      "description": "Used and rare bookshop with a curated selection of fiction, history, and children's books.",
+      "hours": "Mon–Sat 10am–6pm, Sun 12–5pm",
+      "website": "#",
+      "panoFile": "book-rack/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "The Book Rack — Entrance",
+          "hfov": 100,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "menotomy-grill",
+      "name": "Menotomy Grill & Tavern",
+      "category": "Restaurant",
+      "lat": 42.4160,
+      "lng": -71.1548,
+      "description": "Casual American grill and tavern with craft beers and a lively patio.",
+      "hours": "Daily 11:30am–10pm",
+      "website": "#",
+      "panoFile": "menotomy-grill/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Menotomy Grill — Dining Room",
+          "hfov": 110,
+          "pitch": -2,
+          "yaw": 45
+        }
+      }
+    }
+  ]
+}

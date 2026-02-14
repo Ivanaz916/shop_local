@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask a Local — Shop Local Arlington</title>
+    <meta name="description" content="Search for shops, products, and marketplace listings in Arlington Center with our AI assistant.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body class="search-body">
+
+    <!-- ===== HEADER ===== -->
+    <header id="top-bar">
+        <div class="top-bar-left">
+            <a href="index.html" class="nav-back" aria-label="Back to home">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+            </a>
+            <h1><span class="brand-icon">🏘️</span> Ask a Local</h1>
+        </div>
+        <nav class="top-bar-right">
+            <a href="browse.html" class="nav-link">Browse Shops</a>
+        </nav>
+    </header>
+
+    <!-- ===== CHAT CONTAINER ===== -->
+    <main id="chat-container">
+        <!-- Messages area -->
+        <div id="chat-messages">
+            <!-- Welcome message -->
+            <div class="message message-ai">
+                <div class="message-avatar">🏘️</div>
+                <div class="message-bubble">
+                    <p>Hi! I know what's happening on Mass Ave. Ask me about local shops, marketplace finds, or anything Arlington.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prompt chips -->
+        <div id="prompt-chips">
+            <button class="chip" data-prompt="What shops are open right now?">🕐 Open now?</button>
+            <button class="chip" data-prompt="Are there any good restaurants on Mass Ave?">🍽️ Restaurants</button>
+            <button class="chip" data-prompt="What's for sale on the marketplace?">🛍️ Marketplace</button>
+            <button class="chip" data-prompt="Where can I find books in Arlington?">📚 Bookstores</button>
+        </div>
+
+        <!-- Input bar -->
+        <div id="chat-input-bar">
+            <input type="text" id="chat-input" placeholder="What are you looking for in Arlington?" autocomplete="off">
+            <button id="chat-send" aria-label="Send message">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

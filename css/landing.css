@@ -1,0 +1,206 @@
+/* ================================================================
+   Landing Page Styles
+   ================================================================ */
+
+.landing-body {
+    overflow-y: auto;
+    height: auto;
+}
+
+/* ---------- Hero ---------- */
+#landing-hero {
+    position: relative;
+    min-height: calc(100vh - var(--top-bar-height) - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 40px;
+    margin-top: var(--top-bar-height);
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(165deg, rgba(15, 61, 37, 0.92) 0%, rgba(26, 95, 58, 0.85) 40%, rgba(39, 133, 90, 0.78) 100%),
+        url('../images/neighborhood.jpg') center/cover no-repeat;
+    background-color: var(--color-primary-dark);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-content h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    margin-bottom: 48px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+/* ---------- Path Cards ---------- */
+.path-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.path-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.path-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.path-card-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.path-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.path-card p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.path-card-cta {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.path-card-browse .path-card-cta {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+
+.path-card-browse:hover .path-card-cta {
+    background: #f0b54a;
+    transform: scale(1.03);
+}
+
+.path-card-search .path-card-cta {
+    background: #fff;
+    color: var(--color-primary-dark);
+}
+
+.path-card-search:hover .path-card-cta {
+    background: #f0f0ea;
+    transform: scale(1.03);
+}
+
+/* ---------- Stats Strip ---------- */
+#landing-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 32px 24px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* ---------- Footer ---------- */
+#site-footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    background: var(--color-bg);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .path-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 32px;
+    }
+
+    .path-card {
+        padding: 28px 20px;
+    }
+
+    .path-card-icon {
+        font-size: 2.4rem;
+    }
+
+    #landing-stats {
+        gap: 24px;
+    }
+
+    .stat-number {
+        font-size: 1.4rem;
+    }
+}

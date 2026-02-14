@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Local Arlington — Virtual Street Walk</title>
+    <meta name="description" content="Explore Massachusetts Avenue in Arlington Center. Walk the street and step inside local shops with 360° views.">
+
+    <!-- Pannellum (free, MIT-licensed 360° viewer) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ===== TOP BAR ===== -->
+    <header id="top-bar">
+        <div class="top-bar-left">
+            <button id="sidebar-toggle" aria-label="Toggle shop list">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <h1>
+                <span class="brand-icon">🏘️</span>
+                Shop Local Arlington
+            </h1>
+        </div>
+        <nav class="top-bar-right">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="search.html" class="nav-link">Search</a>
+            <span id="mode-badge" class="badge badge-gallery">Gallery</span>
+        </nav>
+    </header>
+
+    <!-- ===== SIDEBAR — shop directory ===== -->
+    <aside id="sidebar" class="sidebar-closed">
+        <div id="sidebar-header">
+            <h2>Participating Shops</h2>
+            <div id="filter-container">
+                <select id="category-filter" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+        </div>
+        <ul id="shop-list">
+            <!-- Populated dynamically from shops.json -->
+        </ul>
+    </aside>
+
+    <!-- ===== MAIN VIEWER AREA ===== -->
+    <main id="viewer-container">
+        <!-- Neighborhood photos grid -->
+        <div id="photo-grid" class="photo-grid"></div>
+
+        <!-- Marketplace listings -->
+        <section id="marketplace-section" class="marketplace-section">
+            <div class="marketplace-header">
+                <h2>🛍️ Marketplace</h2>
+                <p>Recent finds from your Arlington neighbors</p>
+            </div>
+            <div id="marketplace-grid" class="marketplace-grid"></div>
+        </section>
+
+        <!-- Pannellum — indoor 360° interiors -->
+        <div id="pannellum-view" class="hidden"></div>
+
+        <!-- Loading overlay -->
+        <div id="loading-overlay" class="hidden">
+            <div class="spinner"></div>
+            <p>Loading panorama…</p>
+        </div>
+    </main>
+
+    <!-- ===== SHOP INFO PANEL (slides up on shop entry) ===== -->
+    <div id="shop-info-panel" class="panel-hidden">
+        <button id="panel-close" aria-label="Close info panel">&times;</button>
+        <div id="panel-content">
+            <h3 id="panel-shop-name"></h3>
+            <p id="panel-shop-description"></p>
+            <div id="panel-details">
+                <span id="panel-shop-category" class="detail-tag"></span>
+                <span id="panel-shop-hours" class="detail-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span></span>
+                </span>
+            </div>
+            <div id="panel-actions">
+                <a id="panel-shop-website" href="#" target="_blank" rel="noopener" class="btn btn-primary">Visit Website</a>
+                <button id="btn-back-to-street" class="btn btn-secondary">← Back to Gallery</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/supabase-client.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/interior.js"></script>
+</body>
+</html>
