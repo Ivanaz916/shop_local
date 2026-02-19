@@ -6,48 +6,63 @@
     <title>Shop Local Arlington</title>
     <meta name="description" content="Discover local shops and marketplace finds on Massachusetts Avenue in Arlington Center, MA.">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts — display + body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Birthstone&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/landing.css">
 </head>
 <body class="landing-body">
 
-    <!-- ===== HEADER ===== -->
-    <header id="top-bar">
-        <div class="top-bar-left">
-            <h1><span class="brand-icon">🏘️</span> Shop Local Arlington</h1>
-        </div>
-    </header>
-
-    <!-- ===== HERO ===== -->
+    <!-- ===== HERO — full viewport ===== -->
     <section id="landing-hero">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <h2>Massachusetts Avenue, Arlington Center</h2>
-            <p class="hero-subtitle">Your neighborhood. Your shops. All in one place.</p>
-
-            <!-- ===== TWO PATH CARDS ===== -->
-            <div class="path-cards">
-                <!-- Browse Card -->
-                <a href="browse.html" class="path-card path-card-browse">
-                    <div class="path-card-icon">🚶</div>
-                    <h3>Walk the Block</h3>
-                    <p>Browse local shops, peek inside with 360° views, and discover marketplace finds from your neighbors.</p>
-                    <span class="path-card-cta">Start Browsing →</span>
-                </a>
-
-                <!-- Search Card -->
-                <a href="search.html" class="path-card path-card-search">
-                    <div class="path-card-icon">💬</div>
-                    <h3>Ask a Local</h3>
-                    <p>Looking for something specific? Our AI assistant knows every shop and listing on the block.</p>
-                    <span class="path-card-cta">Start Searching →</span>
-                </a>
+        <!-- Image collage background -->
+        <div class="hero-images">
+            <div class="hero-img hero-img-1">
+                <img src="images/town/75E809C5-16BF-47BE-8B8C-EE8EA0A07A31.JPEG" alt="Arlington neighborhood">
             </div>
+            <div class="hero-img hero-img-2">
+                <img src="images/town/IMG_5563.JPEG" alt="Massachusetts Avenue">
+            </div>
+            <div class="hero-img hero-img-3">
+                <img src="images/town/revised1.png" alt="Arlington local">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <!-- Headline -->
+        <div class="hero-content">
+            <h1 class="hero-headline"><span class="headline-top">Local</span><br><span class="headline-script">Revolutionized</span></h1>
+            <p class="hero-tagline">Arlington Center &middot; Massachusetts Avenue</p>
+        </div>
+        <a href="#action-section" class="scroll-arrow" aria-label="Scroll down">↓</a>
+    </section>
+
+    <!-- ===== ACTION SECTION ===== -->
+    <section id="action-section">
+        <a href="#landing-hero" class="scroll-arrow scroll-arrow-up" aria-label="Back to top">&uarr;</a>
+        <p class="action-intro">Shopping local should be <span class="accent-script">easier.</span></p>
+        <p class="action-detail">This site aims to curate what's available while giving you the feel of browsing.</p>
+        <p class="action-detail">Once you get a feel of the local landscape, get out there or use the connection details included to connect and get what you need!</p>
+
+        <div class="path-cards">
+            <!-- Browse Card -->
+            <a href="browse.html" class="path-card path-card-browse">
+                <div class="path-card-icon">🚶</div>
+                <h3>Walk the Block</h3>
+                <p>Browse local shops, peek inside with 360° views, and discover marketplace finds from your neighbors.</p>
+                <span class="path-card-cta">Start Browsing →</span>
+            </a>
+
+            <!-- Search Card -->
+            <a href="search.html" class="path-card path-card-search">
+                <div class="path-card-icon">💬</div>
+                <h3>Ask a Local</h3>
+                <p>Looking for something specific? Our AI assistant knows every shop and listing on the block.</p>
+                <span class="path-card-cta">Start Searching →</span>
+            </a>
         </div>
     </section>
 
@@ -74,15 +89,22 @@
 
     <script src="js/supabase-client.js"></script>
     <script>
-        // Update marketplace listing count from Supabase (if connected)
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 if (typeof SupabaseClient !== 'undefined' && SupabaseClient.isConfigured()) {
                     const listings = await SupabaseClient.fetchListings();
                     document.getElementById('stat-listings').textContent = listings.length;
                 }
-            } catch (e) {
-                // Supabase not configured yet — that's fine, show 0
+            } catch (e) { /* Supabase not configured yet */ }
+
+            // Hide down arrow once scrolled past hero
+            const downArrow = document.querySelector('.scroll-arrow:not(.scroll-arrow-up)');
+            if (downArrow) {
+                const observer = new IntersectionObserver(([entry]) => {
+                    downArrow.style.opacity = entry.isIntersecting ? '1' : '0';
+                    downArrow.style.pointerEvents = entry.isIntersecting ? 'auto' : 'none';
+                }, { threshold: 0.3 });
+                observer.observe(document.getElementById('landing-hero'));
             }
         });
     </script>

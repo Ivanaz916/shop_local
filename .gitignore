@@ -12,6 +12,7 @@ desktop.ini
 # Environment / secrets
 .env
 .env.local
+js/supabase-client.js
 
 # Node (if added later)
 node_modules/
@@ -26,3 +27,4 @@ SETUP.md
 placeholder-generator.html
 test.html
 bookmarklet.html
+listings-template.csv

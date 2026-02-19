@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --color-primary: #1a5f3a;       /* forest green — local / community feel */
     --color-primary-light: #27855a;

@@ -16,7 +16,7 @@
       "description": "Historic single-screen movie theatre showing independent and classic films since 1927.",
       "hours": "Showtimes vary — see website",
       "website": "https://capitoltheatreusa.com",
-      "panoFile": "capitol-theatre/entrance.jpg",
+      "panoFile": "sample-interior.jpg",
       "scenes": {
         "entrance": {
           "title": "Capitol Theatre — Lobby",
