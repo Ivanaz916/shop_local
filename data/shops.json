@@ -10,7 +10,7 @@
     {
       "id": "capitol-theatre",
       "name": "Capitol Theatre",
-      "category": "Entertainment",
+      "category": "Arts & Entertainment",
       "lat": 42.4155,
       "lng": -71.1563,
       "description": "Historic single-screen movie theatre showing independent and classic films since 1927.",
@@ -27,9 +27,47 @@
       }
     },
     {
+      "id": "arlington-center-for-arts",
+      "name": "Arlington Center for the Arts",
+      "category": "Arts & Entertainment",
+      "lat": 42.4160,
+      "lng": -71.1575,
+      "description": "Community arts center offering classes, gallery exhibitions, performances, and studio space for artists of all ages.",
+      "hours": "Mon–Sat 9am–9pm, Sun 10am–5pm",
+      "website": "https://www.acarts.org",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Center for the Arts — Entrance",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "regent-theatre",
+      "name": "Regent Theatre",
+      "category": "Arts & Entertainment",
+      "lat": 42.4156,
+      "lng": -71.1567,
+      "description": "Intimate performance venue at 7 Medford Street hosting live music, comedy, and theater events.",
+      "hours": "Show nights only — see website for schedule",
+      "website": "https://www.regenttheatre.com",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Regent Theatre — Lobby",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
       "id": "arlington-cafe",
       "name": "Arlington Café",
-      "category": "Café",
+      "category": "Café & Coffee",
       "lat": 42.4148,
       "lng": -71.1575,
       "description": "Neighborhood café serving specialty coffee, fresh pastries, and light bites.",
@@ -46,9 +84,294 @@
       }
     },
     {
+      "id": "caffe-artigiano",
+      "name": "Caffè Artigiano",
+      "category": "Café & Coffee",
+      "lat": 42.4152,
+      "lng": -71.1558,
+      "description": "Artisan espresso bar and café with house-roasted beans, seasonal drinks, and freshly baked goods.",
+      "hours": "Mon–Fri 6am–5pm, Sat–Sun 7am–4pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Caffè Artigiano — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "new-leaf-restaurant",
+      "name": "New Leaf Restaurant & Bar",
+      "category": "Café & Coffee",
+      "lat": 42.4157,
+      "lng": -71.1572,
+      "description": "Cozy brunch and lunch spot with farm-to-table ingredients, creative egg dishes, and a curated coffee program.",
+      "hours": "Daily 8am–3pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "New Leaf — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "menotomy-grill",
+      "name": "Menotomy Grill & Tavern",
+      "category": "Food & Dining",
+      "lat": 42.4160,
+      "lng": -71.1548,
+      "description": "Casual American grill and tavern with craft beers and a lively patio.",
+      "hours": "Daily 11:30am–10pm",
+      "website": "#",
+      "panoFile": "menotomy-grill/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Menotomy Grill — Dining Room",
+          "hfov": 110,
+          "pitch": -2,
+          "yaw": 45
+        }
+      }
+    },
+    {
+      "id": "tutto-bene",
+      "name": "Tutto Bene",
+      "category": "Food & Dining",
+      "lat": 42.4154,
+      "lng": -71.1562,
+      "description": "Beloved Italian trattoria on Mass Ave serving handmade pasta, wood-fired pizzas, and classic antipasti.",
+      "hours": "Tue–Sun 5pm–10pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Tutto Bene — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "chilli-duck",
+      "name": "Chilli Duck Thai Bistro",
+      "category": "Food & Dining",
+      "lat": 42.4162,
+      "lng": -71.1508,
+      "description": "Authentic Thai restaurant known for vibrant curries, pad thai, and a welcoming family atmosphere.",
+      "hours": "Mon–Sat 11:30am–9:30pm, Sun 12–9pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Chilli Duck — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "jasons-restaurant",
+      "name": "Jason's Restaurant",
+      "category": "Food & Dining",
+      "lat": 42.4175,
+      "lng": -71.1430,
+      "description": "Classic American diner open since the 1970s, famous for hearty breakfasts, loaded burgers, and homestyle comfort food.",
+      "hours": "Daily 6am–3pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Jason's Restaurant — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "pho-and-i",
+      "name": "Pho & I Vietnamese Kitchen",
+      "category": "Food & Dining",
+      "lat": 42.4153,
+      "lng": -71.1570,
+      "description": "Fresh Vietnamese cuisine featuring aromatic pho, bánh mì sandwiches, spring rolls, and bubble tea.",
+      "hours": "Mon–Sat 11am–9pm, Sun 12–8pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Pho & I — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "dantes-pizza",
+      "name": "Dante's Inferno Pizzeria",
+      "category": "Food & Dining",
+      "lat": 42.4155,
+      "lng": -71.1578,
+      "description": "Neighborhood pizza joint with New York–style pies, calzones, subs, and late-night delivery.",
+      "hours": "Sun–Thu 11am–10pm, Fri–Sat 11am–11pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Dante's Pizzeria — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "sichuan-gourmet",
+      "name": "Sichuan Gourmet",
+      "category": "Food & Dining",
+      "lat": 42.4158,
+      "lng": -71.1542,
+      "description": "Authentic Sichuan Chinese cuisine with bold spices, mapo tofu, dan dan noodles, and Peking duck.",
+      "hours": "Daily 11:30am–9:30pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Sichuan Gourmet — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "bollywood-masala",
+      "name": "Bollywood Masala",
+      "category": "Food & Dining",
+      "lat": 42.4157,
+      "lng": -71.1550,
+      "description": "Lively Indian restaurant serving biryanis, curries, tandoori platters, and fresh-baked naan.",
+      "hours": "Tue–Sun 12–10pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Bollywood Masala — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "mixx-burgers",
+      "name": "Mixx Burgers & Bowls",
+      "category": "Food & Dining",
+      "lat": 42.4154,
+      "lng": -71.1582,
+      "description": "Fast-casual spot with customizable smash burgers, grain bowls, crispy fries, and house-made sauces.",
+      "hours": "Mon–Sat 11am–9pm, Sun 12–8pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Mixx — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "yoga-tree-arlington",
+      "name": "Yoga Tree Arlington",
+      "category": "Health & Wellness",
+      "lat": 42.4148,
+      "lng": -71.1580,
+      "description": "Welcoming yoga studio offering Vinyasa, Hatha, Yin, and restorative classes for all experience levels.",
+      "hours": "Mon–Fri 6am–8pm, Sat–Sun 8am–6pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Yoga Tree — Studio",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-family-chiro",
+      "name": "Arlington Family Chiropractic & Wellness",
+      "category": "Health & Wellness",
+      "lat": 42.4153,
+      "lng": -71.1590,
+      "description": "Family chiropractic practice providing spinal adjustments, massage therapy, and holistic wellness care.",
+      "hours": "Mon–Wed 8am–6pm, Thu 10am–7pm, Fri 8am–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Family Chiropractic — Reception",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "active-physical-therapy",
+      "name": "Active Physical Therapy",
+      "category": "Health & Wellness",
+      "lat": 42.4152,
+      "lng": -71.1597,
+      "description": "Outpatient physical therapy clinic specializing in sports injuries, orthopedic rehab, and post-surgery recovery.",
+      "hours": "Mon–Fri 7am–7pm, Sat 8am–1pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Active PT — Reception",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "harmony-wellness",
+      "name": "Harmony Health & Wellness Center",
+      "category": "Health & Wellness",
+      "lat": 42.4147,
+      "lng": -71.1565,
+      "description": "Integrative wellness center offering acupuncture, herbal medicine, nutritional counseling, and mindfulness coaching.",
+      "hours": "Mon–Sat 9am–7pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Harmony Wellness — Reception",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
       "id": "book-rack",
       "name": "The Book Rack",
-      "category": "Retail",
+      "category": "Books & Media",
       "lat": 42.4158,
       "lng": -71.1555,
       "description": "Used and rare bookshop with a curated selection of fiction, history, and children's books.",
@@ -65,21 +388,325 @@
       }
     },
     {
-      "id": "menotomy-grill",
-      "name": "Menotomy Grill & Tavern",
-      "category": "Restaurant",
-      "lat": 42.4160,
-      "lng": -71.1548,
-      "description": "Casual American grill and tavern with craft beers and a lively patio.",
-      "hours": "Daily 11:30am–10pm",
+      "id": "camelot-books",
+      "name": "Camelot Books & Music",
+      "category": "Books & Media",
+      "lat": 42.4163,
+      "lng": -71.1540,
+      "description": "Independent bookstore and music shop carrying new releases, vinyl records, local zines, and gifts.",
+      "hours": "Mon–Sat 10am–7pm, Sun 11am–5pm",
       "website": "#",
-      "panoFile": "menotomy-grill/entrance.jpg",
+      "panoFile": null,
       "scenes": {
         "entrance": {
-          "title": "Menotomy Grill — Dining Room",
+          "title": "Camelot Books — Entrance",
           "hfov": 110,
-          "pitch": -2,
-          "yaw": 45
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "oohlala-boutique",
+      "name": "Oohlala Children's Boutique",
+      "category": "Clothing & Apparel",
+      "lat": 42.4156,
+      "lng": -71.1538,
+      "description": "Charming children's clothing boutique featuring playful, eco-friendly brands and unique accessories for newborns through tweens.",
+      "hours": "Mon–Sat 10am–6pm, Sun 11am–4pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Oohlala — Shop Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "thread-style-boutique",
+      "name": "Thread & Style Boutique",
+      "category": "Clothing & Apparel",
+      "lat": 42.4160,
+      "lng": -71.1530,
+      "description": "Women's clothing boutique offering curated seasonal collections, accessories, and personalized styling sessions.",
+      "hours": "Mon–Sat 10am–6pm, Sun 12–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Thread & Style — Shop Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-exchange",
+      "name": "The Arlington Exchange",
+      "category": "Clothing & Apparel",
+      "lat": 42.4165,
+      "lng": -71.1523,
+      "description": "Upscale consignment shop with gently used designer clothing, handbags, and jewelry for men and women.",
+      "hours": "Mon–Sat 10am–5:30pm, Sun 11am–4pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Exchange — Shop Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "paper-planet",
+      "name": "Paper Planet",
+      "category": "Retail & Gifts",
+      "lat": 42.4151,
+      "lng": -71.1606,
+      "description": "Delightful stationery and gift shop stocking greeting cards, wrapping, journals, art supplies, and quirky local gifts.",
+      "hours": "Mon–Sat 10am–6pm, Sun 11am–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Paper Planet — Shop Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-artisans",
+      "name": "Arlington Artisans Co-op",
+      "category": "Retail & Gifts",
+      "lat": 42.4158,
+      "lng": -71.1615,
+      "description": "Artist-run cooperative gallery and gift shop showcasing handmade jewelry, ceramics, textiles, and fine art by local makers.",
+      "hours": "Tue–Sat 11am–6pm, Sun 12–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Artisans — Gallery",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-florist",
+      "name": "Arlington Florist",
+      "category": "Retail & Gifts",
+      "lat": 42.4162,
+      "lng": -71.1620,
+      "description": "Full-service florist offering fresh-cut flowers, custom arrangements, wedding florals, and same-day delivery.",
+      "hours": "Mon–Sat 8am–6pm, Sun 9am–2pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Florist — Shop",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "salon-zen-arlington",
+      "name": "Salon Zen Arlington",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4148,
+      "lng": -71.1591,
+      "description": "Full-service hair salon specializing in color, balayage, cuts, and blowouts in a relaxed, eco-conscious environment.",
+      "hours": "Tue–Sat 9am–7pm, Sun 10am–4pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Salon Zen — Studio",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "green-tea-nail-spa",
+      "name": "Green Tea Nail & Spa",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4153,
+      "lng": -71.1599,
+      "description": "Tranquil nail salon and spa offering manicures, pedicures, gel polish, and relaxing body treatments.",
+      "hours": "Mon–Sat 9:30am–7:30pm, Sun 10am–6pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Green Tea Nail Spa — Salon",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "bishops-cut-style",
+      "name": "Bishop's Cut & Style",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4158,
+      "lng": -71.1608,
+      "description": "Classic barbershop and style lounge offering precision haircuts, straight-razor shaves, and beard grooming.",
+      "hours": "Tue–Fri 9am–7pm, Sat 8am–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Bishop's — Barber Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "ye-olde-cheshire-cheese",
+      "name": "Ye Olde Cheshire Cheese",
+      "category": "Specialty Food & Drink",
+      "lat": 42.4163,
+      "lng": -71.1514,
+      "description": "Artisan cheese shop and specialty food market with imported and local cheeses, charcuterie, wine pairings, and gift baskets.",
+      "hours": "Mon–Sat 10am–7pm, Sun 11am–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Ye Olde Cheshire Cheese — Shop",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "wine-cask-arlington",
+      "name": "Wine Cask Arlington",
+      "category": "Specialty Food & Drink",
+      "lat": 42.4165,
+      "lng": -71.1507,
+      "description": "Neighborhood wine and spirits shop with an expertly curated selection of Old and New World wines, craft beers, and small-batch spirits.",
+      "hours": "Mon–Sat 10am–9pm, Sun 12–6pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Wine Cask — Shop Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-natural-foods",
+      "name": "Arlington Natural Foods",
+      "category": "Specialty Food & Drink",
+      "lat": 42.4168,
+      "lng": -71.1500,
+      "description": "Community-focused natural food store offering organic produce, bulk goods, vitamins, supplements, and local dairy products.",
+      "hours": "Mon–Sat 8am–8pm, Sun 9am–7pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Natural Foods — Market",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "crossfit-arlington",
+      "name": "CrossFit Arlington",
+      "category": "Fitness",
+      "lat": 42.4170,
+      "lng": -71.1490,
+      "description": "High-intensity functional fitness gym with coached group workouts, open gym hours, and nutrition workshops.",
+      "hours": "Mon–Fri 5:30am–8pm, Sat–Sun 8am–12pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "CrossFit Arlington — Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "ironstrength-fitness",
+      "name": "IronStrength Fitness Studio",
+      "category": "Fitness",
+      "lat": 42.4145,
+      "lng": -71.1613,
+      "description": "Boutique strength training and group fitness studio with small-class personal training, Pilates, and TRX sessions.",
+      "hours": "Mon–Fri 6am–8pm, Sat 7am–2pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "IronStrength — Studio",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-hardware",
+      "name": "Arlington Hardware & Home",
+      "category": "Home & Garden",
+      "lat": 42.4143,
+      "lng": -71.1620,
+      "description": "Independent hardware and home improvement store carrying tools, paint, plumbing supplies, and helpful knowledgeable staff.",
+      "hours": "Mon–Sat 7:30am–6pm, Sun 9am–4pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Hardware — Store",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "the-garden-shop",
+      "name": "The Garden Shop",
+      "category": "Home & Garden",
+      "lat": 42.4140,
+      "lng": -71.1628,
+      "description": "Year-round garden center and plant nursery with seasonal flowers, perennials, houseplants, soil amendments, and gardening gifts.",
+      "hours": "Mon–Sat 9am–6pm, Sun 10am–5pm",
+      "website": "#",
+      "panoFile": null,
+      "scenes": {
+        "entrance": {
+          "title": "The Garden Shop — Entrance",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
         }
       }
     }
