@@ -6,11 +6,21 @@
     "lng": -71.1569
   },
   "defaultHeading": 90,
+  "categories": [
+    "Food & Dining",
+    "Arts & Culture",
+    "Health & Wellness",
+    "Retail & Shopping",
+    "Beauty & Personal Care",
+    "Clothing & Accessories",
+    "Home & Garden",
+    "Professional Services"
+  ],
   "shops": [
     {
       "id": "capitol-theatre",
       "name": "Capitol Theatre",
-      "category": "Entertainment",
+      "category": "Arts & Culture",
       "lat": 42.4155,
       "lng": -71.1563,
       "description": "Historic single-screen movie theatre showing independent and classic films since 1927.",
@@ -27,9 +37,66 @@
       }
     },
     {
+      "id": "regent-theatre",
+      "name": "Regent Theatre",
+      "category": "Arts & Culture",
+      "lat": 42.4152,
+      "lng": -71.1566,
+      "description": "Beautifully restored 1916 performing arts venue hosting live music, comedy, film, and community events.",
+      "hours": "Event times vary — see website",
+      "website": "https://regenttheatre.com",
+      "panoFile": "regent-theatre/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Regent Theatre — Lobby",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-center-for-the-arts",
+      "name": "Arlington Center for the Arts",
+      "category": "Arts & Culture",
+      "lat": 42.4163,
+      "lng": -71.1546,
+      "description": "Community arts center offering classes, workshops, gallery exhibitions, and performance space for all ages.",
+      "hours": "Mon–Sat 9am–9pm, Sun 10am–5pm",
+      "website": "https://acarts.org",
+      "panoFile": "arlington-center-for-the-arts/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Center for the Arts — Gallery",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "cyrus-dallin-art-museum",
+      "name": "Cyrus Dallin Art Museum",
+      "category": "Arts & Culture",
+      "lat": 42.4157,
+      "lng": -71.1560,
+      "description": "Museum dedicated to the works of sculptor Cyrus Edwin Dallin, featuring rotating exhibitions and local art.",
+      "hours": "Wed–Sun 12–4pm",
+      "website": "https://dallinartmuseum.org",
+      "panoFile": "cyrus-dallin-art-museum/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Cyrus Dallin Art Museum — Gallery",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
       "id": "arlington-cafe",
       "name": "Arlington Café",
-      "category": "Café",
+      "category": "Food & Dining",
       "lat": 42.4148,
       "lng": -71.1575,
       "description": "Neighborhood café serving specialty coffee, fresh pastries, and light bites.",
@@ -46,9 +113,256 @@
       }
     },
     {
+      "id": "menotomy-grill",
+      "name": "Menotomy Grill & Tavern",
+      "category": "Food & Dining",
+      "lat": 42.4160,
+      "lng": -71.1548,
+      "description": "Casual American grill and tavern with craft beers and a lively patio.",
+      "hours": "Daily 11:30am–10pm",
+      "website": "#",
+      "panoFile": "menotomy-grill/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Menotomy Grill — Dining Room",
+          "hfov": 110,
+          "pitch": -2,
+          "yaw": 45
+        }
+      }
+    },
+    {
+      "id": "blue-ribbon-bbq",
+      "name": "Blue Ribbon BBQ",
+      "category": "Food & Dining",
+      "lat": 42.4190,
+      "lng": -71.1503,
+      "description": "Award-winning Texas and Carolina-style BBQ with house-smoked meats, homemade sides, and craft beers.",
+      "hours": "Daily 11:30am–9pm",
+      "website": "https://blueribbonbbq.com",
+      "panoFile": "blue-ribbon-bbq/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Blue Ribbon BBQ — Dining Area",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "flora",
+      "name": "Flora Restaurant",
+      "category": "Food & Dining",
+      "lat": 42.4151,
+      "lng": -71.1570,
+      "description": "Farm-to-table restaurant featuring seasonal New England cuisine with locally sourced ingredients.",
+      "hours": "Tue–Sun 5pm–10pm",
+      "website": "https://florarestaurant.com",
+      "panoFile": "flora/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Flora Restaurant — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "szechuans-dumpling",
+      "name": "Szechuan's Dumpling",
+      "category": "Food & Dining",
+      "lat": 42.4145,
+      "lng": -71.1580,
+      "description": "Authentic Szechuan Chinese restaurant known for handmade dumplings, noodles, and bold flavors.",
+      "hours": "Daily 11am–9:30pm",
+      "website": "#",
+      "panoFile": "szechuans-dumpling/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Szechuan's Dumpling — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "not-your-average-joes",
+      "name": "Not Your Average Joe's",
+      "category": "Food & Dining",
+      "lat": 42.4143,
+      "lng": -71.1585,
+      "description": "Upscale-casual restaurant with creative American dishes, craft cocktails, and a warm atmosphere.",
+      "hours": "Mon–Thu 11:30am–10pm, Fri–Sat 11:30am–11pm, Sun 10:30am–9pm",
+      "website": "https://notyouraveragejoes.com",
+      "panoFile": "not-your-average-joes/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Not Your Average Joe's — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "swirl-and-slice",
+      "name": "Swirl and Slice",
+      "category": "Food & Dining",
+      "lat": 42.4150,
+      "lng": -71.1572,
+      "description": "Neighborhood pizza shop offering hand-tossed pies, calzones, and fresh salads.",
+      "hours": "Mon–Sat 11am–9pm, Sun 12–8pm",
+      "website": "#",
+      "panoFile": "swirl-and-slice/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Swirl and Slice — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "snappy-sushi",
+      "name": "Snappy Sushi",
+      "category": "Food & Dining",
+      "lat": 42.4146,
+      "lng": -71.1578,
+      "description": "Casual sushi restaurant with a wide selection of rolls, sashimi, bento boxes, and Japanese favorites.",
+      "hours": "Mon–Sat 11:30am–9:30pm, Sun 12–9pm",
+      "website": "#",
+      "panoFile": "snappy-sushi/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Snappy Sushi — Dining Area",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "fasika-ethiopian",
+      "name": "Fasika Ethiopian Restaurant",
+      "category": "Food & Dining",
+      "lat": 42.4138,
+      "lng": -71.1592,
+      "description": "Family-owned Ethiopian restaurant serving traditional platters of injera with flavorful stews and veggie dishes.",
+      "hours": "Tue–Sun 11:30am–10pm",
+      "website": "#",
+      "panoFile": "fasika-ethiopian/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Fasika Ethiopian Restaurant — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "tango-mango",
+      "name": "Tango Mango",
+      "category": "Food & Dining",
+      "lat": 42.4149,
+      "lng": -71.1574,
+      "description": "Vibrant smoothie and juice bar offering fresh-pressed juices, açaí bowls, and healthy bites.",
+      "hours": "Mon–Fri 7am–6pm, Sat–Sun 8am–5pm",
+      "website": "#",
+      "panoFile": "tango-mango/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Tango Mango — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "bison-county",
+      "name": "Bison County",
+      "category": "Food & Dining",
+      "lat": 42.4159,
+      "lng": -71.1550,
+      "description": "Comfort food and BBQ joint offering generous portions, loaded nachos, and a fun saloon vibe.",
+      "hours": "Daily 11:30am–11pm",
+      "website": "#",
+      "panoFile": "bison-county/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Bison County — Dining Area",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "sams-restaurant",
+      "name": "Sam's Restaurant",
+      "category": "Food & Dining",
+      "lat": 42.4147,
+      "lng": -71.1577,
+      "description": "Classic American diner serving hearty breakfasts, burgers, and home-style comfort food since the 1930s.",
+      "hours": "Mon–Sat 6am–3pm, Sun 7am–2pm",
+      "website": "#",
+      "panoFile": "sams-restaurant/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Sam's Restaurant — Dining Room",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "la-victoria",
+      "name": "La Victoria Taqueria",
+      "category": "Food & Dining",
+      "lat": 42.4154,
+      "lng": -71.1564,
+      "description": "Authentic Mexican taqueria with fresh tacos, burritos, enchiladas, and homemade salsas.",
+      "hours": "Daily 10am–10pm",
+      "website": "#",
+      "panoFile": "la-victoria/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "La Victoria Taqueria — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "peets-coffee",
+      "name": "Peet's Coffee",
+      "category": "Food & Dining",
+      "lat": 42.4156,
+      "lng": -71.1558,
+      "description": "Premium coffeehouse offering hand-roasted coffee, espresso drinks, and fresh-baked pastries.",
+      "hours": "Daily 5:30am–7pm",
+      "website": "https://peets.com",
+      "panoFile": "peets-coffee/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Peet's Coffee — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
       "id": "book-rack",
       "name": "The Book Rack",
-      "category": "Retail",
+      "category": "Retail & Shopping",
       "lat": 42.4158,
       "lng": -71.1555,
       "description": "Used and rare bookshop with a curated selection of fiction, history, and children's books.",
@@ -65,21 +379,420 @@
       }
     },
     {
-      "id": "menotomy-grill",
-      "name": "Menotomy Grill & Tavern",
-      "category": "Restaurant",
-      "lat": 42.4160,
-      "lng": -71.1548,
-      "description": "Casual American grill and tavern with craft beers and a lively patio.",
-      "hours": "Daily 11:30am–10pm",
-      "website": "#",
-      "panoFile": "menotomy-grill/entrance.jpg",
+      "id": "boomerangs",
+      "name": "Boomerangs",
+      "category": "Retail & Shopping",
+      "lat": 42.4162,
+      "lng": -71.1544,
+      "description": "Community thrift shop benefiting AIDS Action Committee, offering clothing, furniture, books, and housewares.",
+      "hours": "Mon–Sat 10am–6pm, Sun 12–5pm",
+      "website": "https://shopboomerangs.org",
+      "panoFile": "boomerangs/entrance.jpg",
       "scenes": {
         "entrance": {
-          "title": "Menotomy Grill — Dining Room",
+          "title": "Boomerangs — Store Floor",
           "hfov": 110,
-          "pitch": -2,
-          "yaw": 45
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "taming-the-wild",
+      "name": "Taming the Wild",
+      "category": "Retail & Shopping",
+      "lat": 42.4161,
+      "lng": -71.1547,
+      "description": "Locally owned pet supply shop offering premium food, treats, toys, and grooming supplies for cats and dogs.",
+      "hours": "Mon–Fri 10am–7pm, Sat 10am–6pm, Sun 11am–5pm",
+      "website": "#",
+      "panoFile": "taming-the-wild/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Taming the Wild — Store",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-toy-shop",
+      "name": "The Toy Shop of Arlington",
+      "category": "Retail & Shopping",
+      "lat": 42.4153,
+      "lng": -71.1568,
+      "description": "Charming independent toy store stocking educational toys, games, puzzles, and unique gifts for children.",
+      "hours": "Mon–Sat 10am–5:30pm, Sun 12–5pm",
+      "website": "#",
+      "panoFile": "arlington-toy-shop/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "The Toy Shop of Arlington — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "kensington-gift-shop",
+      "name": "Kensington Gift Shop",
+      "category": "Retail & Shopping",
+      "lat": 42.4157,
+      "lng": -71.1559,
+      "description": "Curated gift shop with jewelry, candles, cards, home décor, and unique finds from local artisans.",
+      "hours": "Mon–Sat 10am–6pm, Sun 11am–5pm",
+      "website": "#",
+      "panoFile": "kensington-gift-shop/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Kensington Gift Shop — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-wine-spirits",
+      "name": "Arlington Wine & Spirits",
+      "category": "Retail & Shopping",
+      "lat": 42.4164,
+      "lng": -71.1542,
+      "description": "Well-stocked neighborhood liquor store with craft beer, fine wines, and spirits from around the world.",
+      "hours": "Mon–Sat 9am–9pm, Sun 12–6pm",
+      "website": "#",
+      "panoFile": "arlington-wine-spirits/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Wine & Spirits — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "evolve-wellness",
+      "name": "Evolve Wellness Spa",
+      "category": "Health & Wellness",
+      "lat": 42.4144,
+      "lng": -71.1583,
+      "description": "Full-service wellness spa offering massage therapy, acupuncture, facials, and holistic health treatments.",
+      "hours": "Mon–Fri 9am–8pm, Sat 9am–6pm, Sun 10am–4pm",
+      "website": "#",
+      "panoFile": "evolve-wellness/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Evolve Wellness Spa — Reception",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-yoga",
+      "name": "Arlington Yoga",
+      "category": "Health & Wellness",
+      "lat": 42.4140,
+      "lng": -71.1590,
+      "description": "Community yoga studio offering vinyasa, restorative, and beginner-friendly classes for all levels.",
+      "hours": "Classes daily — see schedule online",
+      "website": "#",
+      "panoFile": "arlington-yoga/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Yoga — Studio",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "in-motion-fitness",
+      "name": "In Motion Fitness",
+      "category": "Health & Wellness",
+      "lat": 42.4170,
+      "lng": -71.1530,
+      "description": "Neighborhood fitness studio with personal training, group classes, and customized workout programs.",
+      "hours": "Mon–Fri 5:30am–9pm, Sat–Sun 7am–5pm",
+      "website": "#",
+      "panoFile": "in-motion-fitness/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "In Motion Fitness — Gym Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-chiropractic",
+      "name": "Arlington Chiropractic",
+      "category": "Health & Wellness",
+      "lat": 42.4165,
+      "lng": -71.1540,
+      "description": "Family chiropractic office providing spinal adjustments, sports injury rehab, and wellness care.",
+      "hours": "Mon–Fri 8am–6pm, Sat 9am–1pm",
+      "website": "#",
+      "panoFile": "arlington-chiropractic/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Chiropractic — Office",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "center-pharmacy",
+      "name": "Center Pharmacy",
+      "category": "Health & Wellness",
+      "lat": 42.4156,
+      "lng": -71.1561,
+      "description": "Independent pharmacy offering prescription services, over-the-counter remedies, and personalized health advice.",
+      "hours": "Mon–Fri 9am–7pm, Sat 9am–3pm",
+      "website": "#",
+      "panoFile": "center-pharmacy/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Center Pharmacy — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "salon-bliss",
+      "name": "Salon Bliss",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4142,
+      "lng": -71.1588,
+      "description": "Full-service hair salon specializing in cuts, color, highlights, and bridal styling.",
+      "hours": "Tue–Sat 9am–7pm",
+      "website": "#",
+      "panoFile": "salon-bliss/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Salon Bliss — Interior",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "mass-ave-barber",
+      "name": "Mass Ave Barber Shop",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4153,
+      "lng": -71.1567,
+      "description": "Classic neighborhood barbershop offering men's haircuts, beard trims, and hot towel shaves.",
+      "hours": "Mon–Fri 8am–6pm, Sat 8am–4pm",
+      "website": "#",
+      "panoFile": "mass-ave-barber/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Mass Ave Barber Shop — Inside",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "nail-envy",
+      "name": "Nail Envy Arlington",
+      "category": "Beauty & Personal Care",
+      "lat": 42.4146,
+      "lng": -71.1579,
+      "description": "Nail salon offering manicures, pedicures, gel nails, and nail art in a relaxing environment.",
+      "hours": "Mon–Sat 9:30am–7pm, Sun 10am–5pm",
+      "website": "#",
+      "panoFile": "nail-envy/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Nail Envy Arlington — Salon",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-cleaners",
+      "name": "Arlington Cleaners",
+      "category": "Professional Services",
+      "lat": 42.4167,
+      "lng": -71.1536,
+      "description": "Trusted dry cleaning and laundry service with alterations, same-day service, and eco-friendly options.",
+      "hours": "Mon–Fri 7am–6:30pm, Sat 8am–4pm",
+      "website": "#",
+      "panoFile": "arlington-cleaners/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Cleaners — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-insurance",
+      "name": "Arlington Insurance Agency",
+      "category": "Professional Services",
+      "lat": 42.4168,
+      "lng": -71.1534,
+      "description": "Independent insurance agency providing home, auto, business, and life insurance coverage for local residents.",
+      "hours": "Mon–Fri 9am–5pm",
+      "website": "#",
+      "panoFile": "arlington-insurance/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Insurance Agency — Office",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "mass-ave-realty",
+      "name": "Mass Ave Realty",
+      "category": "Professional Services",
+      "lat": 42.4139,
+      "lng": -71.1593,
+      "description": "Local real estate office helping residents buy, sell, and rent properties throughout Arlington and beyond.",
+      "hours": "Mon–Fri 9am–6pm, Sat 10am–3pm",
+      "website": "#",
+      "panoFile": "mass-ave-realty/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Mass Ave Realty — Office",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-print-ship",
+      "name": "Arlington Print & Ship",
+      "category": "Professional Services",
+      "lat": 42.4141,
+      "lng": -71.1589,
+      "description": "Full-service print and shipping center offering copying, printing, packaging, and UPS/FedEx drop-off.",
+      "hours": "Mon–Fri 8am–6:30pm, Sat 9am–4pm",
+      "website": "#",
+      "panoFile": "arlington-print-ship/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Print & Ship — Counter",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "moss-and-co",
+      "name": "Moss & Co. Boutique",
+      "category": "Clothing & Accessories",
+      "lat": 42.4150,
+      "lng": -71.1573,
+      "description": "Women's clothing boutique featuring curated collections of casual and occasion wear from indie designers.",
+      "hours": "Mon–Sat 10am–6pm, Sun 11am–5pm",
+      "website": "#",
+      "panoFile": "moss-and-co/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Moss & Co. Boutique — Store",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "uptown-consignment",
+      "name": "Uptown Consignment",
+      "category": "Clothing & Accessories",
+      "lat": 42.4169,
+      "lng": -71.1532,
+      "description": "Consignment shop specializing in gently used designer clothing, handbags, shoes, and accessories.",
+      "hours": "Tue–Sat 10am–5:30pm",
+      "website": "#",
+      "panoFile": "uptown-consignment/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Uptown Consignment — Floor",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "green-thumb-garden",
+      "name": "Green Thumb Garden Center",
+      "category": "Home & Garden",
+      "lat": 42.4175,
+      "lng": -71.1520,
+      "description": "Garden center offering annuals, perennials, shrubs, soil, and gardening supplies with expert advice.",
+      "hours": "Mon–Sat 8am–6pm, Sun 9am–5pm (seasonal)",
+      "website": "#",
+      "panoFile": "green-thumb-garden/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Green Thumb Garden Center — Greenhouse",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "arlington-hardware",
+      "name": "Arlington Hardware",
+      "category": "Home & Garden",
+      "lat": 42.4171,
+      "lng": -71.1528,
+      "description": "Locally owned hardware store with tools, paint, plumbing supplies, and friendly neighborhood expertise.",
+      "hours": "Mon–Fri 7:30am–7pm, Sat 8am–5pm, Sun 9am–4pm",
+      "website": "#",
+      "panoFile": "arlington-hardware/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Arlington Hardware — Store",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
+        }
+      }
+    },
+    {
+      "id": "nest-home-decor",
+      "name": "Nest Home & Décor",
+      "category": "Home & Garden",
+      "lat": 42.4137,
+      "lng": -71.1595,
+      "description": "Home furnishings shop carrying furniture, lighting, rugs, and decorative accents for modern living.",
+      "hours": "Mon–Sat 10am–6pm, Sun 11am–4pm",
+      "website": "#",
+      "panoFile": "nest-home-decor/entrance.jpg",
+      "scenes": {
+        "entrance": {
+          "title": "Nest Home & Décor — Showroom",
+          "hfov": 110,
+          "pitch": 0,
+          "yaw": 0
         }
       }
     }
