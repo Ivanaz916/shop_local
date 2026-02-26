@@ -37,6 +37,7 @@
         <nav class="top-bar-right">
             <a href="index.html" class="nav-link">Home</a>
             <a href="search.html" class="nav-link">Search</a>
+            <a href="requests.html" class="nav-link">Looking For…</a>
             <span id="mode-badge" class="badge badge-gallery">Gallery</span>
         </nav>
     </header>
@@ -68,6 +69,28 @@
                 <p>Recent finds from your Arlington neighbors</p>
             </div>
             <div id="marketplace-grid" class="marketplace-grid"></div>
+        </section>
+
+        <!-- Feature Interest Survey -->
+        <section id="survey-section" class="survey-section hidden">
+            <button class="survey-dismiss" id="survey-dismiss" aria-label="Dismiss survey">&times;</button>
+            <div class="survey-content">
+                <h3>🆕 Quick Question — Help Us Build What You Need</h3>
+                <p>Would you use a feature to <strong>list your own for-sale items</strong> directly on this site and use local shops as a <strong>drop-off/pickup point</strong> for buyers?</p>
+                <div class="survey-buttons" id="survey-buttons">
+                    <button class="survey-btn survey-btn-yes" data-vote="yes">👍 Yes, I'd use that!</button>
+                    <button class="survey-btn survey-btn-maybe" data-vote="maybe">🤔 Maybe</button>
+                    <button class="survey-btn survey-btn-no" data-vote="no">👎 Not for me</button>
+                </div>
+                <div id="survey-comment-area" class="survey-comment-area hidden">
+                    <input type="text" id="survey-comment" placeholder="Any thoughts? (optional)" maxlength="200">
+                    <button id="survey-submit-comment" class="survey-btn survey-btn-send">Send →</button>
+                </div>
+                <div id="survey-results" class="survey-results hidden"></div>
+                <div id="survey-thanks" class="survey-thanks hidden">
+                    <p>Thanks for your input! 🙌</p>
+                </div>
+            </div>
         </section>
 
         <!-- Pannellum — indoor 360° interiors -->

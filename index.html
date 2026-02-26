@@ -63,6 +63,14 @@
                 <p>Looking for something specific? Our AI assistant knows every shop and listing on the block.</p>
                 <span class="path-card-cta">Start Searching →</span>
             </a>
+
+            <!-- Request Board Card -->
+            <a href="requests.html" class="path-card path-card-request">
+                <div class="path-card-icon">📋</div>
+                <h3>Looking For…</h3>
+                <p>Can't find it? Post what you need and local shop owners will reach out if they have it.</p>
+                <span class="path-card-cta">Post a Request →</span>
+            </a>
         </div>
     </section>
 
@@ -80,6 +88,10 @@
             <span class="stat-number">360°</span>
             <span class="stat-label">Interior Views</span>
         </div>
+        <div class="stat">
+            <span class="stat-number" id="stat-requests">0</span>
+            <span class="stat-label">Active Requests</span>
+        </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
@@ -94,6 +106,9 @@
                 if (typeof SupabaseClient !== 'undefined' && SupabaseClient.isConfigured()) {
                     const listings = await SupabaseClient.fetchListings();
                     document.getElementById('stat-listings').textContent = listings.length;
+
+                    const requests = await SupabaseClient.fetchRequests();
+                    document.getElementById('stat-requests').textContent = requests.length;
                 }
             } catch (e) { /* Supabase not configured yet */ }
 

@@ -255,3 +255,111 @@ shop_local/
 - **Shop owner portal** — authenticated page where shop owners can update their own hours, descriptions, and panorama images
 - **Push notifications** — notify subscribers when new marketplace listings match their interests
 - **Analytics dashboard** — track page views, search queries, and popular listings using Supabase or a free analytics tool (Plausible, Umami)
+
+---
+
+### Phase 6 — "Looking For…" Request Board (Blind Requests)
+
+**Goal:** Let shoppers post what they're looking for. Shop owners see only the request text (no personal info). Site owner manually brokers matches via email.
+
+**Status:** ✅ Frontend built — needs Supabase tables deployed.
+
+16. **Supabase tables/views/functions:**
+
+    ```sql
+    -- Requests table (full data — private)
+    CREATE TABLE requests (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      requester_name TEXT NOT NULL,
+      requester_email TEXT NOT NULL,
+      request_text TEXT NOT NULL CHECK (char_length(request_text) >= 10),
+      flag_count INT DEFAULT 0,
+      created_at TIMESTAMPTZ DEFAULT now()
+    );
+
+    ALTER TABLE requests ENABLE ROW LEVEL SECURITY;
+
+    -- Anyone can insert (rate-limited by app logic)
+    CREATE POLICY "Anyone can insert requests"
+      ON requests FOR INSERT WITH CHECK (true);
+
+    -- Public view — only exposes safe columns (no name/email)
+    CREATE VIEW requests_public AS
+      SELECT id, request_text, created_at
+      FROM requests
+      WHERE flag_count < 3
+        AND created_at > now() - INTERVAL '30 days'
+      ORDER BY created_at DESC;
+
+    -- Flag function (increments flag_count)
+    CREATE OR REPLACE FUNCTION flag_request(req_id UUID)
+    RETURNS void AS $$
+      UPDATE requests SET flag_count = flag_count + 1 WHERE id = req_id;
+    $$ LANGUAGE sql SECURITY DEFINER;
+    ```
+
+17. **`requests.html`** — new page:
+    - Form: first name, email, request text (honeypot for spam)
+    - Public board: shows only request text + time ago (no personal info)
+    - "I have this" flow: shop owners email arlingtonislocal@gmail.com referencing the request
+    - Flag button: 3+ flags auto-hides request (no manual review)
+    - 30-day auto-expiry via view filter
+    - No auth required
+
+18. **Landing page update (`index.html`):**
+    - Third card: "Looking For…" → links to `requests.html`
+    - Stats strip: added "Active Requests" counter
+
+**Files added/modified:**
+- `requests.html` (new)
+- `css/requests.css` (new)
+- `js/supabase-client.js` (added `submitRequest`, `fetchRequests`, `flagRequest`)
+- `index.html` (third card + stats)
+
+---
+
+### Phase 7 — User Listings + Shop Drop-Offs (Pending Survey Validation)
+
+**Goal:** Allow users to list their own second-hand items for sale and use participating shops as exchange/drop-off points.
+
+**Status:** 🗳️ Survey deployed on browse page. Will build after gauging user interest.
+
+19. **Feature interest survey** (deployed):
+    - Appears on `browse.html` below marketplace
+    - 3-option vote: Yes / Maybe / No
+    - Optional comment field
+    - Results stored in Supabase `survey_responses` table
+    - Auto-hides after vote or dismiss (localStorage)
+    - Results shown inline after voting
+
+    ```sql
+    CREATE TABLE survey_responses (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      survey_id TEXT NOT NULL,
+      vote TEXT NOT NULL CHECK (vote IN ('yes', 'no', 'maybe')),
+      comment TEXT,
+      created_at TIMESTAMPTZ DEFAULT now()
+    );
+
+    ALTER TABLE survey_responses ENABLE ROW LEVEL SECURITY;
+
+    CREATE POLICY "Anyone can insert survey votes"
+      ON survey_responses FOR INSERT WITH CHECK (true);
+
+    CREATE POLICY "Anyone can read survey results"
+      ON survey_responses FOR SELECT USING (true);
+    ```
+
+20. **If survey validates interest**, build Phase A+B:
+    - `list-item.html` — submission form (title, price, description, photo, seller name/email, drop-off shop picker)
+    - `user_listings` Supabase table with `drop_off_shop_id` and `status` workflow
+    - Supabase Storage bucket for listing photos
+    - "Community" badge on browse page to distinguish user listings from FB marketplace items
+    - Shops get `accepts_dropoffs` flag in `shops.json`
+
+**Files added/modified:**
+- `js/app.js` (added `initSurvey()`)
+- `js/supabase-client.js` (added `submitSurveyVote`, `fetchSurveyResults`)
+- `css/styles.css` (added survey styles)
+- `browse.html` (added survey section)
+

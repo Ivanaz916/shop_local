@@ -682,3 +682,201 @@ html, body {
         height: 110px;
     }
 }
+
+/* ================================================================
+   Feature Interest Survey
+   ================================================================ */
+
+.survey-section {
+    position: relative;
+    max-width: 720px;
+    margin: 8px auto 32px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(26, 95, 58, 0.06), rgba(232, 168, 56, 0.06));
+    border: 1px solid rgba(26, 95, 58, 0.15);
+    border-radius: 14px;
+}
+
+.survey-section.hidden {
+    display: none;
+}
+
+.survey-dismiss {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    line-height: 1;
+}
+
+.survey-dismiss:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--color-text);
+}
+
+.survey-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    padding-right: 24px;
+}
+
+.survey-content p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.survey-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.survey-btn {
+    padding: 9px 18px;
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.survey-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.survey-btn-yes:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.survey-btn-maybe:hover {
+    border-color: var(--color-accent);
+    color: #b8860b;
+}
+
+.survey-btn-no:hover {
+    border-color: #999;
+}
+
+.survey-btn-send {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+.survey-btn-send:hover {
+    background: var(--color-primary-light);
+}
+
+.survey-comment-area {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.survey-comment-area.hidden {
+    display: none;
+}
+
+.survey-comment-area input {
+    flex: 1;
+    padding: 9px 14px;
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.survey-comment-area input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(26, 95, 58, 0.1);
+}
+
+.survey-results {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+}
+
+.survey-results.hidden {
+    display: none;
+}
+
+.survey-result-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+}
+
+.survey-result-bar:last-child {
+    margin-bottom: 0;
+}
+
+.survey-result-label {
+    min-width: 50px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.survey-result-track {
+    flex: 1;
+    height: 8px;
+    background: var(--color-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.survey-result-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.survey-result-fill-yes { background: var(--color-primary); }
+.survey-result-fill-maybe { background: var(--color-accent); }
+.survey-result-fill-no { background: #999; }
+
+.survey-result-count {
+    min-width: 24px;
+    text-align: right;
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+}
+
+.survey-thanks {
+    text-align: center;
+    padding: 8px 0 0;
+}
+
+.survey-thanks.hidden {
+    display: none;
+}
+
+.survey-thanks p {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0;
+}

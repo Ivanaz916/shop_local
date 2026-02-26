@@ -9,8 +9,8 @@
 const SupabaseClient = (() => {
     // ---- CONFIGURATION ----
     // Replace these with your Supabase project values
-    const SUPABASE_URL = '';      // e.g., 'https://abc123.supabase.co'
-    const SUPABASE_ANON_KEY = ''; // e.g., 'eyJhbGciOiJIUzI1NiIs...'
+    const SUPABASE_URL = 'https://weztjgtyudpvxtyktpfu.supabase.co';      // e.g., 'https://abc123.supabase.co'
+    const SUPABASE_ANON_KEY = 'sb_publishable_r92Rj1RhiVElDJNLlo4Rcw_m2gHqsga'; // e.g., 'eyJhbGciOiJIUzI1NiIs...'
 
     let client = null;
 
@@ -234,5 +234,121 @@ const SupabaseClient = (() => {
         });
     }
 
-    return { isConfigured, fetchListings, fetchAllForContext, askQuestion };
+    // --------------- Request Board ---------------
+
+    /**
+     * Submit a "Looking For" request (blind — name/email stored but never shown publicly).
+     */
+    async function submitRequest({ name, email, requestText }) {
+        const sb = await getClient();
+        if (!sb) {
+            console.warn('[SupabaseClient] Not configured — request not saved.');
+            return { success: false, reason: 'not_configured' };
+        }
+
+        const { error } = await sb
+            .from('requests')
+            .insert([{ requester_name: name, requester_email: email, request_text: requestText }]);
+
+        if (error) {
+            console.error('[SupabaseClient] submitRequest error:', error);
+            return { success: false, reason: error.message };
+        }
+        return { success: true };
+    }
+
+    /**
+     * Fetch active requests (public view — only text + date, no personal info).
+     */
+    async function fetchRequests(limit) {
+        const sb = await getClient();
+        if (!sb) return getMockRequests(limit);
+
+        let query = sb
+            .from('requests')
+            .select('id, request_text, created_at')
+            .order('created_at', { ascending: false });
+
+        if (limit) query = query.limit(limit);
+
+        const { data, error } = await query;
+        console.log('[SupabaseClient] fetchRequests result:', { data, error });
+        if (error) {
+            console.error('[SupabaseClient] fetchRequests error:', error);
+            return [];
+        }
+        return data || [];
+    }
+
+    /**
+     * Flag a request as inappropriate (increment flag_count).
+     */
+    async function flagRequest(requestId) {
+        const sb = await getClient();
+        if (!sb) return { success: false };
+
+        const { error } = await sb.rpc('flag_request', { req_id: requestId });
+        if (error) {
+            console.error('[SupabaseClient] flagRequest error:', error);
+            return { success: false };
+        }
+        return { success: true };
+    }
+
+    function getMockRequests(limit) {
+        const mock = [
+            { id: 'mock-r1', request_text: 'Looking for a standing desk under $200', created_at: '2026-02-20T10:00:00Z' },
+            { id: 'mock-r2', request_text: 'Anyone have kids ice skates, size 1-2?', created_at: '2026-02-19T14:30:00Z' },
+            { id: 'mock-r3', request_text: 'Need a local tailor for suit alterations', created_at: '2026-02-18T09:00:00Z' },
+        ];
+        return limit ? mock.slice(0, limit) : mock;
+    }
+
+    // --------------- Feature Survey ---------------
+
+    /**
+     * Submit a survey vote.
+     */
+    async function submitSurveyVote({ surveyId, vote, comment }) {
+        const sb = await getClient();
+        if (!sb) {
+            console.warn('[SupabaseClient] Not configured — vote not saved.');
+            return { success: false, reason: 'not_configured' };
+        }
+
+        const { error } = await sb
+            .from('survey_responses')
+            .insert([{ survey_id: surveyId, vote, comment: comment || null }]);
+
+        if (error) {
+            console.error('[SupabaseClient] submitSurveyVote error:', error);
+            return { success: false, reason: error.message };
+        }
+        return { success: true };
+    }
+
+    /**
+     * Fetch aggregated survey results.
+     */
+    async function fetchSurveyResults(surveyId) {
+        const sb = await getClient();
+        if (!sb) return { yes: 0, no: 0, maybe: 0, total: 0 };
+
+        const { data, error } = await sb
+            .from('survey_responses')
+            .select('vote')
+            .eq('survey_id', surveyId);
+
+        if (error || !data) return { yes: 0, no: 0, maybe: 0, total: 0 };
+
+        const counts = { yes: 0, no: 0, maybe: 0, total: data.length };
+        data.forEach(r => { if (counts[r.vote] !== undefined) counts[r.vote]++; });
+        return counts;
+    }
+
+    return {
+        isConfigured, fetchListings, fetchAllForContext, askQuestion,
+        submitRequest, fetchRequests, flagRequest,
+        submitSurveyVote, fetchSurveyResults
+    };
 })();

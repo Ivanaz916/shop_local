@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looking For… — Shop Local Arlington</title>
+    <meta name="description" content="Post what you're looking for and let Arlington shop owners find it for you.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Birthstone&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/requests.css">
+</head>
+<body class="requests-body">
+
+    <!-- ===== TOP BAR ===== -->
+    <header id="top-bar">
+        <div class="top-bar-left">
+            <h1>
+                <span class="brand-icon">🏘️</span>
+                Shop Local Arlington
+            </h1>
+        </div>
+        <nav class="top-bar-right">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="browse.html" class="nav-link">Browse</a>
+            <a href="search.html" class="nav-link">Search</a>
+        </nav>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="requests-main">
+
+        <!-- Hero intro -->
+        <section class="requests-hero">
+            <h2>📋 Looking For…</h2>
+            <p>Can't find what you need? Post your request and local shop owners will reach out if they can help.</p>
+            <p class="requests-privacy-note">🔒 Your name and email are <strong>never shown publicly</strong> — only the request text is visible. Shop owners contact you through us.</p>
+        </section>
+
+        <!-- Submit form -->
+        <section class="request-form-section">
+            <h3>Post a Request</h3>
+            <form id="request-form" novalidate>
+                <!-- Honeypot — hidden from humans, bots fill it in -->
+                <div class="hp-field" aria-hidden="true" tabindex="-1">
+                    <label for="hp-website">Website</label>
+                    <input type="text" id="hp-website" name="website" autocomplete="off" tabindex="-1">
+                </div>
+
+                <div class="form-group">
+                    <label for="req-name">First Name</label>
+                    <input type="text" id="req-name" placeholder="Alex" required maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="req-email">Email <span class="label-hint">(never displayed — only used if a shop has your item)</span></label>
+                    <input type="email" id="req-email" placeholder="alex@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="req-text">What are you looking for?</label>
+                    <textarea id="req-text" rows="3" placeholder="e.g. Standing desk under $200, kids ice skates size 1…" required minlength="10" maxlength="500"></textarea>
+                    <span class="char-count"><span id="char-current">0</span>/500</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-submit" id="req-submit">
+                    Post Request
+                </button>
+                <div id="form-message" class="form-message hidden"></div>
+            </form>
+        </section>
+
+        <!-- Divider -->
+        <hr class="section-divider">
+
+        <!-- Public request board -->
+        <section class="request-board-section">
+            <h3>Recent Requests</h3>
+            <p class="board-subtitle">Shop owners — see something you can help with? <a href="mailto:arlingtonislocal@gmail.com?subject=I%20can%20help%20with%20a%20request" class="board-email-link">Email us</a> and we'll connect you.</p>
+            <div id="request-board" class="request-board">
+                <div class="board-loading">Loading requests…</div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="site-footer" class="requests-footer">
+        <p>Made with ❤️ for the Arlington, MA community</p>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/supabase-client.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('request-form');
+        const nameInput = document.getElementById('req-name');
+        const emailInput = document.getElementById('req-email');
+        const textInput = document.getElementById('req-text');
+        const honeypot = document.getElementById('hp-website');
+        const charCurrent = document.getElementById('char-current');
+        const formMsg = document.getElementById('form-message');
+        const submitBtn = document.getElementById('req-submit');
+
+        // Character counter
+        textInput.addEventListener('input', () => {
+            charCurrent.textContent = textInput.value.length;
+        });
+
+        // Submit handler
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Honeypot check
+            if (honeypot.value) return;
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const requestText = textInput.value.trim();
+
+            // Basic validation
+            if (!name || !email || requestText.length < 10) {
+                showFormMsg('Please fill in all fields (request must be at least 10 characters).', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Posting…';
+
+            const result = await SupabaseClient.submitRequest({ name, email, requestText });
+
+            if (result.success) {
+                showFormMsg('Request posted! Shop owners will reach out if they can help.', 'success');
+                form.reset();
+                charCurrent.textContent = '0';
+                loadRequests(); // Refresh the board
+            } else if (result.reason === 'not_configured') {
+                showFormMsg('Request board is in demo mode — Supabase not configured yet.', 'info');
+            } else {
+                showFormMsg('Something went wrong. Please try again.', 'error');
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Post Request';
+        });
+
+        // Load and render the public request board
+        async function loadRequests() {
+            const board = document.getElementById('request-board');
+            const requests = await SupabaseClient.fetchRequests(20);
+
+            if (!requests || requests.length === 0) {
+                board.innerHTML = '<p class="board-empty">No requests yet — be the first!</p>';
+                return;
+            }
+
+            board.innerHTML = requests.map(req => {
+                const date = new Date(req.created_at);
+                const ago = timeAgo(date);
+                return `
+                    <div class="request-card" data-id="${req.id}">
+                        <p class="request-text">${escapeHtml(req.request_text)}</p>
+                        <div class="request-meta">
+                            <span class="request-time">${ago}</span>
+                            <button class="request-flag" title="Flag as inappropriate" data-id="${req.id}">🚩</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Flag buttons
+            board.querySelectorAll('.request-flag').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    btn.disabled = true;
+                    btn.textContent = '…';
+                    const res = await SupabaseClient.flagRequest(id);
+                    btn.textContent = res.success ? '✓' : '🚩';
+                });
+            });
+        }
+
+        function showFormMsg(text, type) {
+            formMsg.textContent = text;
+            formMsg.className = `form-message form-message-${type}`;
+            formMsg.classList.remove('hidden');
+            setTimeout(() => formMsg.classList.add('hidden'), 6000);
+        }
+
+        function timeAgo(date) {
+            const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+            if (seconds < 60) return 'just now';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes}m ago`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours}h ago`;
+            const days = Math.floor(hours / 24);
+            if (days < 30) return `${days}d ago`;
+            return date.toLocaleDateString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initial load
+        loadRequests();
+    });
+    </script>
+</body>
+</html>

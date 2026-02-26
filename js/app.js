@@ -295,6 +295,9 @@ async function initApp() {
     // Render marketplace listings
     renderMarketplace();
 
+    // Initialize feature interest survey
+    initSurvey();
+
     // Populate sidebar
     populateSidebar(AppState.shops);
 
@@ -360,4 +363,103 @@ function stringToColor(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
     return colors[Math.abs(hash) % colors.length];
+}
+
+// ── Feature Interest Survey ──
+const SURVEY_ID = 'user-listings-dropoff-v1';
+const SURVEY_STORAGE_KEY = 'survey_voted_' + SURVEY_ID;
+
+function initSurvey() {
+    const section = document.getElementById('survey-section');
+    const dismissBtn = document.getElementById('survey-dismiss');
+    const buttons = document.getElementById('survey-buttons');
+    const commentArea = document.getElementById('survey-comment-area');
+    const commentInput = document.getElementById('survey-comment');
+    const submitComment = document.getElementById('survey-submit-comment');
+    const resultsEl = document.getElementById('survey-results');
+    const thanksEl = document.getElementById('survey-thanks');
+
+    if (!section) return;
+
+    // Check if already voted or dismissed
+    const stored = localStorage.getItem(SURVEY_STORAGE_KEY);
+    if (stored === 'dismissed' || stored === 'voted') {
+        section.classList.add('hidden');
+        return;
+    }
+
+    // Show the survey
+    section.classList.remove('hidden');
+
+    // Dismiss
+    dismissBtn.addEventListener('click', () => {
+        localStorage.setItem(SURVEY_STORAGE_KEY, 'dismissed');
+        section.classList.add('hidden');
+    });
+
+    let selectedVote = null;
+
+    // Vote buttons
+    buttons.querySelectorAll('.survey-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedVote = btn.dataset.vote;
+            // Highlight selected
+            buttons.querySelectorAll('.survey-btn').forEach(b => b.style.opacity = '0.5');
+            btn.style.opacity = '1';
+            btn.style.border = '2px solid var(--color-primary)';
+            // Show comment input
+            commentArea.classList.remove('hidden');
+            commentInput.focus();
+        });
+    });
+
+    // Submit (with optional comment)
+    async function submitVote() {
+        if (!selectedVote) return;
+
+        const comment = commentInput.value.trim();
+        submitComment.disabled = true;
+        submitComment.textContent = '…';
+
+        await SupabaseClient.submitSurveyVote({
+            surveyId: SURVEY_ID,
+            vote: selectedVote,
+            comment: comment || null
+        });
+
+        localStorage.setItem(SURVEY_STORAGE_KEY, 'voted');
+
+        // Hide form, show results
+        buttons.style.display = 'none';
+        commentArea.classList.add('hidden');
+
+        // Fetch and show results
+        const results = await SupabaseClient.fetchSurveyResults(SURVEY_ID);
+        if (results.total > 0) {
+            resultsEl.innerHTML = ['yes', 'maybe', 'no'].map(key => {
+                const pct = Math.round((results[key] / results.total) * 100);
+                const label = key === 'yes' ? '👍 Yes' : key === 'maybe' ? '🤔 Maybe' : '👎 No';
+                return `
+                    <div class="survey-result-bar">
+                        <span class="survey-result-label">${label}</span>
+                        <div class="survey-result-track">
+                            <div class="survey-result-fill survey-result-fill-${key}" style="width: ${pct}%"></div>
+                        </div>
+                        <span class="survey-result-count">${results[key]}</span>
+                    </div>
+                `;
+            }).join('');
+            resultsEl.classList.remove('hidden');
+        }
+
+        thanksEl.classList.remove('hidden');
+    }
+
+    submitComment.addEventListener('click', submitVote);
+    commentInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            submitVote();
+        }
+    });
 }

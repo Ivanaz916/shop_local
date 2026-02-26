@@ -201,9 +201,9 @@
 
 .path-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 760px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
@@ -276,6 +276,17 @@
     transform: scale(1.03);
 }
 
+.path-card-request .path-card-cta {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.path-card-request:hover .path-card-cta {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.03);
+}
+
 /* ---------- Stats Strip ---------- */
 #landing-stats {
     display: flex;
@@ -329,6 +340,10 @@
     }
     .headline-script {
         font-size: clamp(3rem, 14vw, 5rem);
+    }
+
+    .path-cards {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
