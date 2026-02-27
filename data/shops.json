@@ -35,7 +35,7 @@
       "description": "Neighborhood café serving specialty coffee, fresh pastries, and light bites.",
       "hours": "Mon–Fri 6:30am–4pm, Sat–Sun 7am–3pm",
       "website": "#",
-      "panoFile": "arlington-cafe/entrance.jpg",
+      "panoFile": "basement.jpg",
       "scenes": {
         "entrance": {
           "title": "Arlington Café — Inside",
