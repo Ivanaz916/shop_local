@@ -43,7 +43,7 @@
 
         <!-- Submit form -->
         <section class="request-form-section">
-            <h3>Post a Request</h3>
+            <h3>Post a Request or Listing</h3>
             <form id="request-form" novalidate>
                 <!-- Honeypot — hidden from humans, bots fill it in -->
                 <div class="hp-field" aria-hidden="true" tabindex="-1">
@@ -57,14 +57,34 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="req-email">Email <span class="label-hint">(never displayed — only used if a shop has your item)</span></label>
+                    <label for="req-email">Email <span class="label-hint">(never displayed unless you opt in)</span></label>
                     <input type="email" id="req-email" placeholder="alex@example.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="req-text">What are you looking for?</label>
+                    <label>Post Type</label>
+                    <div class="post-type-toggle">
+                        <input type="radio" name="post-type" id="type-wanted" value="wanted" checked>
+                        <label for="type-wanted">Wanted</label>
+                        <input type="radio" name="post-type" id="type-sale" value="for_sale">
+                        <label for="type-sale">For Sale</label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="form-text-group">
+                    <label for="req-text" id="text-label">What are you looking for?</label>
                     <textarea id="req-text" rows="3" placeholder="e.g. Standing desk under $200, kids ice skates size 1…" required minlength="10" maxlength="500"></textarea>
                     <span class="char-count"><span id="char-current">0</span>/500</span>
+                </div>
+
+                <div class="form-group" id="fb-link-group" style="display:none;">
+                    <label for="fb-link">Facebook Marketplace Link <span class="label-hint">(optional)</span></label>
+                    <input type="url" id="fb-link" placeholder="https://facebook.com/marketplace/item/...">
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="publish-contact">
+                    <label for="publish-contact">Publish my name & email on the board</label>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-submit" id="req-submit">
@@ -105,10 +125,30 @@
         const charCurrent = document.getElementById('char-current');
         const formMsg = document.getElementById('form-message');
         const submitBtn = document.getElementById('req-submit');
+        const postTypeInputs = document.getElementsByName('post-type');
+        const textLabel = document.getElementById('text-label');
+        const fbLinkGroup = document.getElementById('fb-link-group');
+        const fbLinkInput = document.getElementById('fb-link');
+        const publishContact = document.getElementById('publish-contact');
 
         // Character counter
         textInput.addEventListener('input', () => {
             charCurrent.textContent = textInput.value.length;
+        });
+
+        // Post type toggle
+        postTypeInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                if (input.value === 'for_sale' && input.checked) {
+                    textLabel.textContent = 'What are you selling?';
+                    fbLinkGroup.style.display = 'block';
+                    submitBtn.textContent = 'Post Listing';
+                } else {
+                    textLabel.textContent = 'What are you looking for?';
+                    fbLinkGroup.style.display = 'none';
+                    submitBtn.textContent = 'Post Request';
+                }
+            });
         });
 
         // Submit handler
@@ -121,6 +161,9 @@
             const name = nameInput.value.trim();
             const email = emailInput.value.trim();
             const requestText = textInput.value.trim();
+            const postType = document.querySelector('input[name="post-type"]:checked').value;
+            const fbLink = fbLinkInput.value.trim();
+            const publish = publishContact.checked;
 
             // Basic validation
             if (!name || !email || requestText.length < 10) {
@@ -129,12 +172,12 @@
             }
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Posting…';
+            submitBtn.textContent = postType === 'for_sale' ? 'Posting…' : 'Posting…';
 
-            const result = await SupabaseClient.submitRequest({ name, email, requestText });
+            const result = await SupabaseClient.submitRequest({ name, email, requestText, postType, fbLink, publishContact: publish });
 
             if (result.success) {
-                showFormMsg('Request posted! Shop owners will reach out if they can help.', 'success');
+                showFormMsg(postType === 'for_sale' ? 'Listing posted! Your item will be visible to neighbors.' : 'Request posted! Shop owners will reach out if they can help.', 'success');
                 form.reset();
                 charCurrent.textContent = '0';
                 loadRequests(); // Refresh the board
@@ -145,7 +188,7 @@
             }
 
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Post Request';
+            submitBtn.textContent = postType === 'for_sale' ? 'Post Listing' : 'Post Request';
         });
 
         // Load and render the public request board
@@ -154,16 +197,24 @@
             const requests = await SupabaseClient.fetchRequests(20);
 
             if (!requests || requests.length === 0) {
-                board.innerHTML = '<p class="board-empty">No requests yet — be the first!</p>';
+                board.innerHTML = '<p class="board-empty">No posts yet — be the first!</p>';
                 return;
             }
 
             board.innerHTML = requests.map(req => {
                 const date = new Date(req.created_at);
                 const ago = timeAgo(date);
+                const badge = req.post_type === 'for_sale' ? '<span class="request-badge badge-sale">For Sale</span>' : '<span class="request-badge badge-wanted">Wanted</span>';
+                const fbLink = req.fb_link ? `<a href="${escapeHtml(req.fb_link)}" class="request-fb-link" target="_blank">View on Facebook</a>` : '';
+                const contact = req.publish_contact && req.requester_name && req.requester_email ? `<div class="request-contact">${escapeHtml(req.requester_name)} &lt;${escapeHtml(req.requester_email)}&gt;</div>` : '';
                 return `
                     <div class="request-card" data-id="${req.id}">
+                        <div class="request-header">
+                            ${badge}
+                            ${fbLink}
+                        </div>
                         <p class="request-text">${escapeHtml(req.request_text)}</p>
+                        ${contact}
                         <div class="request-meta">
                             <span class="request-time">${ago}</span>
                             <button class="request-flag" title="Flag as inappropriate" data-id="${req.id}">🚩</button>

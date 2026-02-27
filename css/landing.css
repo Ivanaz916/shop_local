@@ -2,6 +2,39 @@
    Landing Page Styles — "Local Revolutionized"
    ================================================================ */
 
+/* Floating nav bar (appears on scroll) */
+.floating-nav {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 1001;
+    display: flex;
+    gap: 18px;
+    background: rgba(30,30,30,0.08);
+    border-radius: 12px;
+    padding: 6px 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.floating-nav.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.floating-nav-link {
+    color: #181818;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+.floating-nav-link:hover {
+    background: rgba(30,30,30,0.12);
+    color: #0f1a14;
+}
+
 .landing-body {
     overflow-y: auto;
     height: auto;
@@ -201,9 +234,9 @@
 
 .path-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    max-width: 960px;
+    max-width: 720px;
     margin: 0 auto;
 }
 
@@ -263,16 +296,6 @@
 
 .path-card-browse:hover .path-card-cta {
     background: var(--color-primary-light);
-    transform: scale(1.03);
-}
-
-.path-card-search .path-card-cta {
-    background: var(--color-accent);
-    color: var(--color-primary-dark);
-}
-
-.path-card-search:hover .path-card-cta {
-    background: #f0b54a;
     transform: scale(1.03);
 }
 
@@ -340,10 +363,6 @@
     }
     .headline-script {
         font-size: clamp(3rem, 14vw, 5rem);
-    }
-
-    .path-cards {
-        grid-template-columns: 1fr 1fr;
     }
 }
 

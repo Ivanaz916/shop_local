@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="css/landing.css">
 </head>
 <body class="landing-body">
+    <!-- Minimal nav bar, hidden until scroll past hero -->
+    <nav id="floating-nav" class="floating-nav">
+        <a href="index.html" class="floating-nav-link">Home</a>
+        <a href="about.html" class="floating-nav-link">About</a>
+        <a href="requests.html" class="floating-nav-link">Get Involved</a>
+    </nav>
 
     <!-- ===== HERO — full viewport ===== -->
     <section id="landing-hero">
@@ -44,32 +50,22 @@
     <section id="action-section">
         <a href="#landing-hero" class="scroll-arrow scroll-arrow-up" aria-label="Back to top">&uarr;</a>
         <p class="action-intro">Shopping local should be <span class="accent-script">easier.</span></p>
-        <p class="action-detail">This site aims to curate what's available while giving you the feel of browsing.</p>
-        <p class="action-detail">Once you get a feel of the local landscape, get out there or use the connection details included to connect and get what you need!</p>
 
         <div class="path-cards">
             <!-- Browse Card -->
             <a href="browse.html" class="path-card path-card-browse">
                 <div class="path-card-icon">🚶</div>
                 <h3>Walk the Block</h3>
-                <p>Browse local shops, peek inside with 360° views, and discover marketplace finds from your neighbors.</p>
+                <p>Browse local shops, peek inside with 360° views, and search for what you need.</p>
                 <span class="path-card-cta">Start Browsing →</span>
             </a>
 
-            <!-- Search Card -->
-            <a href="search.html" class="path-card path-card-search">
-                <div class="path-card-icon">💬</div>
-                <h3>Ask a Local</h3>
-                <p>Looking for something specific? Our AI assistant knows every shop and listing on the block.</p>
-                <span class="path-card-cta">Start Searching →</span>
-            </a>
-
-            <!-- Request Board Card -->
+            <!-- Community Board Card -->
             <a href="requests.html" class="path-card path-card-request">
                 <div class="path-card-icon">📋</div>
                 <h3>Looking For…</h3>
-                <p>Can't find it? Post what you need and local shop owners will reach out if they have it.</p>
-                <span class="path-card-cta">Post a Request →</span>
+                <p>Post what you're looking for — or list something for sale. Connect with your neighbors.</p>
+                <span class="path-card-cta">Browse the Board →</span>
             </a>
         </div>
     </section>
@@ -81,16 +77,12 @@
             <span class="stat-label">Local Shops</span>
         </div>
         <div class="stat">
-            <span class="stat-number" id="stat-listings">0</span>
-            <span class="stat-label">Marketplace Listings</span>
-        </div>
-        <div class="stat">
             <span class="stat-number">360°</span>
             <span class="stat-label">Interior Views</span>
         </div>
         <div class="stat">
             <span class="stat-number" id="stat-requests">0</span>
-            <span class="stat-label">Active Requests</span>
+            <span class="stat-label">Active Posts</span>
         </div>
     </section>
 
@@ -104,9 +96,6 @@
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 if (typeof SupabaseClient !== 'undefined' && SupabaseClient.isConfigured()) {
-                    const listings = await SupabaseClient.fetchListings();
-                    document.getElementById('stat-listings').textContent = listings.length;
-
                     const requests = await SupabaseClient.fetchRequests();
                     document.getElementById('stat-requests').textContent = requests.length;
                 }
@@ -123,5 +112,19 @@
             }
         });
     </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.getElementById('floating-nav');
+            function checkScroll() {
+                if (window.scrollY > 200) {
+                    nav.classList.add('visible');
+                } else {
+                    nav.classList.remove('visible');
+                }
+            }
+            window.addEventListener('scroll', checkScroll);
+            checkScroll();
+        });
+        </script>
 </body>
 </html>

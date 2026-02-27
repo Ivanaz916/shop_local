@@ -6,6 +6,8 @@
 
 const ChatApp = (() => {
     let isProcessing = false;
+    let currentShopId = null;
+    let mode = 'gallery';
 
     function init() {
         const input = document.getElementById('chat-input');
@@ -52,8 +54,8 @@ const ChatApp = (() => {
         const typingEl = addTypingIndicator();
 
         try {
-            // Call LLM / local search
-            const answer = await SupabaseClient.askQuestion(question);
+            // Call LLM / local search, scoped if inside shop
+            const answer = await SupabaseClient.askQuestion(question, currentShopId);
 
             // Remove typing indicator
             typingEl.remove();
@@ -112,7 +114,64 @@ const ChatApp = (() => {
         return msg;
     }
 
-    return { init };
+    function setScope(shop) {
+        currentShopId = shop.id;
+        mode = 'interior';
+        updateChips(shop);
+        clearMessages();
+        const label = document.getElementById('chat-scope-label');
+        if (label) label.textContent = `Searching only ${shop.name}`;
+    }
+
+    function clearScope() {
+        currentShopId = null;
+        mode = 'gallery';
+        updateChips();
+        clearMessages();
+        const label = document.getElementById('chat-scope-label');
+        if (label) label.textContent = 'Searching all shops on Mass Ave';
+    }
+
+    function updateChips(shop) {
+        const chipsEl = document.getElementById('prompt-chips');
+        if (!chipsEl) return;
+        chipsEl.innerHTML = '';
+        if (shop) {
+            chipsEl.innerHTML = `
+                <button class="chip" data-prompt="What's in stock?">🛒 Inventory</button>
+                <button class="chip" data-prompt="What are your hours?">⏰ Hours</button>
+                <button class="chip" data-prompt="How do I contact you?">📞 Contact</button>
+            `;
+        } else {
+            chipsEl.innerHTML = `
+                <button class="chip" data-prompt="What shops are open right now?">🕐 Open now?</button>
+                <button class="chip" data-prompt="Are there any good restaurants on Mass Ave?">🍽️ Restaurants</button>
+                <button class="chip" data-prompt="Where can I find books in Arlington?">📚 Bookstores</button>
+                <button class="chip" data-prompt="Tell me about Arlington Center">🏠 About Arlington</button>
+            `;
+        }
+        chipsEl.classList.remove('hidden');
+        chipsEl.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.getElementById('chat-input').value = chip.dataset.prompt;
+                handleSend();
+            });
+        });
+    }
+
+    function clearMessages() {
+        const messages = document.getElementById('chat-messages');
+        if (messages) messages.innerHTML = `
+            <div class="message message-ai">
+                <div class="message-avatar">🏘️</div>
+                <div class="message-bubble">
+                    <p>Hi! I know what's happening on Mass Ave. Ask me about local shops or anything Arlington.</p>
+                </div>
+            </div>
+        `;
+    }
+
+    return { init, setScope, clearScope, updateChips };
 })();
 
 // Initialize on load

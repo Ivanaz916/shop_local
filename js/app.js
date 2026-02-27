@@ -180,6 +180,11 @@ function enterShop(shopId) {
     AppState.currentShopId = shopId;
     AppState.mode = 'interior';
 
+    // Update chat scope to this shop
+    if (typeof ChatApp !== 'undefined') {
+        ChatApp.setScope(shop);
+    }
+
     // Toggle views
     DOM.photoGrid().style.display = 'none';
     DOM.pannellumView().classList.remove('hidden');
@@ -204,6 +209,11 @@ function enterShop(shopId) {
 function exitToStreet() {
     AppState.mode = 'gallery';
     AppState.currentShopId = null;
+
+    // Reset chat scope to all shops
+    if (typeof ChatApp !== 'undefined') {
+        ChatApp.clearScope();
+    }
 
     // Toggle views
     DOM.pannellumView().classList.add('hidden');
@@ -292,11 +302,10 @@ async function initApp() {
     // Render photo grid
     renderPhotoGrid(AppState.shops);
 
-    // Render marketplace listings
-    renderMarketplace();
-
-    // Initialize feature interest survey
-    initSurvey();
+    // Initialize embedded chat
+    if (typeof ChatApp !== 'undefined') {
+        ChatApp.init();
+    }
 
     // Populate sidebar
     populateSidebar(AppState.shops);
@@ -323,143 +332,3 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded fired');
     initApp();
 });
-
-// ── Marketplace ──
-async function renderMarketplace() {
-    const grid = document.getElementById('marketplace-grid');
-    const section = document.getElementById('marketplace-section');
-    if (!grid || !section) return;
-
-    try {
-        const listings = await SupabaseClient.fetchListings(null, 8);
-        if (!listings || listings.length === 0) {
-            section.style.display = 'none';
-            return;
-        }
-        grid.innerHTML = listings.map(listing => `
-            <div class="marketplace-card">
-                <div class="marketplace-img" style="background-color: ${stringToColor(listing.title)};">
-                    ${listing.image_url
-                        ? `<img src="${listing.image_url}" alt="${listing.title}" loading="lazy">`
-                        : `<span class="marketplace-placeholder">${listing.title.charAt(0)}</span>`
-                    }
-                </div>
-                <div class="marketplace-info">
-                    <h4>${listing.title}</h4>
-                    <span class="marketplace-price">${listing.price ? '$' + listing.price.toFixed(0) : 'Free'}</span>
-                    <p class="marketplace-desc">${listing.description || ''}</p>
-                    <span class="marketplace-seller">Posted by ${listing.seller_name || 'Neighbor'}</span>
-                </div>
-            </div>
-        `).join('');
-    } catch (e) {
-        console.warn('Marketplace unavailable:', e);
-        section.style.display = 'none';
-    }
-}
-
-function stringToColor(str) {
-    const colors = ['#e8d5c4', '#c4d8e8', '#d5e8c4', '#e8c4d5', '#e8e4c4', '#c4e8e0'];
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    return colors[Math.abs(hash) % colors.length];
-}
-
-// ── Feature Interest Survey ──
-const SURVEY_ID = 'user-listings-dropoff-v1';
-const SURVEY_STORAGE_KEY = 'survey_voted_' + SURVEY_ID;
-
-function initSurvey() {
-    const section = document.getElementById('survey-section');
-    const dismissBtn = document.getElementById('survey-dismiss');
-    const buttons = document.getElementById('survey-buttons');
-    const commentArea = document.getElementById('survey-comment-area');
-    const commentInput = document.getElementById('survey-comment');
-    const submitComment = document.getElementById('survey-submit-comment');
-    const resultsEl = document.getElementById('survey-results');
-    const thanksEl = document.getElementById('survey-thanks');
-
-    if (!section) return;
-
-    // Check if already voted or dismissed
-    const stored = localStorage.getItem(SURVEY_STORAGE_KEY);
-    if (stored === 'dismissed' || stored === 'voted') {
-        section.classList.add('hidden');
-        return;
-    }
-
-    // Show the survey
-    section.classList.remove('hidden');
-
-    // Dismiss
-    dismissBtn.addEventListener('click', () => {
-        localStorage.setItem(SURVEY_STORAGE_KEY, 'dismissed');
-        section.classList.add('hidden');
-    });
-
-    let selectedVote = null;
-
-    // Vote buttons
-    buttons.querySelectorAll('.survey-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            selectedVote = btn.dataset.vote;
-            // Highlight selected
-            buttons.querySelectorAll('.survey-btn').forEach(b => b.style.opacity = '0.5');
-            btn.style.opacity = '1';
-            btn.style.border = '2px solid var(--color-primary)';
-            // Show comment input
-            commentArea.classList.remove('hidden');
-            commentInput.focus();
-        });
-    });
-
-    // Submit (with optional comment)
-    async function submitVote() {
-        if (!selectedVote) return;
-
-        const comment = commentInput.value.trim();
-        submitComment.disabled = true;
-        submitComment.textContent = '…';
-
-        await SupabaseClient.submitSurveyVote({
-            surveyId: SURVEY_ID,
-            vote: selectedVote,
-            comment: comment || null
-        });
-
-        localStorage.setItem(SURVEY_STORAGE_KEY, 'voted');
-
-        // Hide form, show results
-        buttons.style.display = 'none';
-        commentArea.classList.add('hidden');
-
-        // Fetch and show results
-        const results = await SupabaseClient.fetchSurveyResults(SURVEY_ID);
-        if (results.total > 0) {
-            resultsEl.innerHTML = ['yes', 'maybe', 'no'].map(key => {
-                const pct = Math.round((results[key] / results.total) * 100);
-                const label = key === 'yes' ? '👍 Yes' : key === 'maybe' ? '🤔 Maybe' : '👎 No';
-                return `
-                    <div class="survey-result-bar">
-                        <span class="survey-result-label">${label}</span>
-                        <div class="survey-result-track">
-                            <div class="survey-result-fill survey-result-fill-${key}" style="width: ${pct}%"></div>
-                        </div>
-                        <span class="survey-result-count">${results[key]}</span>
-                    </div>
-                `;
-            }).join('');
-            resultsEl.classList.remove('hidden');
-        }
-
-        thanksEl.classList.remove('hidden');
-    }
-
-    submitComment.addEventListener('click', submitVote);
-    commentInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            submitVote();
-        }
-    });
-}

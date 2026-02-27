@@ -305,3 +305,66 @@ html:has(.requests-body) {
         font-size: 1.4rem;
     }
 }
+
+/* ---------- Post Type Toggle ---------- */
+.post-type-toggle {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.post-type-toggle input[type="radio"] {
+    accent-color: var(--color-primary);
+    margin-right: 4px;
+}
+.post-type-toggle label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-right: 16px;
+}
+
+/* ---------- Request Badges ---------- */
+.request-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.badge-sale {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+}
+.badge-wanted {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* ---------- Request Header ---------- */
+.request-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.request-fb-link {
+    display: inline-block;
+    font-size: 0.78rem;
+    color: #1877f2;
+    text-decoration: underline;
+    margin-right: 8px;
+}
+.request-fb-link:hover {
+    color: #0a5ad7;
+}
+
+.request-contact {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+}

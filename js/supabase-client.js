@@ -94,8 +94,10 @@ const SupabaseClient = (() => {
     /**
      * Send a question to the Supabase Edge Function for LLM processing.
      * Falls back to local keyword search if Edge Function isn't deployed.
+     * @param {string} question
+     * @param {string} [shopId] - Optional shop ID to scope the search to
      */
-    async function askQuestion(question) {
+    async function askQuestion(question, shopId) {
         const sb = await getClient();
 
         if (sb) {
@@ -113,27 +115,33 @@ const SupabaseClient = (() => {
         }
 
         // Fallback: local keyword-based search
-        return localSearch(question);
+        return localSearch(question, shopId);
     }
 
     /**
      * Simple local keyword search as fallback when Supabase/LLM isn't available.
+     * @param {string} question
+     * @param {string} [shopId] - Optional shop ID to scope the search to
      */
-    async function localSearch(question) {
+    async function localSearch(question, shopId) {
         const { shops, listings } = await fetchAllForContext();
         const q = question.toLowerCase();
         const results = [];
 
+        // Filter shops if scoped
+        const targetShops = shopId ? shops.filter(s => s.id === shopId) : shops;
+
         // Search shops
-        shops.forEach(shop => {
+        targetShops.forEach(shop => {
             const text = `${shop.name} ${shop.category} ${shop.description}`.toLowerCase();
             if (q.split(' ').some(word => word.length > 2 && text.includes(word))) {
                 results.push(`🏪 **${shop.name}** (${shop.category}) — ${shop.description} Hours: ${shop.hours}`);
             }
         });
 
-        // Search listings
-        listings.forEach(listing => {
+        // Search listings (scoped to shop if applicable)
+        const targetListings = shopId ? listings.filter(l => l.shop_id === shopId) : listings;
+        targetListings.forEach(listing => {
             const text = `${listing.title} ${listing.category || ''} ${listing.description || ''}`.toLowerCase();
             if (q.split(' ').some(word => word.length > 2 && text.includes(word))) {
                 const price = listing.price ? `$${listing.price}` : 'Price not listed';
@@ -142,6 +150,12 @@ const SupabaseClient = (() => {
         });
 
         if (results.length === 0) {
+            if (shopId) {
+                const shop = targetShops[0];
+                if (shop) {
+                    return `Here's what I know about **${shop.name}**:\n\n🏪 **${shop.name}** (${shop.category})\n${shop.description}\n⏰ Hours: ${shop.hours}${shop.website && shop.website !== '#' ? '\n🌐 ' + shop.website : ''}`;
+                }
+            }
             return "I couldn't find anything matching that. Try asking about specific shops, categories like \"restaurants\" or \"books\", or check the Browse page to see everything available.";
         }
 
@@ -237,18 +251,27 @@ const SupabaseClient = (() => {
     // --------------- Request Board ---------------
 
     /**
-     * Submit a "Looking For" request (blind — name/email stored but never shown publicly).
+     * Submit a "Looking For" or "For Sale" post.
      */
-    async function submitRequest({ name, email, requestText }) {
+    async function submitRequest({ name, email, requestText, postType, fbLink, publishContact }) {
         const sb = await getClient();
         if (!sb) {
             console.warn('[SupabaseClient] Not configured — request not saved.');
             return { success: false, reason: 'not_configured' };
         }
 
+        const row = {
+            requester_name: name,
+            requester_email: email,
+            request_text: requestText,
+            post_type: postType || 'wanted',
+            fb_link: fbLink || null,
+            publish_contact: publishContact || false
+        };
+
         const { error } = await sb
             .from('requests')
-            .insert([{ requester_name: name, requester_email: email, request_text: requestText }]);
+            .insert([row]);
 
         if (error) {
             console.error('[SupabaseClient] submitRequest error:', error);
@@ -258,7 +281,8 @@ const SupabaseClient = (() => {
     }
 
     /**
-     * Fetch active requests (public view — only text + date, no personal info).
+     * Fetch active requests/posts (public view).
+     * Returns post_type, fb_link, publish_contact, and conditionally name/email.
      */
     async function fetchRequests(limit) {
         const sb = await getClient();
@@ -266,7 +290,7 @@ const SupabaseClient = (() => {
 
         let query = sb
             .from('requests')
-            .select('id, request_text, created_at')
+            .select('id, request_text, created_at, post_type, fb_link, publish_contact, requester_name, requester_email')
             .order('created_at', { ascending: false });
 
         if (limit) query = query.limit(limit);
@@ -297,9 +321,9 @@ const SupabaseClient = (() => {
 
     function getMockRequests(limit) {
         const mock = [
-            { id: 'mock-r1', request_text: 'Looking for a standing desk under $200', created_at: '2026-02-20T10:00:00Z' },
-            { id: 'mock-r2', request_text: 'Anyone have kids ice skates, size 1-2?', created_at: '2026-02-19T14:30:00Z' },
-            { id: 'mock-r3', request_text: 'Need a local tailor for suit alterations', created_at: '2026-02-18T09:00:00Z' },
+            { id: 'mock-r1', request_text: 'Looking for a standing desk under $200', created_at: '2026-02-20T10:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null },
+            { id: 'mock-r2', request_text: 'Selling kids ice skates, size 1-2, great condition!', created_at: '2026-02-19T14:30:00Z', post_type: 'for_sale', fb_link: 'https://facebook.com/marketplace/item/123', publish_contact: true, requester_name: 'Jamie', requester_email: 'jamie@example.com' },
+            { id: 'mock-r3', request_text: 'Need a local tailor for suit alterations', created_at: '2026-02-18T09:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null },
         ];
         return limit ? mock.slice(0, limit) : mock;
     }
@@ -348,7 +372,6 @@ const SupabaseClient = (() => {
 
     return {
         isConfigured, fetchListings, fetchAllForContext, askQuestion,
-        submitRequest, fetchRequests, flagRequest,
-        submitSurveyVote, fetchSurveyResults
+        submitRequest, fetchRequests, flagRequest
     };
 })();

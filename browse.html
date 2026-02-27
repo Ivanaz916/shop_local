@@ -36,9 +36,8 @@
         </div>
         <nav class="top-bar-right">
             <a href="index.html" class="nav-link">Home</a>
-            <a href="search.html" class="nav-link">Search</a>
-            <a href="requests.html" class="nav-link">Looking For…</a>
-            <span id="mode-badge" class="badge badge-gallery">Gallery</span>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="requests.html" class="nav-link">Get Involved</a>
         </nav>
     </header>
 
@@ -60,36 +59,36 @@
     <!-- ===== MAIN VIEWER AREA ===== -->
     <main id="viewer-container">
         <!-- Neighborhood photos grid -->
-        <div id="photo-grid" class="photo-grid"></div>
+        <div id="photo-grid" class="photo-grid modern-grid"></div>
 
-        <!-- Marketplace listings -->
-        <section id="marketplace-section" class="marketplace-section">
-            <div class="marketplace-header">
-                <h2>🛍️ Marketplace</h2>
-                <p>Recent finds from your Arlington neighbors</p>
+        <!-- Embedded LLM-based Search (Chat) -->
+        <section id="chat-section" class="chat-section">
+            <div class="chat-header">
+                <h2>🔎 Search Local Inventory</h2>
+                <p id="chat-scope-label">Search shopowner inventory and shop details</p>
             </div>
-            <div id="marketplace-grid" class="marketplace-grid"></div>
-        </section>
-
-        <!-- Feature Interest Survey -->
-        <section id="survey-section" class="survey-section hidden">
-            <button class="survey-dismiss" id="survey-dismiss" aria-label="Dismiss survey">&times;</button>
-            <div class="survey-content">
-                <h3>🆕 Quick Question — Help Us Build What You Need</h3>
-                <p>Would you use a feature to <strong>list your own for-sale items</strong> directly on this site and use local shops as a <strong>drop-off/pickup point</strong> for buyers?</p>
-                <div class="survey-buttons" id="survey-buttons">
-                    <button class="survey-btn survey-btn-yes" data-vote="yes">👍 Yes, I'd use that!</button>
-                    <button class="survey-btn survey-btn-maybe" data-vote="maybe">🤔 Maybe</button>
-                    <button class="survey-btn survey-btn-no" data-vote="no">👎 Not for me</button>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message message-ai">
+                    <div class="message-avatar">🏘️</div>
+                    <div class="message-bubble">
+                        <p>Ask about available inventory, shop hours, or anything local. Results are powered by shopowner-provided inventory and listings.</p>
+                    </div>
                 </div>
-                <div id="survey-comment-area" class="survey-comment-area hidden">
-                    <input type="text" id="survey-comment" placeholder="Any thoughts? (optional)" maxlength="200">
-                    <button id="survey-submit-comment" class="survey-btn survey-btn-send">Send →</button>
-                </div>
-                <div id="survey-results" class="survey-results hidden"></div>
-                <div id="survey-thanks" class="survey-thanks hidden">
-                    <p>Thanks for your input! 🙌</p>
-                </div>
+            </div>
+            <div id="prompt-chips" class="prompt-chips">
+                <button class="chip" data-prompt="What inventory is available?">🛒 Inventory</button>
+                <button class="chip" data-prompt="What shops are open right now?">🕐 Open now?</button>
+                <button class="chip" data-prompt="Where can I find books?">📚 Books</button>
+                <button class="chip" data-prompt="Tell me about Arlington Center">🏠 About Arlington</button>
+            </div>
+            <div id="chat-input-bar" class="chat-input-bar">
+                <input type="text" id="chat-input" placeholder="Search inventory, shops, or ask anything…" autocomplete="off">
+                <button id="chat-send" aria-label="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
             </div>
         </section>
 
@@ -125,6 +124,7 @@
 
     <!-- ===== SCRIPTS ===== -->
     <script src="js/supabase-client.js"></script>
+    <script src="js/chat.js"></script>
     <script src="js/app.js"></script>
     <script src="js/interior.js"></script>
 </body>

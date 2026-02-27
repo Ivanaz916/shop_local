@@ -2,7 +2,7 @@
 
 ### Project Overview
 
-A multi-page static website for Arlington, MA that lets visitors **browse** local shops and marketplace listings or **search** via an AI-powered chat. Hosted on GitHub Pages with Supabase (free tier) for marketplace data and LLM queries.
+A multi-page static website for Arlington, MA that lets visitors **browse** local shops with 360° interiors and an embedded AI chat, or **post and discover** items via a community board. Hosted on GitHub Pages with Supabase (free tier) for data and LLM queries.
 
 **Repo:** [https://github.com/Ivanaz916/shop_local](https://github.com/Ivanaz916/shop_local)
 **Live site:** [https://ivanaz916.github.io/shop_local/](https://ivanaz916.github.io/shop_local/)
@@ -15,13 +15,13 @@ A multi-page static website for Arlington, MA that lets visitors **browse** loca
                         index.html (Landing Page)
                        /                          \
                       /                            \
-           browse.html                        search.html
-      (Gallery + Marketplace)              (LLM Chat Interface)
+           browse.html                      requests.html
+   (Gallery + 360° + Chat)            (Community Board: Wanted / For Sale)
               |                                    |
-      shops.json (local)                  Supabase Edge Function
-      Supabase listings                     /            \
-      Pannellum 360°                  LLM API         Supabase DB
-                                   (Groq/OpenAI)    (listings + shops)
+      shops.json (local)                     Supabase DB
+      Pannellum 360°                      (requests table)
+      Embedded Chat
+        (LLM / local search)
 ```
 
 | Layer | Technology | Cost |
@@ -39,28 +39,27 @@ A multi-page static website for Arlington, MA that lets visitors **browse** loca
 
 ```
 shop_local/
-├── index.html                  ← Landing page ("Browse" or "Search?")
-├── browse.html                 ← Shop gallery + marketplace cards + Pannellum 360°
-├── search.html                 ← LLM chat interface
+├── index.html                  ← Landing page (2 cards: Browse / Looking For…)
+├── browse.html                 ← Shop gallery + Pannellum 360° + embedded AI chat
+├── requests.html               ← Community board: Wanted + For Sale posts
 ├── css/
-│   ├── styles.css              ← Shared + browse styles
+│   ├── styles.css              ← Shared + browse + embedded chat styles
 │   ├── landing.css             ← Landing page styles
-│   └── chat.css                ← Chat interface styles
+│   └── requests.css            ← Request board styles
 ├── js/
-│   ├── app.js                  ← Browse page controller (shop cards, sidebar, modal)
+│   ├── app.js                  ← Browse page controller (shop cards, sidebar, chat)
 │   ├── interior.js             ← Pannellum 360° viewer module
-│   ├── supabase-client.js      ← Supabase init + listing queries
-│   └── chat.js                 ← Search page / LLM chat controller
+│   ├── supabase-client.js      ← Supabase init + queries (requests, listings, LLM)
+│   └── chat.js                 ← Embedded chat module (scope-aware, used by app.js)
 ├── data/
 │   └── shops.json              ← Local shop directory (4 shops)
 ├── images/
-│   ├── neighborhood.jpg        ← Hero banner (Mass Ave photo)
-│   ├── storefronts/            ← Storefront photos per shop
-│   └── panos/                  ← 360° interior equirectangular JPEGs
+│   ├── panos/                  ← 360° interior equirectangular JPEGs
+│   ├── people/                 ← People images
+│   └── town/                   ← Hero/town images
 ├── supabase/
 │   └── functions/
-│       ├── chat/index.ts       ← LLM query Edge Function
-│       └── add-listing/index.ts ← Bookmarklet insert endpoint
+│       └── chat/index.ts       ← LLM query Edge Function (future)
 ├── .gitignore
 └── README.md
 ```
@@ -362,4 +361,97 @@ shop_local/
 - `js/supabase-client.js` (added `submitSurveyVote`, `fetchSurveyResults`)
 - `css/styles.css` (added survey styles)
 - `browse.html` (added survey section)
+
+---
+
+### Phase 8 — Site Simplification & Chat Migration
+
+**Goal:** Simplify the site from 3 landing cards to 2. Remove Ask a Local standalone page, FB Marketplace section, and feature survey. Embed the chat interface into the browse page (scope-aware). Expand the "Looking For…" board into a dual-purpose community board supporting both "Wanted" and "For Sale" posts.
+
+**Status:** ✅ Implemented
+
+21. **Landing page simplification (`index.html`):**
+    - Reduced from 3 cards to 2: "Walk the Block" (→ browse.html) and "Looking For…" (→ requests.html)
+    - Removed "Ask a Local" card entirely
+    - Updated Walk the Block description: "Browse local shops, peek inside with 360° views, and search for what you need."
+    - Updated Looking For description: "Post what you're looking for — or list something for sale. Connect with your neighbors."
+    - Removed "Marketplace Listings" stat; kept Local Shops, 360° Views, Active Requests
+    - Removed `fetchListings()` call from inline script
+
+22. **Browse page — marketplace/survey removal + embedded chat (`browse.html`):**
+    - Removed `<section id="marketplace-section">` entirely
+    - Removed `<section id="survey-section">` entirely
+    - Removed "Search" nav link from top bar
+    - Added `<section id="chat-section">` after `#photo-grid` — chat messages, prompt chips, input bar
+    - Chat always visible below shop cards in gallery mode
+    - When inside 360° view, chat remains visible and scopes to current shop
+
+23. **Chat behavior — scope-aware (`js/chat.js`):**
+    - Refactored `ChatApp` to read `AppState.currentShopId` and `AppState.mode`
+    - Gallery mode: `askQuestion(question)` searches all shops
+    - Interior mode: `askQuestion(question, shopId)` scopes to current shop
+    - Prompt chips update dynamically per mode
+    - Chat messages cleared on mode transition
+
+24. **App.js cleanup (`js/app.js`):**
+    - Removed `renderMarketplace()`, `stringToColor()`, `initSurvey()`, survey constants
+    - Added `initChat()` call in `initApp()`
+    - `enterShop()` and `exitToStreet()` now call `ChatApp.setScope()` and `ChatApp.updateChips()`
+
+25. **Supabase client updates (`js/supabase-client.js`):**
+    - Updated `askQuestion(question, shopId?)` — scoped search when shopId provided
+    - Updated `localSearch(question, shopId?)` — filters to single shop when scoped
+    - Removed `submitSurveyVote()` and `fetchSurveyResults()` exports
+    - Kept `fetchListings()` for future shop-owner inventory
+    - Updated `submitRequest()` to accept `postType`, `fbLink`, `publishContact`
+    - Updated `fetchRequests()` to return new columns
+
+26. **Requests page — dual-purpose community board (`requests.html`):**
+    - Added post-type toggle: "I'm looking for something" vs "I have something for sale"
+    - For Sale mode: textarea label changes, optional FB Marketplace link input, submit button text updates
+    - "Publish my contact info" checkbox (name + email shown on card when opted in)
+    - Board shows "Wanted"/"For Sale" badge per card
+    - Contact info shown when poster opted in
+    - "View on Facebook" link when FB URL provided
+    - Flag + 30-day expiry still functional
+
+27. **CSS changes:**
+    - Removed marketplace styles from `css/styles.css`
+    - Removed survey styles from `css/styles.css`
+    - Added embedded chat styles to `css/styles.css` (adapted from `css/chat.css`)
+    - Updated `css/landing.css` to 2-column card grid
+    - Updated `css/requests.css` with toggle, badge, and FB link styles
+
+28. **File cleanup:**
+    - Deleted `search.html` (functionality moved to browse page)
+    - Deleted `css/chat.css` (styles merged into `css/styles.css`)
+
+29. **Supabase schema migration:**
+    ```sql
+    ALTER TABLE requests ADD COLUMN post_type TEXT NOT NULL DEFAULT 'wanted'
+      CHECK (post_type IN ('wanted', 'for_sale'));
+    ALTER TABLE requests ADD COLUMN fb_link TEXT;
+    ALTER TABLE requests ADD COLUMN publish_contact BOOLEAN NOT NULL DEFAULT false;
+    ```
+    - SELECT RLS policy returns new columns
+    - `fetchRequests()` conditionally includes `requester_name`/`requester_email` when `publish_contact = true`
+
+**Files modified:**
+- `index.html` (2-card layout, updated stats)
+- `browse.html` (removed marketplace/survey, added embedded chat section)
+- `requests.html` (dual-purpose board with post-type toggle, FB link, publish-contact)
+- `js/app.js` (removed marketplace/survey code, added chat init)
+- `js/chat.js` (refactored for embedded, scope-aware usage)
+- `js/supabase-client.js` (updated request functions, removed survey functions)
+- `css/styles.css` (removed marketplace/survey styles, added embedded chat styles)
+- `css/landing.css` (2-column card grid)
+- `css/requests.css` (toggle, badge, FB link styles)
+
+**Files deleted:**
+- `search.html`
+- `css/chat.css`
+
+**Deprecated phases:**
+- Phase 4 (FB Marketplace Bookmarklet) — removed, too manual
+- Phase 7 (User Listings Survey) — removed, replaced by direct For Sale posts on community board
 
