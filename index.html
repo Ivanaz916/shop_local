@@ -15,13 +15,6 @@
     <link rel="stylesheet" href="css/landing.css">
 </head>
 <body class="landing-body">
-    <!-- Minimal nav bar, hidden until scroll past hero -->
-    <nav id="floating-nav" class="floating-nav">
-        <a href="index.html" class="floating-nav-link">Home</a>
-        <a href="about.html" class="floating-nav-link">About</a>
-        <a href="requests.html" class="floating-nav-link">Get Involved</a>
-    </nav>
-
     <!-- ===== HERO — full viewport ===== -->
     <section id="landing-hero">
         <!-- Image collage background -->
@@ -112,19 +105,5 @@
             }
         });
     </script>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.getElementById('floating-nav');
-            function checkScroll() {
-                if (window.scrollY > 200) {
-                    nav.classList.add('visible');
-                } else {
-                    nav.classList.remove('visible');
-                }
-            }
-            window.addEventListener('scroll', checkScroll);
-            checkScroll();
-        });
-        </script>
 </body>
 </html>
