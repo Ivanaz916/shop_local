@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us — Shop Local Arlington</title>
+    <meta name="description" content="List your shop on Shop Local Arlington — free community platform for Mass Ave businesses.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Birthstone&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Reset & tokens ─────────────────────────────────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --green:        #1a5f3a;
+            --green-light:  #27855a;
+            --green-dark:   #0f3d25;
+            --green-bg:     #f0f7f3;
+            --gold:         #e8a838;
+            --gold-light:   #fdf3de;
+            --text:         #181818;
+            --text-muted:   #555;
+            --border:       #d4e4da;
+            --white:        #ffffff;
+            --font:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius:       12px;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--text);
+            background: #f7f7fa;
+            line-height: 1.6;
+        }
+
+        /* ─── Nav ─────────────────────────────────────────────────── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--green-dark);
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+        .nav-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .nav-brand span { color: var(--gold); }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+        /* ─── Hero banner ─────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-light) 100%);
+            padding: 72px 32px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* subtle geometric accent */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 340px; height: 340px;
+            border-radius: 50%;
+            background: rgba(232, 168, 56, 0.08);
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -60px;
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            letter-spacing: 0.05em;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        .hero-sub {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: rgba(255,255,255,0.82);
+            max-width: 640px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--green-dark);
+            font-weight: 800;
+            font-size: 0.95rem;
+            padding: 10px 28px;
+            border-radius: 40px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── Section wrapper ─────────────────────────────────────── */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+        .section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            letter-spacing: 0.04em;
+            color: var(--green-dark);
+            margin-bottom: 8px;
+        }
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 620px;
+            margin-bottom: 40px;
+        }
+
+        /* ─── Benefit cards ───────────────────────────────────────── */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .benefit-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            position: relative;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .benefit-card:hover {
+            box-shadow: 0 8px 28px rgba(26,95,58,0.12);
+            transform: translateY(-3px);
+        }
+        .benefit-card::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: var(--green-bg);
+            line-height: 1;
+        }
+        .benefit-card h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+        /* accent top border by alternating pattern */
+        .benefit-card:nth-child(odd)  { border-top: 3px solid var(--green); }
+        .benefit-card:nth-child(even) { border-top: 3px solid var(--gold); }
+
+        /* ─── Checklist section ──────────────────────────────────── */
+        .checklist-section {
+            background: var(--green-bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .checklist-items { display: flex; flex-direction: column; gap: 0; }
+        .checklist-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .checklist-item:last-child { margin-bottom: 0; }
+
+        .checklist-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 24px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+        .checklist-letter {
+            flex-shrink: 0;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--green);
+            color: var(--white);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .checklist-item:nth-child(even) .checklist-letter { background: var(--gold); color: var(--green-dark); }
+        .checklist-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--green-dark);
+        }
+        .checklist-body { padding: 24px; }
+        .checklist-body p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        /* ─── Tables ─────────────────────────────────────────────── */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+        }
+        .data-table thead tr {
+            background: var(--green);
+            color: var(--white);
+        }
+        .data-table thead th {
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        .data-table tbody tr { border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: var(--green-bg); }
+        .data-table tbody td { padding: 10px 14px; color: var(--text-muted); }
+        .data-table tbody td:first-child { color: var(--text); font-weight: 500; }
+        .badge-yes {
+            display: inline-block;
+            background: var(--green);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.04em;
+        }
+        .badge-opt {
+            display: inline-block;
+            background: var(--border);
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        /* ─── Tip list ───────────────────────────────────────────── */
+        .tip-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .tip-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .tip-list li::before {
+            content: '✓';
+            flex-shrink: 0;
+            width: 20px; height: 20px;
+            background: var(--green);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        /* ─── Bullet list (profile section) ─────────────────────── */
+        .prose-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .prose-list li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.65;
+        }
+        .prose-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* ─── How It Works steps ─────────────────────────────────── */
+        .steps-section { background: var(--green-dark); }
+        .steps-section .section { color: var(--white); }
+        .steps-section .section-label { color: var(--gold); }
+        .steps-section h2 { color: var(--white); }
+        .steps-section .section-intro { color: rgba(255,255,255,0.6); }
+
+        .steps-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+        /* Connector line */
+        .steps-row::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: calc(12.5% + 1px);
+            right: calc(12.5% + 1px);
+            height: 2px;
+            background: rgba(232,168,56,0.35);
+            z-index: 0;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .step-num {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: var(--green);
+            border: 3px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            flex-shrink: 0;
+        }
+        .step-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .step-desc {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ─── CTA section ────────────────────────────────────────── */
+        .cta-section {
+            background: linear-gradient(135deg, var(--gold-light) 0%, #fff 100%);
+            border-top: 4px solid var(--gold);
+        }
+        .cta-section .section { text-align: center; }
+        .cta-section .section-label { color: var(--gold); }
+        .cta-section h2 { color: var(--green-dark); }
+        .cta-section .section-intro { margin: 0 auto 32px; max-width: 540px; }
+        .cta-btn {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 14px 40px;
+            border-radius: 40px;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 4px 18px rgba(26,95,58,0.25);
+        }
+        .cta-btn:hover {
+            background: var(--green-light);
+            transform: translateY(-2px);
+        }
+        .cta-note {
+            margin-top: 18px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ─── Footer ─────────────────────────────────────────────── */
+        footer {
+            background: var(--green-dark);
+            padding: 24px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+        }
+
+        /* ─── Divider ─────────────────────────────────────────────── */
+        .rule {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+
+        /* ─── Sub-section heading ─────────────────────────────────── */
+        .sub-heading {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        /* ─── Print ──────────────────────────────────────────────── */
+        @media print {
+            nav { display: none; }
+            .benefit-card:hover, .cta-btn:hover { transform: none; box-shadow: none; }
+            .steps-row::before { display: none; }
+            body { font-size: 12px; }
+        }
+
+        /* ─── Responsive ─────────────────────────────────────────── */
+        @media (max-width: 700px) {
+            .steps-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+            .steps-row::before { display: none; }
+            .hero { padding: 52px 20px 44px; }
+            nav { padding: 0 16px; }
+            .nav-links { gap: 14px; }
+        }
+        @media (max-width: 480px) {
+            .steps-row { grid-template-columns: 1fr; }
+            .benefits-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
+    <nav>
+        <a class="nav-brand" href="index.html">SHOP <span>LOCAL</span> ARLINGTON</a>
+        <div class="nav-links">
+            <a href="browse.html">Browse</a>
+            <a href="requests.html">Community</a>
+            <a href="PARTNER_WITH_US.html" class="active">Partner With Us</a>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+    <header class="hero">
+        <p class="hero-eyebrow">Arlington Center &middot; Massachusetts Avenue</p>
+        <h1>GET YOUR SHOP<br>ON THE MAP</h1>
+        <p class="hero-sub">
+            Shop Local Arlington is a free, community-driven platform built to drive foot traffic
+            back to the independent shops lining Mass Ave — with immersive 360° tours, AI-powered
+            search, and page-view insights, at absolutely no cost to you.
+        </p>
+        <span class="hero-badge">Free to Join &mdash; Zero Fees, Ever</span>
+    </header>
+
+    <!-- ═══ WHY PARTNER ════════════════════════════════════════════ -->
+    <section>
+        <div class="section">
+            <p class="section-label">Benefits</p>
+            <h2>WHY PARTNER WITH US?</h2>
+            <p class="section-intro">Six reasons to list your shop today.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card" data-num="01">
+                    <h3>Increase Foot Traffic</h3>
+                    <p>Your shop gets discovered by local residents and visitors browsing Mass Ave online — turning digital interest into people through your door.</p>
+                </div>
+                <div class="benefit-card" data-num="02">
+                    <h3>Immersive 360° Tours</h3>
+                    <p>Customers can step inside your shop before they arrive, building the familiarity and confidence that encourages them to visit in person.</p>
+                </div>
+                <div class="benefit-card" data-num="03">
+                    <h3>AI-Powered Search</h3>
+                    <p>Site visitors search for items across every listed shop at once. When your inventory is on the platform, it shows up in their results.</p>
+                </div>
+                <div class="benefit-card" data-num="04">
+                    <h3>Page-View Metrics</h3>
+                    <p>See how many people viewed your shop page and what products they searched for — simple, actionable insight with no technical setup required.</p>
+                </div>
+                <div class="benefit-card" data-num="05">
+                    <h3>Community Board</h3>
+                    <p>Neighbors post "looking for" requests on the site. A well-stocked listing means your shop comes up when someone is already looking to buy.</p>
+                </div>
+                <div class="benefit-card" data-num="06">
+                    <h3>Zero Cost</h3>
+                    <p>The platform is free and community-driven. No subscription, no commission, no hidden fees — now or in the future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PARTNERSHIP CHECKLIST ══════════════════════════════════ -->
+    <section class="checklist-section">
+        <div class="section">
+            <p class="section-label">What We Need From You</p>
+            <h2>PARTNERSHIP CHECKLIST</h2>
+            <p class="section-intro">A rough starting point is all we need — we refine everything together over time.</p>
+
+            <div class="checklist-items">
+
+                <!-- A -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checklist-letter">A</div>
+                        <h3>Starting Inventory List</h3>
+                    </div>
+                    <div class="checklist-body">
+                        <p>Provide items in any format — a spreadsheet, a notes-app export, or photos of shelves with item names written alongside them. For each item, we collect:</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Required</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Title (item name)</td><td><span class="badge-yes">Yes</span></td><td>Vintage Oak Side Table</td></tr>
+                                <tr><td>Price</td><td><span class="badge-opt">Optional</span></td><td>$45</td></tr>
+                                <tr><td>Description</td><td><span class="badge-opt">Optional</span></td><td>Mid-century style, minor wear</td></tr>
+                                <tr><td>Photo</td><td><span class="badge-opt">Optional</span></td><td>Photo file or image link</td></tr>
+                                <tr><td>Category</td><td><span class="badge-opt">Optional</span></td><td>e.g., Furniture, Books, Home &amp; Kitchen</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- B -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checklist-letter">B</div>
+                        <h3>360° Interior Panoramas</h3>
+                    </div>
+                    <div class="checklist-body">
+                        <p>Immersive interior photos let site visitors step inside your shop before they arrive. Multiple panoramas are welcome — the goal is to cover as much of your store as possible.</p>
+                        <p class="sub-heading">Free apps to capture panoramas</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>App</th><th>Platform</th><th>How</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Google Maps (photosphere)</td><td>Android</td><td>Maps → Contribute → Camera → Photo Sphere <em style="color:#888;font-size:0.82em">(feature availability varies by app version)</em></td></tr>
+                                <tr><td>Panorama 360 Camera</td><td>iOS / Android</td><td>Free app, exports equirectangular JPEGs — <strong>recommended</strong> for reliable high-res output</td></tr>
+                                <tr><td>Google Street View APK</td><td>Android</td><td>Version 2.0.0.303 retains photosphere capture; search APK Mirror for the installer</td></tr>
+                            </tbody>
+                        </table>
+                        <hr class="rule">
+                        <p class="sub-heading">Tips for a quality result</p>
+                        <ul class="tip-list">
+                            <li>Stand in the center of each room or area</li>
+                            <li>Hold the phone at chest height</li>
+                            <li>Follow the on-screen guide dots slowly and steadily</li>
+                            <li>Avoid moving objects — people, fans, open doors</li>
+                            <li>Target resolution: 3840 &times; 1920 px (2:1 aspect ratio) — lower-resolution shots are still usable; we will advise if quality is too low to publish</li>
+                            <li>Take multiple shots and we will select the best stitch</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- C -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checklist-letter">C</div>
+                        <h3>Shop Owner Profile <em style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</em></h3>
+                    </div>
+                    <div class="checklist-body">
+                        <p>Putting a face to the shop strengthens the personal connection that makes local retail special. If you are comfortable sharing:</p>
+                        <ul class="prose-list">
+                            <li>A photo and a short bio about you and your shop's story</li>
+                            <li>Contact details — we may add a direct-messaging option so site visitors can reach you with questions, mirroring the experience of walking in and chatting in person</li>
+                        </ul>
+                        <p style="margin-top:16px">Sharing contact information is entirely voluntary but encouraged — it builds community trust and keeps the shopping experience personal.</p>
+                    </div>
+                </div>
+
+                <!-- D -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checklist-letter">D</div>
+                        <h3>Update Cadence</h3>
+                    </div>
+                    <div class="checklist-body">
+                        <p>By default we schedule a <strong>quarterly check-in</strong> to refresh your inventory, photos, and shop details. If you prefer a different rhythm — more frequent, less frequent, or updates as-needed — just let us know.</p>
+                    </div>
+                </div>
+
+            </div><!-- /checklist-items -->
+        </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══════════════════════════════════════════ -->
+    <section class="steps-section">
+        <div class="section">
+            <p class="section-label">Process</p>
+            <h2>HOW IT WORKS</h2>
+            <p class="section-intro">No complicated setup on your end. We handle everything technical.</p>
+
+            <div class="steps-row">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <p class="step-title">You Share</p>
+                    <p class="step-desc">Send us your starting inventory and panorama photos in whatever format works for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <p class="step-title">We Build</p>
+                    <p class="step-desc">We set up your page with a 360° tour, searchable inventory, and your profile details.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <p class="step-title">You Go Live</p>
+                    <p class="step-desc">Your listing appears on Shop Local Arlington, discoverable by everyone visiting the site.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <p class="step-title">You Grow</p>
+                    <p class="step-desc">Track page views and search queries so you understand how the community engages with your shop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ════════════════════════════════════════════════════ -->
+    <section class="cta-section">
+        <div class="section">
+            <p class="section-label">Get Started</p>
+            <h2>READY TO GET LISTED?</h2>
+            <p class="section-intro">
+                We would love to have you on the platform. Reach out through the contact
+                information on our live site and we will take it from there.
+            </p>
+            <a class="cta-btn" href="index.html">Visit the Live Site →</a>
+            <p class="cta-note">Shop Local Arlington is built by and for the Arlington, MA community.<br>Together, we keep Mass Ave thriving.</p>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+    <footer>
+        Shop Local Arlington &middot; Arlington Center, Massachusetts Avenue &middot; <em>Local Revolutionized</em>
+    </footer>
+
+</body>
+</html>

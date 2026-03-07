@@ -74,9 +74,9 @@ Multiple panoramas are welcome — the goal is to cover as much of your store as
 
 | App | Platform | How |
 |---|---|---|
-| Google Maps (built-in photosphere) | Android | Maps → Contribute → Camera → Photo Sphere |
-| Panorama 360 Camera | iOS / Android | Free app, exports equirectangular JPEGs |
-| Google Street View APK (sideload) | Android | Older version still supports photosphere capture |
+| Google Maps (built-in photosphere) | Android | Maps → Contribute → Camera → Photo Sphere *(feature availability varies by app version)* |
+| Panorama 360 Camera | iOS / Android | Free app, exports equirectangular JPEGs — **recommended** for reliable high-res output |
+| Google Street View APK (sideload) | Android | Version 2.0.0.303 retains photosphere capture; search APK Mirror for the installer |
 
 **Tips for a quality result**
 
@@ -84,7 +84,7 @@ Multiple panoramas are welcome — the goal is to cover as much of your store as
 - Hold the phone at chest height
 - Follow the on-screen guide dots slowly and steadily
 - Avoid moving objects — people, fans, open doors
-- Minimum resolution: 3840 × 1920 px (2:1 aspect ratio)
+- Target resolution: 3840 × 1920 px (2:1 aspect ratio) — lower-resolution shots are still usable; we will advise if quality is too low to publish
 - Take multiple shots and we will select the best stitch
 
 ---
