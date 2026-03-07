@@ -482,17 +482,26 @@
             .benefits-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- ═══ NAV ═══════════════════════════════════════════════════ -->
-    <nav>
-        <a class="nav-brand" href="index.html">SHOP <span>LOCAL</span> ARLINGTON</a>
-        <div class="nav-links">
-            <a href="browse.html">Browse</a>
-            <a href="requests.html">Community</a>
-            <a href="PARTNER_WITH_US.html" class="active">Partner With Us</a>
-        </div>
+    <!-- ===== SIDE NAV (collapsible) ===== -->
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg class="nav-icon nav-icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="nav-icon nav-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>
+        </svg>
+    </button>
+    <div id="nav-overlay"></div>
+    <nav id="side-nav" aria-label="Main navigation">
+        <a href="index.html" class="side-nav-link">Home</a>
+        <a href="about.html" class="side-nav-link">About</a>
+        <a href="index.html#walk-the-block" class="side-nav-link">Walk the Block</a>
+        <a href="index.html#circular-economy" class="side-nav-link">Circular Economy</a>
+        <a href="get-involved.html" class="side-nav-link">Get Involved</a>
     </nav>
 
     <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
@@ -692,5 +701,6 @@
         Shop Local Arlington &middot; Arlington Center, Massachusetts Avenue &middot; <em>Local Revolutionized</em>
     </footer>
 
+    <script src="js/nav.js"></script>
 </body>
 </html>

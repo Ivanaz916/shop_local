@@ -219,7 +219,6 @@ html, body {
     border-radius: 18px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.04);
 }
-}
 
 .shop-card {
     background: var(--color-surface);
@@ -573,6 +572,108 @@ html, body {
 }
 
 .nav-back:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* ================================================================
+   Side Nav — Collapsible (shared across all pages)
+   ================================================================ */
+
+#nav-toggle {
+    position: fixed;
+    top: 14px;
+    left: 16px;
+    z-index: 1100;
+    background: rgba(0,0,0,0.35);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+#nav-toggle:hover { background: rgba(0,0,0,0.55); }
+
+.nav-icon-close { display: none; }
+#nav-toggle[aria-expanded="true"] .nav-icon-open  { display: none; }
+#nav-toggle[aria-expanded="true"] .nav-icon-close { display: block; }
+
+#nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+#nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100%;
+    background: #0f1a14;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    padding: 72px 0 24px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.35);
+}
+#side-nav.open {
+    transform: translateX(0);
+}
+
+.side-nav-link {
+    display: block;
+    padding: 14px 28px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-family: var(--font-family, 'Inter', sans-serif);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, color 0.2s, padding-left 0.2s;
+    border-left: 3px solid transparent;
+}
+.side-nav-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    padding-left: 32px;
+}
+.side-nav-link.active {
+    color: var(--color-accent, #e8a838);
+    border-left-color: var(--color-accent, #e8a838);
+    background: rgba(232,168,56,0.08);
+}
+
+@media (max-width: 640px) {
+    #side-nav {
+        width: min(260px, 75vw);
+    }
+}
+
+/* Nav toggle when placed inside top-bar (e.g. browse page) */
+.nav-toggle-topbar {
+    position: static;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 4px;
+}
+.nav-toggle-topbar:hover {
     background: rgba(255,255,255,0.15);
 }
 

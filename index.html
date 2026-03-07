@@ -15,6 +15,24 @@
     <link rel="stylesheet" href="css/landing.css">
 </head>
 <body class="landing-body">
+    <!-- ===== SIDE NAV (collapsible) ===== -->
+    <button id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg class="nav-icon nav-icon-open" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        <svg class="nav-icon nav-icon-close" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>
+        </svg>
+    </button>
+    <div id="nav-overlay"></div>
+    <nav id="side-nav" aria-label="Main navigation">
+        <a href="index.html" class="side-nav-link active">Home</a>
+        <a href="about.html" class="side-nav-link">About</a>
+        <a href="#walk-the-block" class="side-nav-link">Walk the Block</a>
+        <a href="#circular-economy" class="side-nav-link">Circular Economy</a>
+        <a href="get-involved.html" class="side-nav-link">Get Involved</a>
+    </nav>
+
     <!-- ===== HERO — full viewport ===== -->
     <section id="landing-hero">
         <!-- Image collage background -->
@@ -46,17 +64,17 @@
 
         <div class="path-cards">
             <!-- Browse Card -->
-            <a href="browse.html" class="path-card path-card-browse">
+            <a href="browse.html" id="walk-the-block" class="path-card path-card-browse">
                 <div class="path-card-icon">🚶</div>
                 <h3>Walk the Block</h3>
                 <p>Browse local shops, peek inside with 360° views, and search for what you need.</p>
                 <span class="path-card-cta">Start Browsing →</span>
             </a>
 
-            <!-- Community Board Card -->
-            <a href="requests.html" class="path-card path-card-request">
-                <div class="path-card-icon">📋</div>
-                <h3>Looking For…</h3>
+            <!-- Circular Economy Card -->
+            <a href="requests.html" id="circular-economy" class="path-card path-card-request">
+                <div class="path-card-icon">♻️</div>
+                <h3>Circular Economy</h3>
                 <p>Post what you're looking for — or list something for sale. Connect with your neighbors.</p>
                 <span class="path-card-cta">Browse the Board →</span>
             </a>
@@ -109,5 +127,6 @@
             }
         });
     </script>
+    <script src="js/nav.js"></script>
 </body>
 </html>

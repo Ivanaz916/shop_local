@@ -34,12 +34,25 @@
                 Shop Local Arlington
             </h1>
         </div>
-        <nav class="top-bar-right">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="requests.html" class="nav-link">Get Involved</a>
-        </nav>
+        <button id="nav-toggle" class="nav-toggle-topbar" aria-label="Toggle navigation" aria-expanded="false">
+            <svg class="nav-icon nav-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
+            </svg>
+            <svg class="nav-icon nav-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/>
+            </svg>
+        </button>
     </header>
+
+    <!-- ===== SIDE NAV (collapsible) ===== -->
+    <div id="nav-overlay"></div>
+    <nav id="side-nav" aria-label="Main navigation">
+        <a href="index.html" class="side-nav-link">Home</a>
+        <a href="about.html" class="side-nav-link">About</a>
+        <a href="index.html#walk-the-block" class="side-nav-link">Walk the Block</a>
+        <a href="index.html#circular-economy" class="side-nav-link">Circular Economy</a>
+        <a href="get-involved.html" class="side-nav-link">Get Involved</a>
+    </nav>
 
     <!-- ===== SIDEBAR — shop directory ===== -->
     <aside id="sidebar" class="sidebar-closed">
@@ -127,5 +140,6 @@
     <script src="js/chat.js"></script>
     <script src="js/app.js"></script>
     <script src="js/interior.js"></script>
+    <script src="js/nav.js"></script>
 </body>
 </html>
