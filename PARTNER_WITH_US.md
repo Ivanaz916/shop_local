@@ -1,134 +1,144 @@
 <!--
   PARTNER_WITH_US.md — Shop Local Arlington
   A resource for shop owners on Massachusetts Avenue, Arlington Center, MA.
-  Renders beautifully on GitHub; can be exported to PDF for distribution.
+  Renders on GitHub; suitable for PDF export and print distribution.
 -->
 
-# 🏘️ SHOP LOCAL ARLINGTON
+# SHOP LOCAL ARLINGTON
 ### *Local Revolutionized* — Arlington Center · Massachusetts Avenue
 
 ---
 
-> ## 📍 Get Your Shop on the Map — **It's Free**
->
-> **Shop Local Arlington** is a free, community-driven platform built to drive foot
-> traffic back to the independent shops lining Mass Ave. We give your shop a beautiful,
-> searchable web presence — complete with immersive 360° tours — at absolutely zero cost.
+## GET YOUR SHOP ON THE MAP — AT NO COST
+
+**Shop Local Arlington** is a free, community-driven platform built to drive foot traffic
+back to the independent shops lining Mass Ave. We give your shop a beautiful, searchable
+web presence — complete with immersive 360° interior tours — at absolutely zero cost to you.
 
 ---
 
-## 🌟 Why Partner With Us?
+## WHY PARTNER WITH US?
 
-| &nbsp; | Benefit | What it means for you |
-|--------|---------|----------------------|
-| 🚶 | **Increase foot traffic** | Your shop gets discovered by local browsers exploring Mass Ave online |
-| 🔭 | **Immersive 360° tours** | Customers peek inside before visiting — building the confidence to walk through your door |
-| 🔍 | **AI-powered search** | Site visitors can search for products *across all listed shops* — your inventory shows up |
-| 📊 | **Page view metrics** | See how many people viewed your page and what they searched for |
-| 📌 | **Community board** | Neighbors post "looking for" requests that may lead them straight to you |
-| 💚 | **Zero cost** | The platform is free, open-source, and community-driven — no fees, ever |
+**1. Increase foot traffic**
+Your shop gets discovered by local residents and visitors browsing Mass Ave online —
+turning digital interest into people through your door.
 
----
+**2. Immersive 360° interior tours**
+Customers can step inside your shop before they arrive, building the familiarity and
+confidence that encourages them to visit in person.
 
-## 📋 What We Need From You
+**3. AI-powered product search**
+Site visitors can search for items across every listed shop at once. When your inventory
+is on the platform, it shows up in their results.
 
-### ✅  a) Starting Inventory List
+**4. Page-view metrics**
+See how many people viewed your shop page and what products they searched for — simple,
+actionable insight with no technical setup required.
 
-> Don't worry about perfection — a rough starting list is all we need.
-> We can refine it together over time.
+**5. Community board**
+Neighbors post "looking for" requests on the site. A well-stocked listing means your
+shop comes up when someone is already looking to buy.
 
-Provide items in **any format** — spreadsheet, notes app, photos of shelves with item names written on paper.  
-For each item, we'd love to capture:
-
-| Field | Required? | Example |
-|-------|-----------|---------|
-| **Title** (item name) | ✅ Yes | *Vintage Oak Side Table* |
-| **Price** | Optional | *$45* |
-| **Description** | Optional | *Mid-century style, minor wear* |
-| **Image URL / Photo** | Optional | *(photo of the item)* |
-| **Category** | Optional | *Furniture*, *Books*, *Home & Kitchen*, *Sports & Outdoors* … |
+**6. Zero cost**
+The platform is free and community-driven. No subscription, no commission, no hidden fees.
 
 ---
 
-### 📸  b) 360° Panorama Photos
+## PARTNERSHIP CHECKLIST
 
-These are immersive interior photos that let site visitors *step inside* your shop before they arrive.  
-Multiple panoramas are welcome — the goal is to capture as much of the store and its inventory as possible.
-
-#### 📱 How to Capture
-
-| App | Platform | Notes |
-|-----|----------|-------|
-| **Google Maps** (built-in photosphere) | Android | Open Google Maps → Contribute → tap camera → "Photo Sphere" |
-| **Panorama 360 Camera** | iOS / Android | Free app, exports equirectangular JPEGs |
-| **Google Street View APK** (sideload) | Android | Old version still works for photosphere capture |
-
-#### 💡 Tips for Great Shots
-
-- 📐 Stand in the **center** of each room / area
-- 📱 Hold phone at **chest height**
-- 🐢 Follow on-screen guide dots **slowly** — rushing causes blurring
-- 🚫 Avoid moving objects (people walking, fans spinning)
-- 🖼️ Minimum resolution: **3840 × 1920 px** (2:1 aspect ratio)
-- 📷 Take multiple shots — we'll pick the best stitch
+*A rough starting point is all we need — we refine everything together over time.*
 
 ---
 
-### 🙋  c) Shop Owner Profile *(Optional)*
+### A · STARTING INVENTORY LIST
 
-Help customers connect with the people behind the shop — preserving the personal, local shopping experience.
+Provide items in any format — a spreadsheet, a notes-app export, or even photos of
+shelves with item names written alongside them. For each item, we collect:
 
-- **Your photo & a short bio** — who are you, and what's your shop's story?
-- **Contact info** *(optional)* — we may implement a Square Messaging integration (free tier) so site visitors can message you directly with questions, just like chatting in person
-
-> Sharing contact info is entirely optional but encouraged — it builds trust with the community. 🤝
-
----
-
-### 🔄  d) Update Frequency
-
-We'll do a **quarterly check-in** by default to refresh your inventory, photos, and shop details.
-
-- Want **more frequent** updates? Just say so — we'll match your preferred cadence.
-- You can also **reach out anytime** to update your listing.
+| Field | Required | Example |
+|---|---|---|
+| **Title** (item name) | Yes | Vintage Oak Side Table |
+| **Price** | No | $45 |
+| **Description** | No | Mid-century style, minor wear |
+| **Photo** | No | Photo file or image link |
+| **Category** | No | e.g., Furniture, Books, Home & Kitchen, Sports & Outdoors |
 
 ---
 
-## 🗺️ How It Works
+### B · 360° INTERIOR PANORAMAS
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                  │
-│   📋 Step 1      🛠️  Step 2      🚀 Step 3      📊 Step 4       │
-│                                                                  │
-│   You share     We build your  Your shop      You get           │
-│   inventory  ──▶  shop page  ──▶  goes live ──▶ insights &      │
-│   + panoramas   (360° tours +   on Shop Local  page-view        │
-│                  search index)  Arlington      metrics           │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
+Immersive interior photos let site visitors step inside your shop before they arrive.
+Multiple panoramas are welcome — the goal is to cover as much of your store as possible.
 
-**That's it.** No complicated setup on your end. We handle everything technical.
+**How to capture — free apps**
 
----
+| App | Platform | How |
+|---|---|---|
+| Google Maps (built-in photosphere) | Android | Maps → Contribute → Camera → Photo Sphere |
+| Panorama 360 Camera | iOS / Android | Free app, exports equirectangular JPEGs |
+| Google Street View APK (sideload) | Android | Older version still supports photosphere capture |
 
-## 🚀 Ready to Get Listed?
+**Tips for a quality result**
 
-```
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║   📬  Reach out — we'd love to hear from you!               ║
-║                                                              ║
-║   Contact method: TBD (check the live site for details)     ║
-║   Live site: https://ivanaz916.github.io/shop_local/        ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-```
-
-> *Shop Local Arlington is built with ❤️ by and for the Arlington, MA community.*
-> *Together, we keep Mass Ave thriving.*
+- Stand in the center of each room or area
+- Hold the phone at chest height
+- Follow the on-screen guide dots slowly and steadily
+- Avoid moving objects — people, fans, open doors
+- Minimum resolution: 3840 × 1920 px (2:1 aspect ratio)
+- Take multiple shots and we will select the best stitch
 
 ---
 
-<sub>🏘️ **Shop Local Arlington** · Arlington Center, Massachusetts Avenue · *Local Revolutionized*</sub>
+### C · SHOP OWNER PROFILE *(optional)*
+
+Putting a face to the shop strengthens the personal connection that makes local retail
+special. If you are comfortable sharing:
+
+- A photo and a short bio about you and your shop's story
+- Contact details — we may add a direct-messaging option so site visitors can reach
+  you with questions, mirroring the experience of walking in and chatting in person
+
+Sharing contact information is entirely voluntary but encouraged — it builds community
+trust and keeps the shopping experience personal.
+
+---
+
+### D · UPDATE CADENCE
+
+By default we schedule a **quarterly check-in** to refresh your inventory, photos, and
+shop details. If you prefer a different rhythm — more frequent, less frequent, or
+updates as-needed — just let us know.
+
+---
+
+## HOW IT WORKS
+
+**Step 1 — You share your information**
+Send us your starting inventory and panorama photos in whatever format works for you.
+
+**Step 2 — We build your shop page**
+We set up your page with a 360° tour, searchable inventory, and your profile details.
+No technical effort required on your end.
+
+**Step 3 — Your shop goes live**
+Your listing appears on Shop Local Arlington, discoverable by everyone visiting the site.
+
+**Step 4 — You receive ongoing insights**
+Track page views and search queries so you understand how the community engages with
+your shop online.
+
+---
+
+## READY TO GET LISTED?
+
+We would love to have you on the platform. Reach out through the contact information
+on our live site and we will take it from there.
+
+> **Live site:** https://ivanaz916.github.io/shop_local/
+
+*Shop Local Arlington is built by and for the Arlington, MA community.
+Together, we keep Mass Ave thriving.*
+
+---
+
+<sub>Shop Local Arlington · Arlington Center, Massachusetts Avenue · *Local Revolutionized*</sub>
