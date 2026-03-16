@@ -20,8 +20,7 @@
     <header id="top-bar">
         <div class="top-bar-left">
             <h1>
-                <span class="brand-icon">🏘️</span>
-                Shop Local Arlington
+                Circular Economy
             </h1>
         </div>
         <button id="nav-toggle" class="nav-toggle-topbar" aria-label="Toggle navigation" aria-expanded="false">
@@ -38,10 +37,10 @@
     <div id="nav-overlay"></div>
     <nav id="side-nav" aria-label="Main navigation">
         <a href="index.html" class="side-nav-link">Home</a>
-        <a href="about.html" class="side-nav-link">About</a>
-        <a href="index.html#walk-the-block" class="side-nav-link">Walk the Block</a>
-        <a href="index.html#circular-economy" class="side-nav-link">Circular Economy</a>
+        <a href="browse.html" class="side-nav-link">Walk the Block</a>
+        <a href="requests.html" class="side-nav-link">Circular Economy</a>
         <a href="get-involved.html" class="side-nav-link">Get Involved</a>
+        <a href="about.html" class="side-nav-link">About</a>
     </nav>
 
     <!-- ===== MAIN CONTENT ===== -->
@@ -50,8 +49,6 @@
         <!-- Hero intro -->
         <section class="requests-hero">
             <h2>📋 Looking For…</h2>
-            <p>Can't find what you need? Post your request and local shop owners will reach out if they can help.</p>
-            <p class="requests-privacy-note">🔒 Your name and email are <strong>never shown publicly</strong> — only the request text is visible. Shop owners contact you through us.</p>
         </section>
 
         <!-- Submit form -->
@@ -90,14 +87,26 @@
                     <span class="char-count"><span id="char-current">0</span>/500</span>
                 </div>
 
-                <div class="form-group" id="fb-link-group" style="display:none;">
+                <div class="form-group" id="fb-link-group">
                     <label for="fb-link">Facebook Marketplace Link <span class="label-hint">(optional)</span></label>
                     <input type="url" id="fb-link" placeholder="https://facebook.com/marketplace/item/...">
                 </div>
 
+                <div class="form-group" id="photo-upload-group">
+                    <label>Photo <span class="label-hint">(optional, max 2 MB — auto-resized)</span></label>
+                    <div class="photo-upload-area">
+                        <input type="file" id="photo-upload" accept="image/jpeg,image/png,image/webp" hidden>
+                        <button type="button" class="btn-photo-upload" id="btn-photo-upload">📷 Add Photo</button>
+                        <span class="photo-filename hidden" id="photo-filename"></span>
+                        <button type="button" class="btn-photo-remove hidden" id="btn-photo-remove">✕ Remove</button>
+                        <div class="photo-status hidden" id="photo-status"></div>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <input type="checkbox" id="publish-contact">
-                    <label for="publish-contact">Publish my name & email on the board</label>
+                    <input type="checkbox" id="hide-contact">
+                    <label for="hide-contact">Hide my name & email on the board</label>
+                    <p class="label-hint hide-contact-note">If hiding your contact info, please include a public meeting point for pickup or drop-off in your description.</p>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-submit" id="req-submit">
@@ -113,7 +122,7 @@
         <!-- Public request board -->
         <section class="request-board-section">
             <h3>Recent Requests</h3>
-            <p class="board-subtitle">Shop owners — see something you can help with? <a href="mailto:arlingtonislocal@gmail.com?subject=I%20can%20help%20with%20a%20request" class="board-email-link">Email us</a> and we'll connect you.</p>
+            
             <div id="request-board" class="request-board">
                 <div class="board-loading">Loading requests…</div>
             </div>
@@ -140,35 +149,180 @@
         const submitBtn = document.getElementById('req-submit');
         const postTypeInputs = document.getElementsByName('post-type');
         const textLabel = document.getElementById('text-label');
-        const fbLinkGroup = document.getElementById('fb-link-group');
         const fbLinkInput = document.getElementById('fb-link');
-        const publishContact = document.getElementById('publish-contact');
+        const hideContact = document.getElementById('hide-contact');
+
+        // Photo upload elements
+        const photoUploadInput = document.getElementById('photo-upload');
+        const btnPhotoUpload = document.getElementById('btn-photo-upload');
+        const photoFilename = document.getElementById('photo-filename');
+        const btnPhotoRemove = document.getElementById('btn-photo-remove');
+        const photoStatus = document.getElementById('photo-status');
+        let approvedPhotoFile = null;
 
         // Character counter
         textInput.addEventListener('input', () => {
             charCurrent.textContent = textInput.value.length;
         });
 
-        // Post type toggle
+        // Post type toggle — only updates labels/button text now
         postTypeInputs.forEach(input => {
             input.addEventListener('change', () => {
                 if (input.value === 'for_sale' && input.checked) {
                     textLabel.textContent = 'What are you selling?';
-                    fbLinkGroup.style.display = 'block';
                     submitBtn.textContent = 'Post Listing';
                 } else {
                     textLabel.textContent = 'What are you looking for?';
-                    fbLinkGroup.style.display = 'none';
                     submitBtn.textContent = 'Post Request';
                 }
             });
         });
 
-        // Submit handler
+        // ---------- Photo Upload ----------
+        btnPhotoUpload.addEventListener('click', () => photoUploadInput.click());
+
+        photoUploadInput.addEventListener('change', async () => {
+            const file = photoUploadInput.files[0];
+            if (!file) return;
+
+            // Validate type
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                showPhotoStatus('Please upload a JPEG, PNG, or WebP image.', 'error');
+                photoUploadInput.value = '';
+                return;
+            }
+            // Validate size (2 MB)
+            if (file.size > 2 * 1024 * 1024) {
+                showPhotoStatus('Image must be under 2 MB.', 'error');
+                photoUploadInput.value = '';
+                return;
+            }
+
+            // Show selected filename
+            photoFilename.textContent = file.name;
+            photoFilename.classList.remove('hidden');
+            btnPhotoUpload.classList.add('hidden');
+            btnPhotoRemove.classList.remove('hidden');
+
+            // Run content moderation
+            showPhotoStatus('Checking image…', 'info');
+            try {
+                const safe = await checkImageContent(file);
+                if (!safe) {
+                    showPhotoStatus('This image was flagged as potentially inappropriate and cannot be uploaded.', 'error');
+                    clearPhoto();
+                    return;
+                }
+                showPhotoStatus('Optimizing…', 'info');
+                approvedPhotoFile = await compressImage(file);
+                showPhotoStatus('✓ Image approved', 'success');
+            } catch (err) {
+                // If the model can't load (e.g. offline), allow the upload
+                console.warn('Content check unavailable, allowing upload:', err);
+                approvedPhotoFile = await compressImage(file);
+                hidePhotoStatus();
+            }
+        });
+
+        btnPhotoRemove.addEventListener('click', clearPhoto);
+
+        function clearPhoto() {
+            photoUploadInput.value = '';
+            photoFilename.textContent = '';
+            photoFilename.classList.add('hidden');
+            btnPhotoRemove.classList.add('hidden');
+            btnPhotoUpload.classList.remove('hidden');
+            approvedPhotoFile = null;
+            hidePhotoStatus();
+        }
+
+        function showPhotoStatus(text, type) {
+            photoStatus.textContent = text;
+            photoStatus.className = 'photo-status photo-status-' + type;
+            photoStatus.classList.remove('hidden');
+        }
+        function hidePhotoStatus() {
+            photoStatus.classList.add('hidden');
+        }
+
+        // NSFW check: uses nsfwjs (client-side, TensorFlow.js) to screen
+        // uploaded photos before they reach the server. This keeps the
+        // community board safe without requiring a paid moderation API.
+        // Libraries are lazy-loaded on first photo select so they never
+        // affect initial page load performance.
+        let nsfwModel = null;
+        async function checkImageContent(file) {
+            if (!nsfwModel) {
+                if (typeof tf === 'undefined') {
+                    await loadScriptAsync('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js');
+                }
+                if (typeof nsfwjs === 'undefined') {
+                    await loadScriptAsync('https://cdn.jsdelivr.net/npm/nsfwjs@2.4.2/dist/nsfwjs.min.js');
+                }
+                nsfwModel = await nsfwjs.load('https://cdn.jsdelivr.net/npm/nsfwjs@2.4.2/dist/model/', { size: 299 });
+            }
+
+            const img = new Image();
+            await new Promise((resolve, reject) => {
+                img.onload = resolve;
+                img.onerror = reject;
+                img.src = URL.createObjectURL(file);
+            });
+
+            const predictions = await nsfwModel.classify(img);
+            URL.revokeObjectURL(img.src);
+
+            // Reject if any inappropriate category scores above threshold
+            const thresholds = { Porn: 0.3, Hentai: 0.3, Sexy: 0.5 };
+            for (const pred of predictions) {
+                if (thresholds[pred.className] && pred.probability > thresholds[pred.className]) {
+                    console.warn('Image flagged:', pred.className, pred.probability);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Resize to max 800px on longest side, compress to JPEG 0.75
+        function compressImage(file) {
+            return new Promise((resolve) => {
+                const MAX_DIM = 800;
+                const QUALITY = 0.75;
+                const img = new Image();
+                img.onload = () => {
+                    let { width, height } = img;
+                    if (width > MAX_DIM || height > MAX_DIM) {
+                        const scale = MAX_DIM / Math.max(width, height);
+                        width = Math.round(width * scale);
+                        height = Math.round(height * scale);
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => {
+                        URL.revokeObjectURL(img.src);
+                        resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+                    }, 'image/jpeg', QUALITY);
+                };
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        function loadScriptAsync(src) {
+            return new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = resolve;
+                s.onerror = reject;
+                document.head.appendChild(s);
+            });
+        }
+
+        // ---------- Submit ----------
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            // Honeypot check
             if (honeypot.value) return;
 
             const name = nameInput.value.trim();
@@ -176,24 +330,39 @@
             const requestText = textInput.value.trim();
             const postType = document.querySelector('input[name="post-type"]:checked').value;
             const fbLink = fbLinkInput.value.trim();
-            const publish = publishContact.checked;
+            const publish = !hideContact.checked;
 
-            // Basic validation
             if (!name || !email || requestText.length < 10) {
                 showFormMsg('Please fill in all fields (request must be at least 10 characters).', 'error');
                 return;
             }
 
             submitBtn.disabled = true;
-            submitBtn.textContent = postType === 'for_sale' ? 'Posting…' : 'Posting…';
+            submitBtn.textContent = 'Posting…';
 
-            const result = await SupabaseClient.submitRequest({ name, email, requestText, postType, fbLink, publishContact: publish });
+            // Upload photo first if present
+            let photoUrl = null;
+            if (approvedPhotoFile) {
+                showPhotoStatus('Uploading photo…', 'info');
+                const uploadResult = await SupabaseClient.uploadPhoto(approvedPhotoFile);
+                if (uploadResult.url) {
+                    photoUrl = uploadResult.url;
+                } else {
+                    console.warn('Photo upload failed, posting without photo.');
+                }
+            }
+
+            const result = await SupabaseClient.submitRequest({
+                name, email, requestText, postType, fbLink,
+                publishContact: publish, photoUrl
+            });
 
             if (result.success) {
-                showFormMsg(postType === 'for_sale' ? 'Listing posted! Your item will be visible to neighbors.' : 'Request posted! Shop owners will reach out if they can help.', 'success');
+                showFormMsg('Success!', 'success');
                 form.reset();
                 charCurrent.textContent = '0';
-                loadRequests(); // Refresh the board
+                clearPhoto();
+                loadRequests();
             } else if (result.reason === 'not_configured') {
                 showFormMsg('Request board is in demo mode — Supabase not configured yet.', 'info');
             } else {
@@ -204,7 +373,7 @@
             submitBtn.textContent = postType === 'for_sale' ? 'Post Listing' : 'Post Request';
         });
 
-        // Load and render the public request board
+        // ---------- Request Board ----------
         async function loadRequests() {
             const board = document.getElementById('request-board');
             const requests = await SupabaseClient.fetchRequests(20);
@@ -214,29 +383,33 @@
                 return;
             }
 
-            board.innerHTML = requests.map(req => {
-                const date = new Date(req.created_at);
-                const ago = timeAgo(date);
-                const badge = req.post_type === 'for_sale' ? '<span class="request-badge badge-sale">For Sale</span>' : '<span class="request-badge badge-wanted">Wanted</span>';
-                const fbLink = req.fb_link ? `<a href="${escapeHtml(req.fb_link)}" class="request-fb-link" target="_blank">View on Facebook</a>` : '';
-                const contact = req.publish_contact && req.requester_name && req.requester_email ? `<div class="request-contact">${escapeHtml(req.requester_name)} &lt;${escapeHtml(req.requester_email)}&gt;</div>` : '';
-                return `
-                    <div class="request-card" data-id="${req.id}">
-                        <div class="request-header">
-                            ${badge}
-                            ${fbLink}
-                        </div>
-                        <p class="request-text">${escapeHtml(req.request_text)}</p>
-                        ${contact}
-                        <div class="request-meta">
-                            <span class="request-time">${ago}</span>
-                            <button class="request-flag" title="Flag as inappropriate" data-id="${req.id}">🚩</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            const now = Date.now();
+            const DAY = 24 * 60 * 60 * 1000;
+            const WEEK = 7 * DAY;
 
-            // Flag buttons
+            const buckets = [
+                { label: 'Past 24 Hours', items: [] },
+                { label: 'Posted This Week',           items: [] },
+                { label: 'Older Posts',                items: [] }
+            ];
+
+            requests.forEach(req => {
+                const age = now - new Date(req.created_at).getTime();
+                if (age < DAY)       buckets[0].items.push(req);
+                else if (age < WEEK) buckets[1].items.push(req);
+                else                 buckets[2].items.push(req);
+            });
+
+            board.innerHTML = buckets
+                .filter(b => b.items.length > 0)
+                .map(b => {
+                    const cards = b.items.map(req => renderCard(req)).join('');
+                    return `<div class="board-time-group">
+                        <h4 class="board-time-heading">${b.label}</h4>
+                        ${cards}
+                    </div>`;
+                }).join('');
+
             board.querySelectorAll('.request-flag').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const id = btn.dataset.id;
@@ -246,6 +419,98 @@
                     btn.textContent = res.success ? '✓' : '🚩';
                 });
             });
+
+            // Reply toggle buttons
+            board.querySelectorAll('.btn-reply-toggle').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    const formEl = document.getElementById('reply-form-' + id);
+                    formEl.classList.toggle('hidden');
+                    // Load existing replies on first open
+                    const listEl = document.getElementById('replies-' + id);
+                    if (!listEl.dataset.loaded) {
+                        await loadReplies(id, listEl);
+                        listEl.dataset.loaded = '1';
+                    }
+                });
+            });
+
+            // Reply submit buttons
+            board.querySelectorAll('.btn-reply-submit').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    const formEl = document.getElementById('reply-form-' + id);
+                    const nameEl = formEl.querySelector('.reply-name');
+                    const textEl = formEl.querySelector('.reply-text');
+                    const name = nameEl.value.trim();
+                    const text = textEl.value.trim();
+                    if (!name || text.length < 2) return;
+                    btn.disabled = true;
+                    btn.textContent = 'Posting…';
+                    await SupabaseClient.submitReply({ requestId: id, name, text });
+                    nameEl.value = '';
+                    textEl.value = '';
+                    btn.disabled = false;
+                    btn.textContent = 'Post Reply';
+                    const listEl = document.getElementById('replies-' + id);
+                    await loadReplies(id, listEl);
+                });
+            });
+        }
+
+        async function loadReplies(requestId, listEl) {
+            const replies = await SupabaseClient.fetchReplies(requestId);
+            if (!replies || replies.length === 0) {
+                listEl.innerHTML = '';
+                return;
+            }
+            listEl.innerHTML = replies.map(r => `
+                <div class="reply-card">
+                    <span class="reply-author">${escapeHtml(r.author_name)}</span>
+                    <span class="reply-time">${timeAgo(new Date(r.created_at))}</span>
+                    <p class="reply-body">${escapeHtml(r.reply_text)}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderCard(req) {
+            const ago = timeAgo(new Date(req.created_at));
+            const badge = req.post_type === 'for_sale'
+                ? '<span class="request-badge badge-sale">For Sale</span>'
+                : '<span class="request-badge badge-wanted">Wanted</span>';
+            const fbLink = req.fb_link
+                ? `<a href="${escapeHtml(req.fb_link)}" class="request-fb-link" target="_blank" rel="noopener">View on Facebook</a>`
+                : '';
+            const contact = req.publish_contact && req.requester_name && req.requester_email
+                ? `<div class="request-contact">${escapeHtml(req.requester_name)} &lt;${escapeHtml(req.requester_email)}&gt;</div>`
+                : '';
+            const photo = req.photo_url
+                ? `<img class="request-photo" src="${escapeHtml(req.photo_url)}" alt="Post photo" loading="lazy">`
+                : '';
+            return `
+                <div class="request-card" data-id="${req.id}">
+                    <div class="request-header">
+                        ${badge}
+                        ${fbLink}
+                    </div>
+                    ${photo}
+                    <p class="request-text">${escapeHtml(req.request_text)}</p>
+                    ${contact}
+                    <div class="request-meta">
+                        <span class="request-time">${ago}</span>
+                        <button class="request-flag" title="Flag as inappropriate" data-id="${req.id}">🚩</button>
+                    </div>
+                    <div class="reply-section">
+                        <button class="btn-reply-toggle" data-id="${req.id}">💬 Reply</button>
+                        <div class="replies-list" id="replies-${req.id}"></div>
+                        <div class="reply-form hidden" id="reply-form-${req.id}">
+                            <input type="text" class="reply-name" placeholder="Your name" maxlength="50">
+                            <textarea class="reply-text" rows="2" placeholder="Your reply…" maxlength="500"></textarea>
+                            <button class="btn-reply-submit" data-id="${req.id}">Post Reply</button>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function showFormMsg(text, type) {
@@ -273,7 +538,6 @@
             return div.innerHTML;
         }
 
-        // Initial load
         loadRequests();
     });
     </script>

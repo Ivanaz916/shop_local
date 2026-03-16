@@ -253,7 +253,7 @@ const SupabaseClient = (() => {
     /**
      * Submit a "Looking For" or "For Sale" post.
      */
-    async function submitRequest({ name, email, requestText, postType, fbLink, publishContact }) {
+    async function submitRequest({ name, email, requestText, postType, fbLink, publishContact, photoUrl }) {
         const sb = await getClient();
         if (!sb) {
             console.warn('[SupabaseClient] Not configured — request not saved.');
@@ -266,7 +266,8 @@ const SupabaseClient = (() => {
             request_text: requestText,
             post_type: postType || 'wanted',
             fb_link: fbLink || null,
-            publish_contact: publishContact || false
+            publish_contact: publishContact || false,
+            photo_url: photoUrl || null
         };
 
         const { error } = await sb
@@ -281,6 +282,37 @@ const SupabaseClient = (() => {
     }
 
     /**
+     * Upload a photo to Supabase Storage and return its public URL.
+     */
+    async function uploadPhoto(file) {
+        const sb = await getClient();
+        if (!sb) {
+            console.warn('[SupabaseClient] Not configured — photo not uploaded.');
+            return { url: null };
+        }
+
+        const ext = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+        const filePath = `request-photos/${fileName}`;
+
+        const { error } = await sb.storage
+            .from('photos')
+            .upload(filePath, file, { cacheControl: '3600', upsert: false });
+
+        if (error) {
+            console.error('[SupabaseClient] uploadPhoto error:', error);
+            return { url: null };
+        }
+
+        const { data: urlData } = sb.storage
+            .from('photos')
+            .getPublicUrl(filePath);
+
+        console.log('[SupabaseClient] uploadPhoto success, publicUrl:', urlData?.publicUrl);
+        return { url: urlData?.publicUrl || null };
+    }
+
+    /**
      * Fetch active requests/posts (public view).
      * Returns post_type, fb_link, publish_contact, and conditionally name/email.
      */
@@ -290,7 +322,7 @@ const SupabaseClient = (() => {
 
         let query = sb
             .from('requests')
-            .select('id, request_text, created_at, post_type, fb_link, publish_contact, requester_name, requester_email')
+            .select('id, request_text, created_at, post_type, fb_link, publish_contact, requester_name, requester_email, photo_url')
             .order('created_at', { ascending: false });
 
         if (limit) query = query.limit(limit);
@@ -301,6 +333,7 @@ const SupabaseClient = (() => {
             console.error('[SupabaseClient] fetchRequests error:', error);
             return [];
         }
+
         return data || [];
     }
 
@@ -321,11 +354,44 @@ const SupabaseClient = (() => {
 
     function getMockRequests(limit) {
         const mock = [
-            { id: 'mock-r1', request_text: 'Looking for a standing desk under $200', created_at: '2026-02-20T10:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null },
-            { id: 'mock-r2', request_text: 'Selling kids ice skates, size 1-2, great condition!', created_at: '2026-02-19T14:30:00Z', post_type: 'for_sale', fb_link: 'https://facebook.com/marketplace/item/123', publish_contact: true, requester_name: 'Jamie', requester_email: 'jamie@example.com' },
-            { id: 'mock-r3', request_text: 'Need a local tailor for suit alterations', created_at: '2026-02-18T09:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null },
+            { id: 'mock-r1', request_text: 'Looking for a standing desk under $200', created_at: '2026-02-20T10:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null, photo_url: null },
+            { id: 'mock-r2', request_text: 'Selling kids ice skates, size 1-2, great condition!', created_at: '2026-02-19T14:30:00Z', post_type: 'for_sale', fb_link: 'https://facebook.com/marketplace/item/123', publish_contact: true, requester_name: 'Jamie', requester_email: 'jamie@example.com', photo_url: null },
+            { id: 'mock-r3', request_text: 'Need a local tailor for suit alterations', created_at: '2026-02-18T09:00:00Z', post_type: 'wanted', fb_link: null, publish_contact: false, requester_name: null, requester_email: null, photo_url: null },
         ];
         return limit ? mock.slice(0, limit) : mock;
+    }
+
+    // --------------- Replies ---------------
+
+    async function submitReply({ requestId, name, text }) {
+        const sb = await getClient();
+        if (!sb) {
+            console.warn('[SupabaseClient] Not configured — reply not saved.');
+            return { success: false, reason: 'not_configured' };
+        }
+        const { error } = await sb
+            .from('request_replies')
+            .insert([{ request_id: requestId, author_name: name, reply_text: text }]);
+        if (error) {
+            console.error('[SupabaseClient] submitReply error:', error);
+            return { success: false, reason: error.message };
+        }
+        return { success: true };
+    }
+
+    async function fetchReplies(requestId) {
+        const sb = await getClient();
+        if (!sb) return [];
+        const { data, error } = await sb
+            .from('request_replies')
+            .select('id, author_name, reply_text, created_at')
+            .eq('request_id', requestId)
+            .order('created_at', { ascending: true });
+        if (error) {
+            console.error('[SupabaseClient] fetchReplies error:', error);
+            return [];
+        }
+        return data || [];
     }
 
     // --------------- Feature Survey ---------------
@@ -372,6 +438,7 @@ const SupabaseClient = (() => {
 
     return {
         isConfigured, fetchListings, fetchAllForContext, askQuestion,
-        submitRequest, fetchRequests, flagRequest
+        submitRequest, fetchRequests, flagRequest, uploadPhoto,
+        submitReply, fetchReplies
     };
 })();
