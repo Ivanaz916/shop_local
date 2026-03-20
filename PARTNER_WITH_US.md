@@ -59,18 +59,44 @@ stock which meets the post needs!
 
 ---
 
-### A · STARTING INVENTORY LIST
+### A · WHAT YOUR SHOP CARRIES
 
-Provide items in any format — a spreadsheet, a notes-app export, or even photos of
-shelves with item names written alongside them. For each item, we collect:
+We don't need a list of every item — just enough for customers to know what you
+offer. Start with the categories and departments you carry, and optionally
+highlight a few signature items. We can always add detail over time.
+
+**Step 1 — Product categories (required)**
+
+List the departments or product types your shop carries. This is what powers search
+results and helps customers find your shop.
+
+| Example shop | Categories |
+|---|---|
+| Craft store | Yarn, Fabric, Beads & Jewelry-Making, Sewing Patterns, Scrapbooking, Art Supplies |
+| Furniture / vintage | Furniture, Lighting, Home Décor, Kitchenware, Art & Prints |
+| Bookshop | Fiction, Non-Fiction, Children's, Local Authors, Gifts & Stationery |
+
+**Step 2 — Featured items (optional)**
+
+Pick up to **10 standout items** you want to showcase — bestsellers, new arrivals, or
+anything that makes your shop unique. For each featured item:
 
 | Field | Required | Example |
 |---|---|---|
-| **Title** (item name) | Yes | Vintage Oak Side Table |
-| **Price** | No | $45 |
-| **Description** | No | Mid-century style, minor wear |
+| **Title** (item name) | Yes | Hand-Dyed Merino Wool Skein |
+| **Price** | No | $18 |
+| **Description** | No | Local artisan, 100 g / 220 yd |
 | **Photo** | No | Photo file or image link |
-| **Category** | No | e.g., Furniture, Books, Home & Kitchen, Sports & Outdoors |
+
+**Step 3 — Brands carried (optional)**
+
+A simple list of brand names you stock (e.g., "Malabrigo, Clover, Brother, Fiskars").
+This helps when customers search by brand.
+
+**Step 4 — Price ranges (optional)**
+
+General price ranges by category help set expectations — e.g., "Yarn: $8–$30,
+Fabric: $12–$25/yd." No need for item-level pricing.
 
 ---
 

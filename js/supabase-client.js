@@ -1,5 +1,5 @@
 /* ================================================================
-   supabase-client.js — Supabase connection for marketplace listings
+   supabase-client.js — Supabase connection for shop listings & community data
    
    SETUP: Replace the placeholder URL and anon key below with your
    actual Supabase project credentials. Get them from:
@@ -42,7 +42,7 @@ const SupabaseClient = (() => {
     }
 
     /**
-     * Fetch active marketplace listings.
+     * Fetch active shop listings (featured items from partner shops).
      * Falls back to mock data if Supabase isn't configured.
      */
     async function fetchListings(category, limit) {
@@ -53,7 +53,7 @@ const SupabaseClient = (() => {
             return getMockListings(category, limit);
         }
 
-        let query = sb.from('listings').select('*').eq('is_active', true).order('created_at', { ascending: false });
+        let query = sb.from('shop_listing').select('*').eq('is_active', true).order('created_at', { ascending: false });
 
         if (category && category !== 'all') {
             query = query.eq('category', category);
@@ -73,7 +73,9 @@ const SupabaseClient = (() => {
     }
 
     /**
-     * Fetch all data for the LLM context (shops + listings).
+     * Fetch all data for the LLM context (shops + featured listings).
+     * shops.json provides departments, brands, and price ranges.
+     * shop_listing provides optional featured items.
      */
     async function fetchAllForContext() {
         const listings = await fetchListings(null, 200);
@@ -126,24 +128,32 @@ const SupabaseClient = (() => {
     async function localSearch(question, shopId) {
         const { shops, listings } = await fetchAllForContext();
         const q = question.toLowerCase();
+        const words = q.split(' ').filter(w => w.length > 2);
         const results = [];
 
         // Filter shops if scoped
         const targetShops = shopId ? shops.filter(s => s.id === shopId) : shops;
 
-        // Search shops
+        // Search shops — match against name, category, description, departments, and brands
         targetShops.forEach(shop => {
-            const text = `${shop.name} ${shop.category} ${shop.description}`.toLowerCase();
-            if (q.split(' ').some(word => word.length > 2 && text.includes(word))) {
-                results.push(`🏪 **${shop.name}** (${shop.category}) — ${shop.description} Hours: ${shop.hours}`);
+            const depts = (shop.departments || []).join(' ');
+            const brands = (shop.brands || []).join(' ');
+            const priceInfo = Object.entries(shop.priceRanges || {}).map(([k, v]) => `${k}: ${v}`).join(', ');
+            const text = `${shop.name} ${shop.category} ${shop.description} ${depts} ${brands}`.toLowerCase();
+            if (words.some(word => text.includes(word))) {
+                let info = `🏪 **${shop.name}** (${shop.category}) — ${shop.description}\nHours: ${shop.hours}`;
+                if (depts) info += `\n📂 Departments: ${(shop.departments || []).join(', ')}`;
+                if (brands) info += `\n🏷️ Brands: ${(shop.brands || []).join(', ')}`;
+                if (priceInfo) info += `\n💰 Prices: ${priceInfo}`;
+                results.push(info);
             }
         });
 
-        // Search listings (scoped to shop if applicable)
+        // Search featured listings from shop_listing (scoped to shop if applicable)
         const targetListings = shopId ? listings.filter(l => l.shop_id === shopId) : listings;
         targetListings.forEach(listing => {
             const text = `${listing.title} ${listing.category || ''} ${listing.description || ''}`.toLowerCase();
-            if (q.split(' ').some(word => word.length > 2 && text.includes(word))) {
+            if (words.some(word => text.includes(word))) {
                 const price = listing.price ? `$${listing.price}` : 'Price not listed';
                 results.push(`🛍️ **${listing.title}** — ${price}${listing.description ? '. ' + listing.description : ''}`);
             }
@@ -167,62 +177,35 @@ const SupabaseClient = (() => {
         const mock = [
             {
                 id: 'mock-1',
-                title: 'Vintage Bicycle — Trek 820',
+                shop_id: 'book-rack',
+                title: 'Signed First Edition — Hemingway',
                 price: 150.00,
-                description: 'Great condition mountain bike, perfect for the Minuteman trail.',
+                description: 'The Old Man and the Sea, first edition with dust jacket.',
                 image_url: '',
-                seller_name: 'Alex M.',
-                fb_link: '#',
-                category: 'Sports & Outdoors',
+                category: 'Rare & Collectible',
                 created_at: '2026-02-10T12:00:00Z',
                 is_active: true
             },
             {
                 id: 'mock-2',
-                title: 'Standing Desk — Adjustable',
-                price: 200.00,
-                description: 'Electric sit-stand desk, 48" wide. Moving sale!',
+                shop_id: 'arlington-cafe',
+                title: 'House-Made Croissant Box (6 ct)',
+                price: 18.00,
+                description: 'Freshly baked butter croissants — pre-order by 4pm for next-day pickup.',
                 image_url: '',
-                seller_name: 'Jamie L.',
-                fb_link: '#',
-                category: 'Furniture',
+                category: 'Pastries & Baked Goods',
                 created_at: '2026-02-09T15:30:00Z',
                 is_active: true
             },
             {
                 id: 'mock-3',
-                title: 'Kids Book Collection — 30 Books',
-                price: 25.00,
-                description: 'Ages 4-8. Includes Dr. Seuss, Elephant & Piggie, Dog Man.',
+                shop_id: 'menotomy-grill',
+                title: 'Menotomy Burger',
+                price: 16.00,
+                description: 'Half-pound Angus patty, cheddar, house pickles, brioche bun. A local favorite.',
                 image_url: '',
-                seller_name: 'Priya K.',
-                fb_link: '#',
-                category: 'Books',
+                category: 'Burgers & Sandwiches',
                 created_at: '2026-02-08T09:00:00Z',
-                is_active: true
-            },
-            {
-                id: 'mock-4',
-                title: 'KitchenAid Stand Mixer — Artisan',
-                price: 175.00,
-                description: 'Red, lightly used. Comes with all original attachments.',
-                image_url: '',
-                seller_name: 'Sarah T.',
-                fb_link: '#',
-                category: 'Home & Kitchen',
-                created_at: '2026-02-07T18:00:00Z',
-                is_active: true
-            },
-            {
-                id: 'mock-5',
-                title: 'Snow Tires — Bridgestone Blizzak 225/65R17',
-                price: 300.00,
-                description: 'Set of 4, used one season. Plenty of tread left.',
-                image_url: '',
-                seller_name: 'Mike R.',
-                fb_link: '#',
-                category: 'Auto',
-                created_at: '2026-02-06T10:00:00Z',
                 is_active: true
             }
         ];
@@ -392,48 +375,6 @@ const SupabaseClient = (() => {
             return [];
         }
         return data || [];
-    }
-
-    // --------------- Feature Survey ---------------
-
-    /**
-     * Submit a survey vote.
-     */
-    async function submitSurveyVote({ surveyId, vote, comment }) {
-        const sb = await getClient();
-        if (!sb) {
-            console.warn('[SupabaseClient] Not configured — vote not saved.');
-            return { success: false, reason: 'not_configured' };
-        }
-
-        const { error } = await sb
-            .from('survey_responses')
-            .insert([{ survey_id: surveyId, vote, comment: comment || null }]);
-
-        if (error) {
-            console.error('[SupabaseClient] submitSurveyVote error:', error);
-            return { success: false, reason: error.message };
-        }
-        return { success: true };
-    }
-
-    /**
-     * Fetch aggregated survey results.
-     */
-    async function fetchSurveyResults(surveyId) {
-        const sb = await getClient();
-        if (!sb) return { yes: 0, no: 0, maybe: 0, total: 0 };
-
-        const { data, error } = await sb
-            .from('survey_responses')
-            .select('vote')
-            .eq('survey_id', surveyId);
-
-        if (error || !data) return { yes: 0, no: 0, maybe: 0, total: 0 };
-
-        const counts = { yes: 0, no: 0, maybe: 0, total: data.length };
-        data.forEach(r => { if (counts[r.vote] !== undefined) counts[r.vote]++; });
-        return counts;
     }
 
     return {

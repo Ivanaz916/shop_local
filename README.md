@@ -218,6 +218,68 @@ If you previously had the Google Maps Street View version, this simplified versi
 
 ---
 
+## Maintenance
+
+### Supabase Tables
+
+| Table | Description |
+|-------|-------------|
+| **`shops_basicinfo`** | General shop details (name, hours, website) as well as broad categories of items — departments, brands, and price ranges. |
+| **`shop_listing`** | Detailed product inventory for products a shop owner wants to highlight — up to ~10 featured items per shop. |
+| **`requests`** | Circular Economy posts — "Looking For" and "For Sale" entries from community residents. |
+| **`request_replies`** | Replies to Circular Economy posts. |
+
+### How `shops_basicinfo` and `shop_listing` Relate
+
+```
+shops_basicinfo                 shop_listing
+┌─────────────────────┐         ┌─────────────────────┐
+│ id (PK)  ◄──────────│─────────│ shop_id (FK)        │
+│ name                │         │ title               │
+│ category            │         │ price               │
+│ departments[]       │         │ description         │
+│ brands[]            │         │ category            │
+│ price_ranges{}      │         │ image_url           │
+│ description         │         │ is_active           │
+│ hours               │         └─────────────────────┘
+│ website             │          0..~10 featured items
+│ is_active           │          per shop (optional)
+└─────────────────────┘
+ One row per shop
+```
+
+`shops_basicinfo` holds one row per partner shop with everything a customer needs to find it — name, hours, departments carried, brands stocked, and price ranges. `shop_listing` holds optional featured items (bestsellers, new arrivals) that a shop owner wants to highlight. Each `shop_listing` row links back to its shop via `shop_id`.
+
+### Updating Shop Data
+
+Shop data lives in two places: the **Supabase `shops_basicinfo` table** (your admin/intake layer) and the static **`data/shops.json`** file (what the live site reads). The workflow is:
+
+1. **Receive info from a shop owner** — categories, brands, price ranges, featured items, etc.
+2. **Enter it in Supabase** — open the Table Editor dashboard and add/update the row in `shops_basicinfo`. Add any featured items to `shop_listing`.
+3. **Export to `shops.json`** — run the export script to pull the latest DB state into the static file:
+   ```bash
+   python scripts/export-shops.py
+   ```
+4. **Add panorama config** (new shops only) — if this is a new shop, add its lat/lng, panoFile, and scenes to the `PANO_CONFIG` dict in `scripts/export-shops.py` before running the export.
+5. **Deploy** — commit and push:
+   ```bash
+   git add data/shops.json
+   git commit -m "Update shop data"
+   git push origin main
+   ```
+
+### Why Two Sources?
+
+- **`shops_basicinfo`** (Supabase) is where you manage incoming data. The Table Editor makes it easy to add/edit rows without touching code.
+- **`data/shops.json`** (static file) is what the site reads at runtime. If Supabase ever goes down, the site still works because it loads from this file.
+- The export script bridges the two — pulling DB content and merging it with panorama/map config that only you manage.
+
+### Adding Featured Items
+
+When a shop owner highlights specific products, add them to the `shop_listing` table in Supabase. These are the optional "Step 2" items from the Partnership Checklist — bestsellers, new arrivals, or signature items. The AI-powered search on the Browse page queries these alongside the shop-level data from `shops.json`.
+
+---
+
 ## License
 
 MIT — built with ❤️ for the Arlington, MA community.
