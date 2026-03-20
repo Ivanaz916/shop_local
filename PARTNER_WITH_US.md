@@ -1,19 +1,19 @@
 <!--
-  PARTNER_WITH_US.md — Shop Local Arlington
+  PARTNER_WITH_US.md — Local Revolt Arlington
   A resource for shop owners on Massachusetts Avenue, Arlington Center, MA.
   Renders on GitHub; suitable for PDF export and print distribution.
 -->
 
-# SHOP LOCAL ARLINGTON
+# LOCAL REVOLT ARLINGTON
 ### *Local Revolutionized* — Arlington Center · Massachusetts Avenue
 
 ---
 
 ## GET YOUR SHOP ON THE MAP — AT NO COST
 
-**Shop Local Arlington** is a free, community-driven platform built to drive foot traffic
-back to the independent shops lining Mass Ave. We give your shop a beautiful, searchable
-web presence — complete with immersive 360° interior tours — at absolutely zero cost to you.
+**Local Revolt Arlington** is a free, community-driven platform built to drive foot traffic
+back to the independent shops lining Mass Ave. We give your shop a searchable
+web presence — complete with immersive 360° interior tours and innovative ways to interact with potential clientele
 
 ---
 
@@ -39,8 +39,17 @@ actionable insight with no technical setup required.
 Neighbors post "looking for" requests on the site. A well-stocked listing means your
 shop comes up when someone is already looking to buy.
 
-**6. Zero cost**
-The platform is free and community-driven. No subscription, no commission, no hidden fees.
+**6. Connect with shoppers**
+You can choose to add a photo, phone and email contact details, and hours you and
+various team members are in the store. This allows shoppers to connect with specific
+questions, just like reaching out to a trusted friend.
+
+**7. React to shopper needs**
+Under the Circular Economy section, residents can post for items they are looking for.
+Shop owners are welcome to reply to those posts if they think they have something in
+stock which meets the post needs!
+
+
 
 ---
 
@@ -121,7 +130,7 @@ We set up your page with a 360° tour, searchable inventory, and your profile de
 No technical effort required on your end.
 
 **Step 3 — Your shop goes live**
-Your listing appears on Shop Local Arlington, discoverable by everyone visiting the site.
+Your listing appears on Local Revolt Arlington, discoverable by everyone visiting the site.
 
 **Step 4 — You receive ongoing insights**
 Track page views and search queries so you understand how the community engages with
@@ -136,9 +145,9 @@ on our live site and we will take it from there.
 
 > **Live site:** https://ivanaz916.github.io/shop_local/
 
-*Shop Local Arlington is built by and for the Arlington, MA community.
+*Local Revolt Arlington is built by and for the Arlington, MA community.
 Together, we keep Mass Ave thriving.*
 
 ---
 
-<sub>Shop Local Arlington · Arlington Center, Massachusetts Avenue · *Local Revolutionized*</sub>
+<sub>Local Revolt Arlington · Arlington Center, Massachusetts Avenue · *Local Revolutionized*</sub>

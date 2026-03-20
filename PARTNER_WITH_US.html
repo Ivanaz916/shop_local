@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Partner With Us — Shop Local Arlington</title>
-    <meta name="description" content="List your shop on Shop Local Arlington — free community platform for Mass Ave businesses.">
+    <title>Partner With Us — Local Revolt Arlington</title>
+    <meta name="description" content="List your shop on Local Revolt Arlington — free community platform for Mass Ave businesses.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@
         /* ─── Hero banner ─────────────────────────────────────────── */
         .hero {
             background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-light) 100%);
-            padding: 72px 32px 60px;
+            padding: 36px 16px 28px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -82,7 +82,7 @@
             content: '';
             position: absolute;
             top: -80px; right: -80px;
-            width: 340px; height: 340px;
+            width: 220px; height: 220px;
             border-radius: 50%;
             background: rgba(232, 168, 56, 0.08);
         }
@@ -90,7 +90,7 @@
             content: '';
             position: absolute;
             bottom: -60px; left: -60px;
-            width: 260px; height: 260px;
+            width: 140px; height: 140px;
             border-radius: 50%;
             background: rgba(255,255,255,0.04);
         }
@@ -151,6 +151,16 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
+        }
+        /* Page break after 4th benefit card for print/PDF */
+        .benefit-card:nth-child(4) {
+            page-break-after: always;
+            break-after: page;
+        }
+        /* Page break before checklist and steps for print/PDF */
+        .checklist-section, .steps-section {
+            page-break-before: always;
+            break-before: page;
         }
         .benefit-card {
             background: var(--white);
@@ -458,9 +468,15 @@
             margin-bottom: 12px;
         }
 
+        /* ─── Override global styles.css for this standalone page ── */
+        html, body {
+            height: auto !important;
+            overflow: visible !important;
+        }
+
         /* ─── Print ──────────────────────────────────────────────── */
         @media print {
-            nav { display: none; }
+            nav, #nav-toggle, #nav-overlay, #side-nav { display: none !important; }
             .benefit-card:hover, .cta-btn:hover { transform: none; box-shadow: none; }
             .steps-row::before { display: none; }
             body { font-size: 12px; }
@@ -509,9 +525,9 @@
         <p class="hero-eyebrow">Arlington Center &middot; Massachusetts Avenue</p>
         <h1>GET YOUR SHOP<br>ON THE MAP</h1>
         <p class="hero-sub">
-            Shop Local Arlington is a free, community-driven platform built to drive foot traffic
-            back to the independent shops lining Mass Ave — with immersive 360° tours, AI-powered
-            search, and page-view insights, at absolutely no cost to you.
+            Local Revolt Arlington is a free, community-driven platform built to drive foot traffic
+            back to the independent shops lining Mass Ave. We give your shop a searchable
+            web presence — complete with immersive 360° interior tours and innovative ways to interact with potential clientele.
         </p>
     </header>
 
@@ -520,7 +536,7 @@
         <div class="section">
             <p class="section-label">Benefits</p>
             <h2>WHY PARTNER WITH US?</h2>
-            <p class="section-intro">Six reasons to list your shop today.</p>
+            <p class="section-intro">Seven reasons to list your shop today.</p>
 
             <div class="benefits-grid">
                 <div class="benefit-card" data-num="01">
@@ -544,8 +560,12 @@
                     <p>Neighbors post "looking for" requests on the site. A well-stocked listing means your shop comes up when someone is already looking to buy.</p>
                 </div>
                 <div class="benefit-card" data-num="06">
-                    <h3>Zero Cost</h3>
-                    <p>The platform is free and community-driven. No subscription, no commission, no hidden fees — now or in the future.</p>
+                    <h3>Connect with Shoppers</h3>
+                    <p>You can choose to add a photo, phone and email contact details, and hours you and various team members are in the store. This allows shoppers to connect with specific questions, just like reaching out to a trusted friend.</p>
+                </div>
+                <div class="benefit-card" data-num="07">
+                    <h3>React to Shopper Needs</h3>
+                    <p>Under the Circular Economy section, residents can post for items they are looking for. Shop owners are welcome to reply to those posts if they think they have something in stock which meets the post needs!</p>
                 </div>
             </div>
         </div>
@@ -671,7 +691,7 @@
                 <div class="step">
                     <div class="step-num">3</div>
                     <p class="step-title">You Go Live</p>
-                    <p class="step-desc">Your listing appears on Shop Local Arlington, discoverable by everyone visiting the site.</p>
+                    <p class="step-desc">Your listing appears on Local Revolt Arlington, discoverable by everyone visiting the site.</p>
                 </div>
                 <div class="step">
                     <div class="step-num">4</div>
@@ -692,13 +712,13 @@
                 information on our live site and we will take it from there.
             </p>
             <a class="cta-btn" href="index.html">Visit the Live Site →</a>
-            <p class="cta-note">Shop Local Arlington is built by and for the Arlington, MA community.<br>Together, we keep Mass Ave thriving.</p>
+            <p class="cta-note">Local Revolt Arlington is built by and for the Arlington, MA community.<br>Together, we keep Mass Ave thriving.</p>
         </div>
     </section>
 
     <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
     <footer>
-        Shop Local Arlington &middot; Arlington Center, Massachusetts Avenue &middot; <em>Local Revolutionized</em>
+        Local Revolt Arlington &middot; Arlington Center, Massachusetts Avenue &middot; <em>Local Revolutionized</em>
     </footer>
 
     <script src="js/nav.js"></script>

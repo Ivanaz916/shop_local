@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Involved — Shop Local Arlington</title>
-    <meta name="description" content="Get involved with Shop Local Arlington — volunteer, partner, or connect with your community.">
+    <title>Get Involved — Local Revolt Arlington</title>
+    <meta name="description" content="Get involved with Local Revolt Arlington — volunteer, partner, or connect with your community.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +32,211 @@
         <a href="about.html" class="side-nav-link">About</a>
     </nav>
 
-    <main class="page-shell">
-        <h1>Get Involved</h1>
-        <p>Coming soon.</p>
+    <main class="get-involved-page">
+        <!-- ═══ HERO ═══ -->
+        <header class="gi-hero">
+            <p class="gi-eyebrow">Arlington Center &middot; Massachusetts Avenue</p>
+            <h1>How to Get Involved</h1>
+            <p class="gi-intro">
+                This site only works if neighbors like you actually use it — so the single most important thing you can do is start there.
+            </p>
+        </header>
+
+        <!-- ═══ SHOPPERS / COMMUNITY MEMBERS ═══ -->
+        <section class="gi-section">
+            <h2 class="gi-section-heading">Shoppers &amp; Community Members</h2>
+            <div class="gi-cards">
+
+                <div class="gi-card">
+                    <div class="gi-card-num">1</div>
+                    <h2>Shop local when the moment is right</h2>
+                    <p>Life is busy and complicated, and this site isn't here to guilt you out of the occasional Amazon order. Convenience matters, and sometimes a same-day delivery is exactly what you need. But for gifting, browsing, or those moments without a ticking clock — try here first. A local-first mindset doesn't have to mean local-first every time. Small shifts, made by enough people, move the needle.</p>
+                </div>
+
+                <div class="gi-card">
+                    <div class="gi-card-num">2</div>
+                    <h2>Exchange with your neighbors</h2>
+                    <p>The circular economy section is built for exactly this — passing along what you no longer need, finding what someone nearby is offering. It's good for your wallet, good for the planet, and honestly, a pretty nice way to meet the people on your street.</p>
+                </div>
+
+                <div class="gi-card">
+                    <div class="gi-card-num">3</div>
+                    <h2>Help keep things accurate</h2>
+                    <p>As the directory grows, it needs people who care enough to flag outdated info. If you notice a business listing that's stale — wrong hours, old contact details, a storefront that's closed — let us know. Keeping the directory trustworthy is a community effort.</p>
+                </div>
+
+                <div class="gi-card">
+                    <div class="gi-card-num">4</div>
+                    <h2>Become a moderator</h2>
+                    <p>If you have a few hours a month and a stake in this community, consider helping moderate postings on the site. It's a small time commitment with a real impact on quality.</p>
+                </div>
+
+                <div class="gi-card">
+                    <div class="gi-card-num">5</div>
+                    <h2>Become a storefronts outreach lead</h2>
+                    <p>As more businesses join, we'll need people to serve as local ambassadors — helping shops submit updated interior photos, keep their contact info current, and share what's actually on their shelves. If you're a people person who loves this town, this one's for you.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══ SHOP OWNERS ═══ -->
+        <section class="gi-section gi-owners-section">
+            <h2 class="gi-section-heading">Shop Owners</h2>
+            <p class="gi-owners-intro">
+                Local Revolt Arlington is built to give your shop a beautiful, searchable web presence — complete with immersive 360° interior tours, AI-powered product search, and page-view insights. We handle all the technical work; you just share your inventory and a few photos. Download the full partnership guide below to see exactly what's involved.
+            </p>
+            <a class="gi-download-btn" href="PARTNER_WITH_US.pdf" download>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Partnership Guide (PDF)
+            </a>
+        </section>
     </main>
+
+    <style>
+        /* ─── Get Involved page styles ─────────────────────────── */
+        .get-involved-page {
+            background: #f0f1f5;
+            min-height: 100vh;
+        }
+        .gi-hero {
+            background: linear-gradient(135deg, #1b2a4a 0%, #2c3e6b 60%, #3d5a99 100%);
+            padding: 56px 24px 44px;
+            text-align: center;
+        }
+        .gi-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #7eb8da;
+            margin-bottom: 14px;
+        }
+        .gi-hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            letter-spacing: 0.05em;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+        .gi-intro {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: rgba(255,255,255,0.8);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .gi-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 64px;
+        }
+        .gi-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .gi-card {
+            background: #fff;
+            border: 1px solid #d0d4de;
+            border-radius: 12px;
+            padding: 28px 28px 28px 80px;
+            position: relative;
+        }
+        .gi-card:nth-child(odd)  { border-left: 4px solid #2c3e6b; }
+        .gi-card:nth-child(even) { border-left: 4px solid #7eb8da; }
+        .gi-card-num {
+            position: absolute;
+            left: 20px;
+            top: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #2c3e6b;
+            color: #fff;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gi-card:nth-child(even) .gi-card-num {
+            background: #7eb8da;
+            color: #1b2a4a;
+        }
+        .gi-card h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #1b2a4a;
+            margin-bottom: 8px;
+        }
+        .gi-card p {
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .gi-card { padding: 24px 20px 24px 68px; }
+            .gi-card-num { left: 14px; top: 20px; width: 38px; height: 38px; font-size: 1.1rem; }
+        }
+
+        /* ─── Section headings ─────────────────────────────────── */
+        .gi-section-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: 0.04em;
+            color: #1b2a4a;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #7eb8da;
+        }
+
+        /* ─── Shop Owners section ──────────────────────────────── */
+        .gi-owners-section {
+            background: #fff;
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 0 auto 48px;
+            padding: 40px 32px;
+            border: 1px solid #d0d4de;
+        }
+        .gi-owners-intro {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.75;
+            max-width: 760px;
+            margin-bottom: 28px;
+        }
+        .gi-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #2c3e6b;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 4px 16px rgba(44,62,107,0.25);
+        }
+        .gi-download-btn:hover {
+            background: #3d5a99;
+            transform: translateY(-2px);
+        }
+        .gi-download-btn svg {
+            flex-shrink: 0;
+        }
+    </style>
 
     <script src="js/nav.js"></script>
 </body>
