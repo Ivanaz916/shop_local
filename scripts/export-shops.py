@@ -81,7 +81,10 @@ def merge_row(row):
         "lat":          pano.get("lat"),
         "lng":          pano.get("lng"),
         "description":  row.get("description"),
-        "hours":        row.get("hours"),
+        # Normalize hours to an array so the frontend can accept multiple entries
+        "hours":        (lambda v: ([v] if isinstance(v, str) else (v or [])))(row.get("hours")),
+        # days_open is a JSON/array column listing weekdays or named days the shop is open
+        "days_open":    row.get("days_open") or [],
         "website":      row.get("website"),
         "departments":  row.get("departments") or [],
         "brands":       row.get("brands") or [],

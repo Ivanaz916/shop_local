@@ -90,7 +90,8 @@ Add an entry to the `shops` array in `data/shops.json`:
   "lat": 42.4155,
   "lng": -71.1560,
   "description": "A wonderful local shop on Mass Ave.",
-  "hours": "Mon–Sat 10am–6pm",
+  "days_open": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  "hours": ["Mon–Sat 10am–6pm"],
   "website": "https://mynewshop.com",
   "panoFile": "my-new-shop/entrance.jpg",
   "scenes": {
@@ -234,21 +235,22 @@ If you previously had the Google Maps Street View version, this simplified versi
 ```
 shops_basicinfo                 shop_listing
 ┌─────────────────────┐         ┌─────────────────────┐
-│ id (PK)  ◄──────────│─────────│ shop_id (FK)        │
-│ name                │         │ title               │
-│ category            │         │ price               │
-│ departments[]       │         │ description         │
-│ brands[]            │         │ category            │
-│ price_ranges{}      │         │ image_url           │
-│ description         │         │ is_active           │
-│ hours               │         └─────────────────────┘
-│ website             │          0..~10 featured items
-│ is_active           │          per shop (optional)
+| id (PK)  ◄──────────│─────────│ shop_id (FK)        │
+| name                │         │ title               │
+| category            │         │ price               │
+| departments[]       │         │ description         │
+| brands[]            │         │ category            │
+| price_ranges{}      │         │ image_url           │
+| description         │         │ is_active           │
+| days_open[]         │         └─────────────────────┘
+| hours[]             │          0..~10 featured items
+| website             │          per shop (optional)
+| is_active           │          per shop (optional)
 └─────────────────────┘
  One row per shop
 ```
 
-`shops_basicinfo` holds one row per partner shop with everything a customer needs to find it — name, hours, departments carried, brands stocked, and price ranges. `shop_listing` holds optional featured items (bestsellers, new arrivals) that a shop owner wants to highlight. Each `shop_listing` row links back to its shop via `shop_id`.
+`shops_basicinfo` holds one row per partner shop with everything a customer needs to find it — name, days open, one or more `hours` entries (e.g., seasonal or separate weekend hours), departments carried, brands stocked, and price ranges. `shop_listing` holds optional featured items (bestsellers, new arrivals) that a shop owner wants to highlight. Each `shop_listing` row links back to its shop via `shop_id`.
 
 ### Updating Shop Data
 

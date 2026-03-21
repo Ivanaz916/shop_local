@@ -141,7 +141,12 @@ const SupabaseClient = (() => {
             const priceInfo = Object.entries(shop.priceRanges || {}).map(([k, v]) => `${k}: ${v}`).join(', ');
             const text = `${shop.name} ${shop.category} ${shop.description} ${depts} ${brands}`.toLowerCase();
             if (words.some(word => text.includes(word))) {
-                let info = `🏪 **${shop.name}** (${shop.category}) — ${shop.description}\nHours: ${shop.hours}`;
+                const hoursArr = Array.isArray(shop.hours) ? shop.hours : (shop.hours ? [shop.hours] : []);
+                const hoursText = hoursArr.join('; ');
+                const daysText = Array.isArray(shop.days_open) ? shop.days_open.join(', ') : (shop.days_open || '');
+                let info = `🏪 **${shop.name}** (${shop.category}) — ${shop.description}`;
+                if (hoursText) info += `\nHours: ${hoursText}`;
+                if (daysText) info += `\nOpen: ${daysText}`;
                 if (depts) info += `\n📂 Departments: ${(shop.departments || []).join(', ')}`;
                 if (brands) info += `\n🏷️ Brands: ${(shop.brands || []).join(', ')}`;
                 if (priceInfo) info += `\n💰 Prices: ${priceInfo}`;
@@ -163,7 +168,14 @@ const SupabaseClient = (() => {
             if (shopId) {
                 const shop = targetShops[0];
                 if (shop) {
-                    return `Here's what I know about **${shop.name}**:\n\n🏪 **${shop.name}** (${shop.category})\n${shop.description}\n⏰ Hours: ${shop.hours}${shop.website && shop.website !== '#' ? '\n🌐 ' + shop.website : ''}`;
+                    const hoursArr = Array.isArray(shop.hours) ? shop.hours : (shop.hours ? [shop.hours] : []);
+                    const hoursText = hoursArr.join('; ');
+                    const daysText = Array.isArray(shop.days_open) ? shop.days_open.join(', ') : (shop.days_open || '');
+                    let resp = `Here's what I know about **${shop.name}**:\n\n🏪 **${shop.name}** (${shop.category})\n${shop.description}`;
+                    if (hoursText) resp += `\n⏰ Hours: ${hoursText}`;
+                    if (daysText) resp += `\nOpen: ${daysText}`;
+                    if (shop.website && shop.website !== '#') resp += `\n🌐 ${shop.website}`;
+                    return resp;
                 }
             }
             return "I couldn't find anything matching that. Try asking about specific shops, categories like \"restaurants\" or \"books\", or check the Browse page to see everything available.";
