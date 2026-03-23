@@ -6,7 +6,14 @@
 .requests-body html {
     overflow-y: auto;
     height: auto;
-    background: var(--color-bg);
+    background:
+        linear-gradient(to bottom,
+            rgba(247,247,250,0.88) 0%,
+            rgba(247,247,250,0.72) 30%,
+            rgba(247,247,250,0.78) 60%,
+            rgba(247,247,250,0.92) 100%),
+        url('../images/town/reservoir2.jpg') center top / cover no-repeat fixed,
+        var(--color-bg);
 }
 
 html:has(.requests-body) {
