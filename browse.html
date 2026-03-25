@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- App styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -22,9 +22,8 @@
     <!-- ===== TOP BAR ===== -->
     <header id="top-bar">
         <div class="top-bar-left">
-            <h1>
-                Walk the Block
-            </h1>
+            <p class="top-bar-eyebrow">Arlington Center &middot; Massachusetts Avenue</p>
+            <h1>Walk the Block</h1>
         </div>
         <button id="nav-toggle" class="nav-toggle-topbar" aria-label="Toggle navigation" aria-expanded="false">
             <svg class="nav-icon nav-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -66,37 +65,6 @@
         <!-- Neighborhood photos grid -->
         <div id="photo-grid" class="photo-grid modern-grid"></div>
 
-        <!-- Embedded LLM-based Search (Chat) -->
-        <section id="chat-section" class="chat-section">
-            <div class="chat-header">
-                <h2>🔎 Search Local Inventory</h2>
-                <p id="chat-scope-label">Search shopowner inventory and shop details</p>
-            </div>
-            <div id="chat-messages" class="chat-messages">
-                <div class="message message-ai">
-                    <div class="message-avatar">🏘️</div>
-                    <div class="message-bubble">
-                        <p>Ask about available inventory, shop hours, or anything local. Results are powered by shopowner-provided inventory and listings.</p>
-                    </div>
-                </div>
-            </div>
-            <div id="prompt-chips" class="prompt-chips">
-                <button class="chip" data-prompt="What inventory is available?">🛒 Inventory</button>
-                <button class="chip" data-prompt="What shops are open right now?">🕐 Open now?</button>
-                <button class="chip" data-prompt="Where can I find books?">📚 Books</button>
-                <button class="chip" data-prompt="Tell me about Arlington Center">🏠 About Arlington</button>
-            </div>
-            <div id="chat-input-bar" class="chat-input-bar">
-                <input type="text" id="chat-input" placeholder="Search inventory, shops, or ask anything…" autocomplete="off">
-                <button id="chat-send" aria-label="Send message">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="22" y1="2" x2="11" y2="13"/>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
-                </button>
-            </div>
-        </section>
-
         <!-- Pannellum — indoor 360° interiors -->
         <div id="pannellum-view" class="hidden"></div>
 
@@ -128,8 +96,6 @@
     </div>
 
     <!-- ===== SCRIPTS ===== -->
-    <script src="js/supabase-client.js"></script>
-    <script src="js/chat.js"></script>
     <script src="js/app.js"></script>
     <script src="js/interior.js"></script>
     <script src="js/nav.js"></script>

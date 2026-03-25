@@ -27,24 +27,20 @@ turning digital interest into people through your door.
 Customers can step inside your shop before they arrive, building the familiarity and
 confidence that encourages them to visit in person.
 
-**3. AI-powered product search**
-Site visitors can search for items across every listed shop at once. When your inventory
-is on the platform, it shows up in their results.
-
-**4. Page-view metrics**
-See how many people viewed your shop page and what products they searched for — simple,
+**3. Page-view metrics**
+See how many people viewed your shop page — simple,
 actionable insight with no technical setup required.
 
-**5. Community board**
+**4. Community board**
 Neighbors post "looking for" requests on the site. A well-stocked listing means your
 shop comes up when someone is already looking to buy.
 
-**6. Connect with shoppers**
+**5. Connect with shoppers**
 You can choose to add a photo, phone and email contact details, and hours you and
 various team members are in the store. This allows shoppers to connect with specific
 questions, just like reaching out to a trusted friend.
 
-**7. React to shopper needs**
+**6. React to shopper needs**
 Under the Circular Economy section, residents can post for items they are looking for.
 Shop owners are welcome to reply to those posts if they think they have something in
 stock which meets the post needs!
@@ -67,8 +63,8 @@ highlight a few signature items. We can always add detail over time.
 
 **Step 1 — Product categories (required)**
 
-List the departments or product types your shop carries. This is what powers search
-results and helps customers find your shop.
+List the departments or product types your shop carries. This helps customers
+understand what your shop offers.
 
 | Example shop | Categories |
 |---|---|

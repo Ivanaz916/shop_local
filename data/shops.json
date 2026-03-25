@@ -16,6 +16,13 @@
       "description": "Historic single-screen movie theatre showing independent and classic films since 1927.",
       "hours": "Showtimes vary — see website",
       "website": "https://capitoltheatreusa.com",
+      "owner": {
+        "name": "Owner TBD",
+        "photo": "",
+        "phone": "",
+        "email": "",
+        "story": "Bringing independent and classic cinema to Arlington Center since 1927."
+      },
       "departments": ["Independent Films", "Classic Films", "Concessions"],
       "brands": [],
       "priceRanges": { "Tickets": "$10–$15", "Concessions": "$3–$8" },
@@ -38,6 +45,13 @@
       "description": "Neighborhood café serving specialty coffee, fresh pastries, and light bites.",
       "hours": "Mon–Fri 6:30am–4pm, Sat–Sun 7am–3pm",
       "website": "#",
+      "owner": {
+        "name": "Owner TBD",
+        "photo": "",
+        "phone": "",
+        "email": "",
+        "story": "A cozy neighborhood spot crafted for the Arlington community."
+      },
       "departments": ["Coffee & Espresso", "Pastries & Baked Goods", "Sandwiches & Light Bites", "Cold Beverages"],
       "brands": ["Counter Culture Coffee"],
       "priceRanges": { "Coffee & Espresso": "$3–$6", "Pastries & Baked Goods": "$3–$7", "Sandwiches & Light Bites": "$8–$14" },
@@ -60,6 +74,13 @@
       "description": "Used and rare bookshop with a curated selection of fiction, history, and children's books.",
       "hours": "Mon–Sat 10am–6pm, Sun 12–5pm",
       "website": "#",
+      "owner": {
+        "name": "Owner TBD",
+        "photo": "",
+        "phone": "",
+        "email": "",
+        "story": "Keeping the love of books alive with a hand-picked collection of used and rare titles."
+      },
       "departments": ["Fiction", "Non-Fiction", "History", "Children's", "Rare & Collectible", "Local Authors"],
       "brands": [],
       "priceRanges": { "Used Paperbacks": "$3–$10", "Used Hardcovers": "$5–$20", "Rare & Collectible": "$15–$200" },
@@ -82,6 +103,13 @@
       "description": "Casual American grill and tavern with craft beers and a lively patio.",
       "hours": "Daily 11:30am–10pm",
       "website": "#",
+      "owner": {
+        "name": "Owner TBD",
+        "photo": "",
+        "phone": "",
+        "email": "",
+        "story": "Good food, cold craft beer, and a neighborhood gathering place on Mass Ave."
+      },
       "departments": ["Burgers & Sandwiches", "Entrées", "Appetizers", "Craft Beer", "Cocktails", "Desserts"],
       "brands": ["Night Shift Brewing", "Idle Hands"],
       "priceRanges": { "Appetizers": "$8–$15", "Entrées": "$14–$28", "Craft Beer": "$7–$10" },

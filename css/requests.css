@@ -34,9 +34,11 @@ html:has(.requests-body) {
 }
 
 .requests-hero h2 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--color-text);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: #1b2a4a;
     margin-bottom: 10px;
 }
 
@@ -112,7 +114,7 @@ html:has(.requests-body) {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(26, 95, 58, 0.12);
+    box-shadow: 0 0 0 3px rgba(59, 89, 152, 0.12);
 }
 
 .form-group textarea {
@@ -176,9 +178,9 @@ html:has(.requests-body) {
 }
 
 .form-message-success {
-    background: rgba(26, 95, 58, 0.1);
+    background: rgba(59, 89, 152, 0.1);
     color: var(--color-primary);
-    border: 1px solid rgba(26, 95, 58, 0.2);
+    border: 1px solid rgba(59, 89, 152, 0.2);
 }
 
 .form-message-error {
@@ -387,7 +389,7 @@ html:has(.requests-body) {
 .reply-form textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(26, 95, 58, 0.1);
+    box-shadow: 0 0 0 2px rgba(59, 89, 152, 0.1);
 }
 
 .reply-form textarea {
@@ -554,7 +556,7 @@ html:has(.requests-body) {
 
 .btn-photo-upload:hover {
     border-color: var(--color-primary);
-    background: rgba(26, 95, 58, 0.04);
+    background: rgba(59, 89, 152, 0.04);
 }
 
 .photo-filename {

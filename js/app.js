@@ -144,14 +144,35 @@ function renderPhotoGrid(shops) {
         
         const imgPath = shop.panoFile ? `images/panos/${shop.panoFile}` : '';
         const bgColor = colors[index % colors.length];
+        const owner = shop.owner || {};
+        const ownerPhoto = owner.photo || 'images/people/placeholder-owner.svg';
+        const ownerName = owner.name || '';
+        const ownerStory = owner.story || '';
+        const shopHours = shop.hours || '';
+        const shopPhone = owner.phone || '';
+        const shopEmail = owner.email || '';
+        const shopWebsite = shop.website && shop.website !== '#' ? shop.website : '';
         
         card.innerHTML = `
+            <div class="shop-card-owner">
+                <img class="owner-avatar" src="${ownerPhoto}" alt="${ownerName}" onerror="this.src='images/people/placeholder-owner.svg'">
+                <div class="owner-info">
+                    <h3 class="shop-card-name">${shop.name}</h3>
+                    ${ownerName ? `<p class="owner-name">${ownerName}</p>` : ''}
+                    ${ownerStory ? `<p class="owner-story">${ownerStory}</p>` : ''}
+                    <div class="owner-details">
+                        ${shopHours ? `<span class="owner-detail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${shopHours}</span>` : ''}
+                        ${shopPhone ? `<span class="owner-detail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ${shopPhone}</span>` : ''}
+                        ${shopEmail ? `<span class="owner-detail"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> ${shopEmail}</span>` : ''}
+                        ${shopWebsite ? `<span class="owner-detail"><a href="${shopWebsite}" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Website</a></span>` : ''}
+                    </div>
+                </div>
+            </div>
             <div class="shop-card-image" style="background-image: url('${imgPath}'); background-color: ${bgColor}">
                 <span class="shop-card-category">${shop.category}</span>
                 ${!imgPath ? `<span class="shop-card-placeholder">${shop.name.charAt(0)}</span>` : ''}
             </div>
             <div class="shop-card-content">
-                <h3 class="shop-card-name">${shop.name}</h3>
                 <p class="shop-card-description">${shop.description}</p>
                 <button class="shop-card-btn">View 360° Tour</button>
             </div>
@@ -180,11 +201,6 @@ function enterShop(shopId) {
     AppState.currentShopId = shopId;
     AppState.mode = 'interior';
 
-    // Update chat scope to this shop
-    if (typeof ChatApp !== 'undefined') {
-        ChatApp.setScope(shop);
-    }
-
     // Toggle views
     DOM.photoGrid().style.display = 'none';
     DOM.pannellumView().classList.remove('hidden');
@@ -209,11 +225,6 @@ function enterShop(shopId) {
 function exitToStreet() {
     AppState.mode = 'gallery';
     AppState.currentShopId = null;
-
-    // Reset chat scope to all shops
-    if (typeof ChatApp !== 'undefined') {
-        ChatApp.clearScope();
-    }
 
     // Toggle views
     DOM.pannellumView().classList.add('hidden');
@@ -301,11 +312,6 @@ async function initApp() {
     
     // Render photo grid
     renderPhotoGrid(AppState.shops);
-
-    // Initialize embedded chat
-    if (typeof ChatApp !== 'undefined') {
-        ChatApp.init();
-    }
 
     // Populate sidebar
     populateSidebar(AppState.shops);

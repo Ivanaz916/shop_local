@@ -278,7 +278,7 @@ Shop data lives in two places: the **Supabase `shops_basicinfo` table** (your ad
 
 ### Adding Featured Items
 
-When a shop owner highlights specific products, add them to the `shop_listing` table in Supabase. These are the optional "Step 2" items from the Partnership Checklist — bestsellers, new arrivals, or signature items. The AI-powered search on the Browse page queries these alongside the shop-level data from `shops.json`.
+When a shop owner highlights specific products, add them to the `shop_listing` table in Supabase. These are the optional "Step 2" items from the Partnership Checklist — bestsellers, new arrivals, or signature items.
 
 ---
 

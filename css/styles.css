@@ -14,9 +14,9 @@ html {
 }
 
 :root {
-    --color-primary: #1a5f3a;       /* forest green — local / community feel */
-    --color-primary-light: #27855a;
-    --color-primary-dark: #0f3d25;
+    --color-primary: #3b5998;       /* soft blue — calm / approachable feel */
+    --color-primary-light: #5a7abf;
+    --color-primary-dark: #2c3e6b;
     --color-accent: #e8a838;        /* warm gold */
     --color-bg: #f7f7fa;
     --color-surface: #fcfcfc;
@@ -51,24 +51,36 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    background: var(--color-primary);
+    padding: 0 20px;
+    background: linear-gradient(135deg, rgba(27,42,74,0.92) 0%, rgba(44,62,107,0.88) 60%, rgba(61,90,153,0.82) 100%);
     color: #fff;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 
 .top-bar-left {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 14px;
     padding-left: 128px;
 }
 
+.top-bar-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #7eb8da;
+    white-space: nowrap;
+}
+
 .top-bar-left h1 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: #fff;
+    line-height: 1;
 }
 
 .brand-icon {
@@ -176,7 +188,7 @@ html, body {
 }
 
 .shop-item.active {
-    background: rgba(26, 95, 58, 0.08);
+    background: rgba(59, 89, 152, 0.08);
     border-left: 3px solid var(--color-primary);
 }
 
@@ -509,8 +521,16 @@ html, body {
         --sidebar-width: 280px;
     }
 
+    .top-bar-left {
+        padding-left: 0;
+    }
+
     .top-bar-left h1 {
-        font-size: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .top-bar-eyebrow {
+        display: none;
     }
 
     #shop-info-panel {
@@ -803,8 +823,8 @@ html, body {
     max-width: 720px;
     margin: 8px auto 32px;
     padding: 24px 28px;
-    background: linear-gradient(135deg, rgba(26, 95, 58, 0.06), rgba(232, 168, 56, 0.06));
-    border: 1px solid rgba(26, 95, 58, 0.15);
+    background: linear-gradient(135deg, rgba(59, 89, 152, 0.06), rgba(232, 168, 56, 0.06));
+    border: 1px solid rgba(59, 89, 152, 0.15);
     border-radius: 14px;
 }
 
@@ -919,7 +939,7 @@ html, body {
 .survey-comment-area input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(26, 95, 58, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 89, 152, 0.1);
 }
 
 .survey-results {
@@ -992,200 +1012,81 @@ html, body {
     margin-bottom: 0;
 }
 
-/* Embedded Chat Styles */
-.chat-section {
-    max-width: 720px;
-    margin: 32px auto 0;
-    padding: 24px 0;
+/* Shop Owner Profile Styles */
+.shop-card-owner {
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: 12px 12px 0 0;
 }
-.chat-header {
-    text-align: left;
-    margin-bottom: 8px;
+.owner-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--color-border);
+    background: #d0d4de;
 }
-.chat-header h2 {
-    font-size: 1.2rem;
+.owner-info {
+    flex: 1;
+    min-width: 0;
+}
+.owner-info .shop-card-name {
+    font-size: 1rem;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-text);
     margin-bottom: 2px;
 }
-#chat-scope-label {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-bottom: 8px;
+.owner-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 4px;
 }
-.chat-messages {
-    min-height: 80px;
-    max-height: 320px;
-    overflow-y: auto;
-    padding: 12px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    background: var(--color-bg);
-    border-radius: 10px;
-    margin-bottom: 8px;
-}
-.message {
-    display: flex;
-    gap: 10px;
-    max-width: 85%;
-    animation: fadeInUp 0.3s ease;
-}
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.message-ai {
-    align-self: flex-start;
-}
-.message-user {
-    align-self: flex-end;
-    flex-direction: row-reverse;
-}
-.message-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-.message-ai .message-avatar {
-    background: var(--color-primary);
-}
-.message-user .message-avatar {
-    background: var(--color-accent);
-}
-.message-bubble {
-    padding: 12px 16px;
-    border-radius: 16px;
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-.message-ai .message-bubble {
-    background: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-bottom-left-radius: 4px;
-}
-.message-user .message-bubble {
-    background: var(--color-primary);
-    color: #fff;
-    border-bottom-right-radius: 4px;
-}
-.message-bubble p {
-    margin: 0;
-}
-.message-bubble p + p {
-    margin-top: 8px;
-}
-.typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: 12px 16px;
-}
-.typing-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--color-text-muted);
-    border-radius: 50%;
-    animation: typingBounce 1.4s ease-in-out infinite;
-}
-.typing-dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes typingBounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-6px); }
-}
-.prompt-chips {
-    display: flex;
-    gap: 8px;
-    padding: 8px 0;
-    overflow-x: auto;
-    flex-shrink: 0;
-    margin-bottom: 8px;
-}
-.chip {
-    white-space: nowrap;
-    padding: 8px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-family: var(--font-family);
+.owner-story {
     font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-}
-.chip:hover {
-    background: var(--color-primary);
-    color: #fff;
-    border-color: var(--color-primary);
-}
-.prompt-chips.hidden {
-    display: none;
-}
-.chat-input-bar {
-    display: flex;
-    gap: 8px;
-    padding: 0;
-    background: var(--color-bg);
-    border-top: 1px solid var(--color-border);
-    flex-shrink: 0;
-}
-#chat-input {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid var(--color-border);
-    border-radius: 24px;
-    font-family: var(--font-family);
-    font-size: 0.9rem;
-    background: var(--color-surface);
-    color: var(--color-text);
-    outline: none;
-    transition: border-color 0.2s;
-}
-#chat-input:focus {
-    border-color: var(--color-primary);
-}
-#chat-input::placeholder {
     color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: 6px;
 }
-#chat-send {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: var(--color-primary);
-    color: #fff;
+.owner-details {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+}
+.owner-detail {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+}
+.owner-detail a {
+    color: var(--color-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.owner-detail a:hover {
+    text-decoration: underline;
+}
+.owner-detail svg {
     flex-shrink: 0;
+    stroke: var(--color-text-muted);
 }
-#chat-send:hover {
-    background: var(--color-primary-light);
-}
-#chat-send:active {
-    transform: scale(0.93);
-}
-#chat-send:disabled {
-    background: var(--color-border);
-    cursor: not-allowed;
-}
-.message-error .message-bubble {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #991b1b;
+@media (max-width: 480px) {
+    .shop-card-owner {
+        gap: 10px;
+        padding: 14px 14px;
+    }
+    .owner-avatar {
+        width: 44px;
+        height: 44px;
+    }
 }
