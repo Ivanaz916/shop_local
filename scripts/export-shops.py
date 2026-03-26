@@ -35,7 +35,7 @@ PANO_CONFIG = {
     },
     "arlington-cafe": {
         "lat": 42.4148, "lng": -71.1575,
-        "panoFile": "basement.jpg",
+        "panoFile": "kidscloset.jpg",
         "scenes": {"entrance": {"title": "Arlington Café — Inside", "hfov": 110, "pitch": -3, "yaw": 90}},
     },
     "book-rack": {

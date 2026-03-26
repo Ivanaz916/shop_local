@@ -55,7 +55,7 @@
       "departments": ["Coffee & Espresso", "Pastries & Baked Goods", "Sandwiches & Light Bites", "Cold Beverages"],
       "brands": ["Counter Culture Coffee"],
       "priceRanges": { "Coffee & Espresso": "$3–$6", "Pastries & Baked Goods": "$3–$7", "Sandwiches & Light Bites": "$8–$14" },
-      "panoFile": "basement.jpg",
+      "panoFile": "kidscloset.jpg",
       "scenes": {
         "entrance": {
           "title": "Arlington Café — Inside",

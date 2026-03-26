@@ -27,23 +27,24 @@ turning digital interest into people through your door.
 Customers can step inside your shop before they arrive, building the familiarity and
 confidence that encourages them to visit in person.
 
-**3. Page-view metrics**
-See how many people viewed your shop page — simple,
-actionable insight with no technical setup required.
-
-**4. Community board**
+**3. Community board**
 Neighbors post "looking for" requests on the site. A well-stocked listing means your
 shop comes up when someone is already looking to buy.
 
-**5. Connect with shoppers**
+**4. Connect with shoppers**
 You can choose to add a photo, phone and email contact details, and hours you and
 various team members are in the store. This allows shoppers to connect with specific
 questions, just like reaching out to a trusted friend.
 
-**6. React to shopper needs**
+**5. React to shopper needs**
 Under the Circular Economy section, residents can post for items they are looking for.
 Shop owners are welcome to reply to those posts if they think they have something in
 stock which meets the post needs!
+
+**6. Host circular economy exchanges**
+Totally optional — you can elect to be a point of exchange for circular economy
+transactions posted on the site. As a side-benefit, every pickup brings more foot
+traffic to your doorstep.
 
 
 
@@ -55,48 +56,7 @@ stock which meets the post needs!
 
 ---
 
-### A · WHAT YOUR SHOP CARRIES
-
-We don't need a list of every item — just enough for customers to know what you
-offer. Start with the categories and departments you carry, and optionally
-highlight a few signature items. We can always add detail over time.
-
-**Step 1 — Product categories (required)**
-
-List the departments or product types your shop carries. This helps customers
-understand what your shop offers.
-
-| Example shop | Categories |
-|---|---|
-| Craft store | Yarn, Fabric, Beads & Jewelry-Making, Sewing Patterns, Scrapbooking, Art Supplies |
-| Furniture / vintage | Furniture, Lighting, Home Décor, Kitchenware, Art & Prints |
-| Bookshop | Fiction, Non-Fiction, Children's, Local Authors, Gifts & Stationery |
-
-**Step 2 — Featured items (optional)**
-
-Pick up to **10 standout items** you want to showcase — bestsellers, new arrivals, or
-anything that makes your shop unique. For each featured item:
-
-| Field | Required | Example |
-|---|---|---|
-| **Title** (item name) | Yes | Hand-Dyed Merino Wool Skein |
-| **Price** | No | $18 |
-| **Description** | No | Local artisan, 100 g / 220 yd |
-| **Photo** | No | Photo file or image link |
-
-**Step 3 — Brands carried (optional)**
-
-A simple list of brand names you stock (e.g., "Malabrigo, Clover, Brother, Fiskars").
-This helps when customers search by brand.
-
-**Step 4 — Price ranges (optional)**
-
-General price ranges by category help set expectations — e.g., "Yarn: $8–$30,
-Fabric: $12–$25/yd." No need for item-level pricing.
-
----
-
-### B · 360° INTERIOR PANORAMAS
+### A · 360° INTERIOR PANORAMAS
 
 Immersive interior photos let site visitors step inside your shop before they arrive.
 Multiple panoramas are welcome — the goal is to cover as much of your store as possible.
@@ -120,7 +80,7 @@ Multiple panoramas are welcome — the goal is to cover as much of your store as
 
 ---
 
-### C · SHOP OWNER PROFILE *(optional)*
+### B · SHOP OWNER PROFILE *(optional)*
 
 Putting a face to the shop strengthens the personal connection that makes local retail
 special. If you are comfortable sharing:
@@ -134,7 +94,7 @@ trust and keeps the shopping experience personal.
 
 ---
 
-### D · UPDATE CADENCE
+### C · UPDATE CADENCE
 
 By default we schedule a **quarterly check-in** to refresh your inventory, photos, and
 shop details. If you prefer a different rhythm — more frequent, less frequent, or
@@ -154,9 +114,8 @@ No technical effort required on your end.
 **Step 3 — Your shop goes live**
 Your listing appears on Local Revolt Arlington, discoverable by everyone visiting the site.
 
-**Step 4 — You receive ongoing insights**
-Track page views and search queries so you understand how the community engages with
-your shop online.
+**Step 4 — You grow**
+Your shop gains visibility as more residents discover and share the platform.
 
 ---
 
