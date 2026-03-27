@@ -18,12 +18,14 @@ const InteriorModule = (() => {
      * @param {Object} shop — shop object from shops.json
      * @param {Function} onReady — callback when panorama finishes loading
      */
-    function loadShop(shop, onReady) {
+    function loadShop(shop, onReady, startSceneId) {
         currentShopId = shop.id;
 
         // Build scene config from shop data
         const scenes = buildScenes(shop);
-        const firstSceneId = Object.keys(scenes)[0];
+        const firstSceneId = startSceneId && scenes[startSceneId]
+            ? startSceneId
+            : Object.keys(scenes)[0];
 
         if (viewer) {
             // Viewer already exists — destroy and recreate with new scenes
@@ -62,10 +64,10 @@ const InteriorModule = (() => {
         const scenes = {};
 
         for (const [sceneId, sceneData] of Object.entries(shop.scenes)) {
-            scenes[sceneId] = {
+            const sceneConfig = {
                 title: sceneData.title || shop.name,
                 type: 'equirectangular',
-                panorama: `images/panos/${shop.panoFile || shop.id + '/' + sceneId + '.jpg'}`,
+                panorama: `images/panos/${sceneData.panoFile || shop.panoFile || shop.id + '/' + sceneId + '.jpg'}`,
                 hfov: sceneData.hfov || 110,
                 pitch: sceneData.pitch || 0,
                 yaw: sceneData.yaw || 0,
@@ -85,6 +87,16 @@ const InteriorModule = (() => {
                     ...(sceneData.hotSpots || [])
                 ]
             };
+
+            // Support partial panoramas (e.g. iPhone panos)
+            if (sceneData.haov) sceneConfig.haov = sceneData.haov;
+            if (sceneData.vaov) sceneConfig.vaov = sceneData.vaov;
+            if (sceneData.minPitch != null) sceneConfig.minPitch = sceneData.minPitch;
+            if (sceneData.maxPitch != null) sceneConfig.maxPitch = sceneData.maxPitch;
+            if (sceneData.minYaw != null) sceneConfig.minYaw = sceneData.minYaw;
+            if (sceneData.maxYaw != null) sceneConfig.maxYaw = sceneData.maxYaw;
+
+            scenes[sceneId] = sceneConfig;
         }
 
         return scenes;

@@ -27,6 +27,7 @@ OUT_FILE = os.path.join(SCRIPT_DIR, "..", "data", "shops.json")
 
 # ── Panorama / map config (managed by you, not shop owners) ──────
 # Add entries here when you capture panoramas or pin a new shop.
+# For iPhone panos (partial), add haov/vaov/minPitch/maxPitch to the scene.
 PANO_CONFIG = {
     "capitol-theatre": {
         "lat": 42.4155, "lng": -71.1563,

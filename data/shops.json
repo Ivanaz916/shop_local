@@ -55,13 +55,42 @@
       "departments": ["Coffee & Espresso", "Pastries & Baked Goods", "Sandwiches & Light Bites", "Cold Beverages"],
       "brands": ["Counter Culture Coffee"],
       "priceRanges": { "Coffee & Espresso": "$3–$6", "Pastries & Baked Goods": "$3–$7", "Sandwiches & Light Bites": "$8–$14" },
-      "panoFile": "kidscloset.jpg",
+      "panoFile": "room.jpeg",
       "scenes": {
         "entrance": {
           "title": "Arlington Café — Inside",
+          "hfov": 100,
+          "pitch": 0,
+          "yaw": 0,
+          "haov": 240,
+          "vaov": 55,
+          "minPitch": -25,
+          "maxPitch": 25,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 45,
+              "type": "scene",
+              "text": "Go to Back Room",
+              "sceneId": "back-room"
+            }
+          ]
+        },
+        "back-room": {
+          "title": "Arlington Caf\u00e9 \u2014 Back Room",
+          "panoFile": "kidscloset.jpg",
           "hfov": 110,
-          "pitch": -3,
-          "yaw": 90
+          "pitch": 0,
+          "yaw": 0,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 180,
+              "type": "scene",
+              "text": "Return to Entrance",
+              "sceneId": "entrance"
+            }
+          ]
         }
       }
     },

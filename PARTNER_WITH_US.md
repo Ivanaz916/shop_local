@@ -56,27 +56,26 @@ traffic to your doorstep.
 
 ---
 
-### A · 360° INTERIOR PANORAMAS
+### A · INTERIOR PANORAMAS
 
 Immersive interior photos let site visitors step inside your shop before they arrive.
 Multiple panoramas are welcome — the goal is to cover as much of your store as possible.
 
-**How to capture — free apps**
+**How to capture**
 
-| App | Platform | How |
+| Method | Device | How |
 |---|---|---|
-| Google Maps (built-in photosphere) | Android | Maps → Contribute → Camera → Photo Sphere *(feature availability varies by app version)* |
-| Panorama 360 Camera | iOS / Android | Free app, exports equirectangular JPEGs — **recommended** for reliable high-res output |
-| Google Street View APK (sideload) | Android | Version 2.0.0.303 retains photosphere capture; search APK Mirror for the installer |
+| iPhone Camera (Pano mode) | iPhone | Open Camera → swipe to Pano → sweep slowly across the room. Captures ~240° at high quality — **easiest option** |
+| Panorama 360 Camera | iOS / Android | Free app, exports full 360° equirectangular JPEGs |
+| Google Maps (photosphere) | Android | Maps → Contribute → Camera → Photo Sphere *(feature availability varies by app version)* |
 
 **Tips for a quality result**
 
 - Stand in the center of each room or area
-- Hold the phone at chest height
-- Follow the on-screen guide dots slowly and steadily
+- Hold the phone at chest height (portrait for iPhone Pano, any orientation for 360° apps)
+- Sweep slowly and steadily
 - Avoid moving objects — people, fans, open doors
-- Target resolution: 3840 × 1920 px (2:1 aspect ratio) — lower-resolution shots are still usable; we will advise if quality is too low to publish
-- Take multiple shots and we will select the best stitch
+- Take multiple shots and we will select the best one
 
 ---
 

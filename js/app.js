@@ -24,12 +24,12 @@ const DOM = {
     shopList:        () => document.getElementById('shop-list'),
     categoryFilter:  () => document.getElementById('category-filter'),
     infoPanel:       () => document.getElementById('shop-info-panel'),
+    panoBackBtn:     () => document.getElementById('pano-back-btn'),
     panelName:       () => document.getElementById('panel-shop-name'),
     panelDesc:       () => document.getElementById('panel-shop-description'),
     panelCategory:   () => document.getElementById('panel-shop-category'),
     panelHours:      () => document.querySelector('#panel-shop-hours span'),
     panelWebsite:    () => document.getElementById('panel-shop-website'),
-    btnBackToStreet: () => document.getElementById('btn-back-to-street'),
     panelClose:      () => document.getElementById('panel-close')
 };
 
@@ -142,7 +142,16 @@ function renderPhotoGrid(shops) {
         card.className = 'shop-card';
         card.dataset.shopId = shop.id;
         
-        const imgPath = shop.panoFile ? `images/panos/${shop.panoFile}` : '';
+        // Build list of pano images from scenes
+        const sceneEntries = Object.entries(shop.scenes || {});
+        const panoImages = sceneEntries.map(([sceneId, sceneData]) => ({
+            sceneId,
+            src: `images/panos/${sceneData.panoFile || shop.panoFile || shop.id + '/' + sceneId + '.jpg'}`,
+            title: sceneData.title || shop.name
+        }));
+        const hasMultiple = panoImages.length > 1;
+        const firstImg = panoImages.length > 0 ? panoImages[0].src : '';
+        
         const bgColor = colors[index % colors.length];
         const owner = shop.owner || {};
         const ownerPhoto = owner.photo || 'images/people/placeholder-owner.svg';
@@ -168,9 +177,19 @@ function renderPhotoGrid(shops) {
                     </div>
                 </div>
             </div>
-            <div class="shop-card-image" style="background-image: url('${imgPath}'); background-color: ${bgColor}">
+            <div class="shop-card-carousel" style="background-color: ${bgColor}">
+                ${panoImages.map((img, i) => `
+                    <div class="carousel-slide${i === 0 ? ' active' : ''}" data-scene-id="${img.sceneId}">
+                        <img src="${img.src}" alt="${img.title}" loading="lazy">
+                    </div>
+                `).join('')}
+                ${!firstImg ? `<span class="shop-card-placeholder">${shop.name.charAt(0)}</span>` : ''}
                 <span class="shop-card-category">${shop.category}</span>
-                ${!imgPath ? `<span class="shop-card-placeholder">${shop.name.charAt(0)}</span>` : ''}
+                ${hasMultiple ? `
+                    <button class="carousel-arrow carousel-prev" aria-label="Previous photo">&#10094;</button>
+                    <button class="carousel-arrow carousel-next" aria-label="Next photo">&#10095;</button>
+                    <span class="carousel-counter">1 / ${panoImages.length}</span>
+                ` : ''}
             </div>
             <div class="shop-card-content">
                 <p class="shop-card-description">${shop.description}</p>
@@ -178,9 +197,34 @@ function renderPhotoGrid(shops) {
             </div>
         `;
         
+        // Carousel navigation
+        if (hasMultiple) {
+            let currentSlide = 0;
+            const slides = card.querySelectorAll('.carousel-slide');
+            const counter = card.querySelector('.carousel-counter');
+            
+            const showSlide = (idx) => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (idx + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+            };
+            
+            card.querySelector('.carousel-prev').addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide(currentSlide - 1);
+            });
+            card.querySelector('.carousel-next').addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide(currentSlide + 1);
+            });
+        }
+        
         card.querySelector('.shop-card-btn').addEventListener('click', (e) => {
             e.stopPropagation();
-            enterShop(shop.id);
+            const activeSlide = card.querySelector('.carousel-slide.active');
+            const sceneId = activeSlide ? activeSlide.dataset.sceneId : null;
+            enterShop(shop.id, sceneId);
         });
         
         grid.appendChild(card);
@@ -192,7 +236,7 @@ function renderPhotoGrid(shops) {
 /**
  * Transition from gallery into a shop's interior panorama.
  */
-function enterShop(shopId) {
+function enterShop(shopId, startSceneId) {
     const shop = AppState.shops.find(s => s.id === shopId);
     if (!shop) return;
 
@@ -204,11 +248,12 @@ function enterShop(shopId) {
     // Toggle views
     DOM.photoGrid().style.display = 'none';
     DOM.pannellumView().classList.remove('hidden');
+    DOM.panoBackBtn().classList.remove('hidden');
 
-    // Load the interior panorama
+    // Load the interior panorama (optionally starting at a specific scene)
     InteriorModule.loadShop(shop, () => {
         hideLoading();
-    });
+    }, startSceneId);
 
     // Update UI
     updateModeBadge('interior');
@@ -226,8 +271,12 @@ function exitToStreet() {
     AppState.mode = 'gallery';
     AppState.currentShopId = null;
 
+    // Destroy Pannellum viewer
+    InteriorModule.destroy();
+
     // Toggle views
     DOM.pannellumView().classList.add('hidden');
+    DOM.panoBackBtn().classList.add('hidden');
     DOM.photoGrid().style.display = 'grid';
 
     // Update UI
@@ -318,7 +367,6 @@ async function initApp() {
 
     // Wire up UI events
     DOM.sidebarToggle().addEventListener('click', toggleSidebar);
-    DOM.btnBackToStreet().addEventListener('click', exitToStreet);
     DOM.panelClose().addEventListener('click', hideInfoPanel);
 
     // Check for deep-link on load (e.g., ?shop=capitol-theatre)

@@ -52,9 +52,24 @@ This version **removes the Google Maps Street View dependency** for a simpler, A
 
 ## Adding a New Shop
 
-### Step 1 — Capture 360° Photos (Phone Only)
+### Step 1 — Capture Interior Photos (Phone Only)
 
-Since Google's standalone Street View photosphere app has been retired, use one of these free alternatives:
+You have two options depending on your device and quality preference:
+
+#### Option A — iPhone Native Panorama (recommended for quality)
+
+Use the built-in iPhone Camera app in Pano mode. This produces a high-quality ~240° horizontal sweep. The viewer will automatically constrain navigation to the captured area.
+
+**Tips:**
+- Hold the phone in portrait orientation
+- Stand in the center of the room
+- Sweep slowly and steadily following the arrow
+- Keep the phone at chest height
+- Avoid moving objects (people, fans)
+
+#### Option B — Full 360° Photosphere
+
+For a complete 360° × 180° interactive sphere, use one of these free apps:
 
 | App | Platform | Notes |
 |-----|----------|-------|
@@ -101,6 +116,23 @@ Add an entry to the `shops` array in `data/shops.json`:
       "pitch": 0,
       "yaw": 0
     }
+  }
+}
+```
+
+**For iPhone panoramas**, add `haov`, `vaov`, and pitch limits to the scene:
+
+```json
+"scenes": {
+  "entrance": {
+    "title": "My New Shop — Entrance",
+    "hfov": 90,
+    "haov": 240,
+    "vaov": 55,
+    "minPitch": -25,
+    "maxPitch": 25,
+    "pitch": 0,
+    "yaw": 0
   }
 }
 ```
