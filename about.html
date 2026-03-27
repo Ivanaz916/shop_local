@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Shop Local Arlington</title>
-    <meta name="description" content="Learn about Shop Local Arlington — a community platform for Massachusetts Avenue businesses.">
+    <title>About — Local Revolt Arlington</title>
+    <meta name="description" content="Learn about Local Revolt Arlington — a community platform for Massachusetts Avenue businesses.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,10 +32,140 @@
         <a href="about.html" class="side-nav-link active">About</a>
     </nav>
 
-    <main class="page-shell">
-        <h1>About</h1>
-        <p>Coming soon.</p>
+    <main class="about-page">
+        <!-- ═══ HERO ═══ -->
+        <header class="about-hero">
+            <p class="about-eyebrow">Arlington Center &middot; Massachusetts Avenue</p>
+            <h1>About Local Revolt</h1>
+        </header>
+
+        <!-- ═══ WHY THIS SITE EXISTS ═══ -->
+        <section class="about-section">
+            <h2 class="about-heading">Why This Site Exists</h2>
+            <div class="about-prose">
+                <p>It started with Christmas shopping.</p>
+                <p>A couple of years ago, I set a goal: shop local, as much as possible. Simple enough &mdash; except it wasn&rsquo;t. I didn&rsquo;t have time to wander into every storefront along the block, and most small businesses don&rsquo;t have a robust online presence. I ended up defaulting to Amazon, not because I wanted to, but because it was easy. That frustrated me.</p>
+                <p>Local Revolt is a free, no-profit directory that endeavors to make it easier to discover and engage with local businesses.</p>
+                <p>But it&rsquo;s more than that. When we shop local, we keep tax dollars circulating in our own community &mdash; which means lower burdens for every resident. When neighbors exchange goods with each other instead of buying new, we reduce waste and build the kind of connections that make a neighborhood feel like home.</p>
+                <p>And yes &mdash; there&rsquo;s something to be said for not handing your money to massive corporations with values that don&rsquo;t align with yours.</p>
+                <p>This site doesn&rsquo;t take a cut of any sales. It doesn&rsquo;t process transactions. It exists because Arlington deserves better than empty storefronts &mdash; and because the easiest way to fight that is to make shopping local easier.</p>
+            </div>
+        </section>
+
+        <!-- ═══ IMPACTS ═══ -->
+        <section class="about-section about-impacts">
+            <h2 class="about-heading">Impacts</h2>
+            <div class="about-prose">
+                <p class="about-placeholder">Impact data coming soon &mdash; as the platform grows, we&rsquo;ll share what we&rsquo;re seeing here.</p>
+            </div>
+        </section>
+
+        <!-- ═══ ABOUT ME ═══ -->
+        <section class="about-section about-me-section">
+            <h2 class="about-heading">About Me</h2>
+            <div class="about-me-layout">
+                <img class="about-me-photo" src="images/people/family.jpg" alt="Ivana and family at an Arlington community event" loading="lazy">
+                <div class="about-prose">
+                    <p>I&rsquo;m a data scientist by profession and Arlington resident of eight years. I spend my days working with numbers and patterns, but what lights me up outside of work is this town &mdash; its people, its storefronts, its neighborhoods.</p>
+                    <p>I&rsquo;m not a city official. I&rsquo;m just a neighbor who believes that where we spend our money matters &mdash; and that small choices, made by enough people, add up to something real.</p>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <style>
+        /* ─── About page ──────────────────────────────────────── */
+        .about-page {
+            background: #f7f7fa;
+            min-height: 100vh;
+        }
+        .about-hero {
+            background:
+                linear-gradient(135deg, rgba(27,42,74,0.84) 0%, rgba(44,62,107,0.80) 60%, rgba(61,90,153,0.74) 100%),
+                url('images/town/get_involved.JPEG') center/cover no-repeat;
+            padding: 56px 24px 44px;
+            text-align: center;
+        }
+        .about-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #7eb8da;
+            margin-bottom: 14px;
+        }
+        .about-hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            letter-spacing: 0.05em;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        /* ─── Sections ────────────────────────────────────────── */
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 0;
+        }
+        .about-section:last-child {
+            padding-bottom: 64px;
+        }
+        .about-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: 0.04em;
+            color: #1b2a4a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #7eb8da;
+        }
+        .about-prose p {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .about-prose p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ─── Impacts placeholder ─────────────────────────────── */
+        .about-impacts {
+            padding-top: 40px;
+        }
+        .about-placeholder {
+            font-style: italic;
+            color: #888;
+        }
+
+        /* ─── About Me layout ─────────────────────────────────── */
+        .about-me-section {
+            padding-top: 40px;
+        }
+        .about-me-layout {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        .about-me-photo {
+            width: 260px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid #d0d4de;
+        }
+        @media (max-width: 640px) {
+            .about-me-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-me-photo {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
 
     <script src="js/nav.js"></script>
 </body>
