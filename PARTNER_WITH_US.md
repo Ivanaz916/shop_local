@@ -15,6 +15,8 @@
 back to the independent shops lining Mass Ave. We give your shop a searchable
 web presence — complete with immersive 360° interior tours and innovative ways to interact with potential clientele
 
+<div style="display:inline-block;padding:6px 10px;border:2px solid #1a5f3a;border-radius:8px;font-weight:700;">localrevolt.io</div>
+
 ---
 
 ## WHY PARTNER WITH US?
