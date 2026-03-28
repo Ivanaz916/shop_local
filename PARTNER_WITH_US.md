@@ -25,18 +25,18 @@ web presence — complete with immersive 360° interior tours and innovative way
 Your shop gets discovered by local residents and visitors browsing Mass Ave online —
 turning digital interest into people through your door.
 
-**2. Immersive 360° interior tours**
-Customers can step inside your shop before they arrive, building the familiarity and
-confidence that encourages them to visit in person.
-
-**3. Community board**
-Neighbors post "looking for" requests on the site. A well-stocked listing means your
-shop comes up when someone is already looking to buy.
-
-**4. Connect with shoppers**
+**2. Connect with shoppers**
 You can choose to add a photo, phone and email contact details, and hours you and
 various team members are in the store. This allows shoppers to connect with specific
 questions, just like reaching out to a trusted friend.
+
+**3. Immersive 360° interior tours**
+Customers can step inside your shop before they arrive, building the familiarity and
+confidence that encourages them to visit in person.
+
+**4. Community board**
+Neighbors post "looking for" requests on the site. A well-stocked listing means your
+shop comes up when someone is already looking to buy.
 
 **5. React to shopper needs**
 Under the Circular Economy section, residents can post for items they are looking for.
