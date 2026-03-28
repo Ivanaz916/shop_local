@@ -72,7 +72,7 @@
         /* ─── Hero banner ─────────────────────────────────────────── */
         .hero {
             background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-light) 100%);
-            padding: 36px 16px 28px;
+            padding: 24px 16px 18px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -100,7 +100,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 16px;
+            margin-bottom: 10px;
         }
         .hero h1 {
             font-family: 'Bebas Neue', sans-serif;
@@ -108,14 +108,14 @@
             letter-spacing: 0.05em;
             color: var(--white);
             line-height: 1;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
         .hero-sub {
             font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: rgba(255,255,255,0.82);
             max-width: 640px;
-            margin: 0 auto 32px;
-            line-height: 1.7;
+            margin: 0 auto 16px;
+            line-height: 1.6;
         }
         .hero-url {
             display: inline-block;
@@ -133,7 +133,7 @@
         .section {
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 24px;
+            padding: 36px 24px;
         }
         .section-label {
             font-size: 0.72rem;
@@ -154,17 +154,17 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             max-width: 620px;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         /* ─── Benefit cards ───────────────────────────────────────── */
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            gap: 14px;
         }
-        /* Page break after 4th benefit card for print/PDF */
-        .benefit-card:nth-child(4) {
+        /* Page break after 6th benefit card (all cards on page 1) for print/PDF */
+        .benefit-card:nth-child(6) {
             page-break-after: always;
             break-after: page;
         }
@@ -177,7 +177,7 @@
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px 24px;
+            padding: 20px 20px;
             position: relative;
             transition: box-shadow 0.2s, transform 0.2s;
         }
@@ -490,7 +490,27 @@
             nav, #nav-toggle, #nav-overlay, #side-nav { display: none !important; }
             .benefit-card:hover, .cta-btn:hover { transform: none; box-shadow: none; }
             .steps-row::before { display: none; }
-            body { font-size: 12px; }
+            body { font-size: 11px; }
+
+            /* Compress hero for PDF page 1 */
+            .hero { padding: 14px 16px 10px; }
+            .hero-eyebrow { margin-bottom: 6px; font-size: 0.65rem; }
+            .hero h1 { font-size: 2.4rem; margin-bottom: 8px; }
+            .hero-sub { margin: 0 auto 8px; font-size: 0.88rem; line-height: 1.45; }
+            .hero-url { padding: 4px 10px; font-size: 0.82rem; margin-top: 2px; }
+
+            /* Tighter section spacing */
+            .section { padding: 20px 24px; }
+            .section-label { margin-bottom: 4px; }
+            .section h2 { margin-bottom: 4px; font-size: 1.6rem; }
+            .section-intro { margin-bottom: 14px; font-size: 0.85rem; }
+
+            /* Compact benefit cards */
+            .benefits-grid { gap: 8px; }
+            .benefit-card { padding: 12px 14px; border-radius: 8px; }
+            .benefit-card::before { font-size: 1.6rem; top: 10px; right: 12px; }
+            .benefit-card h3 { font-size: 0.82rem; margin-bottom: 4px; }
+            .benefit-card p { font-size: 0.78rem; line-height: 1.5; }
         }
 
         /* ─── Responsive ─────────────────────────────────────────── */
