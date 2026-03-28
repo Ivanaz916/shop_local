@@ -57,6 +57,26 @@
       "priceRanges": { "Coffee & Espresso": "$3–$6", "Pastries & Baked Goods": "$3–$7", "Sandwiches & Light Bites": "$8–$14" },
       "panoFile": "room.jpeg",
       "scenes": {
+        "kitchen": {
+          "title": "Arlington Café — Kitchen",
+          "panoFile": "kitchen.jpg",
+          "hfov": 100,
+          "pitch": 0,
+          "yaw": 0,
+          "haov": 240,
+          "vaov": 55,
+          "minPitch": -25,
+          "maxPitch": 25,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 120,
+              "type": "scene",
+              "text": "Go to Dining Area",
+              "sceneId": "entrance"
+            }
+          ]
+        },
         "entrance": {
           "title": "Arlington Café — Inside",
           "hfov": 100,
@@ -67,6 +87,13 @@
           "minPitch": -25,
           "maxPitch": 25,
           "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": -120,
+              "type": "scene",
+              "text": "Go to Kitchen",
+              "sceneId": "kitchen"
+            },
             {
               "pitch": -5,
               "yaw": 45,
@@ -89,6 +116,13 @@
               "type": "scene",
               "text": "Return to Entrance",
               "sceneId": "entrance"
+            },
+            {
+              "pitch": -5,
+              "yaw": -90,
+              "type": "scene",
+              "text": "Go to Kitchen",
+              "sceneId": "kitchen"
             }
           ]
         }
