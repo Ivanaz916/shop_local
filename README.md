@@ -312,6 +312,45 @@ Shop data lives in two places: the **Supabase `shops_basicinfo` table** (your ad
 
 When a shop owner highlights specific products, add them to the `shop_listing` table in Supabase. These are the optional "Step 2" items from the Partnership Checklist — bestsellers, new arrivals, or signature items.
 
+### Tier 1 Moderation
+
+Tier 1 moderation is reactive: community posts and replies remain live, the existing
+three-flag auto-hide behavior remains in place, and a moderator receives an email
+for every new post, reply, or flag. Review and removal are handled in the Supabase
+Table Editor.
+
+Deploy the database migration and alert function:
+
+```bash
+supabase db push
+supabase functions deploy moderation-alert --no-verify-jwt
+```
+
+Configure the Edge Function with a Resend API key, a verified sender, and a strong
+random webhook secret:
+
+```bash
+supabase secrets set \
+  RESEND_API_KEY=... \
+  MODERATION_FROM_EMAIL="Local Revolt <moderation@your-verified-domain.example>" \
+  MODERATION_ALERT_EMAIL=ivana.rocci131@gmail.com \
+  MODERATION_WEBHOOK_SECRET=...
+```
+
+Store the function URL and the same webhook secret in Supabase Vault:
+
+```sql
+select vault.create_secret(
+  'https://YOUR_PROJECT_REF.supabase.co/functions/v1/moderation-alert',
+  'moderation_alert_url'
+);
+select vault.create_secret('YOUR_WEBHOOK_SECRET', 'moderation_webhook_secret');
+```
+
+The alerts contain only the event type and database record ID. They do not send
+community members' content or contact details to the email provider. To change
+the recipient later, update `MODERATION_ALERT_EMAIL` and redeploy the function.
+
 ---
 
 ## License
