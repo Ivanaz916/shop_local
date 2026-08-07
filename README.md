@@ -319,6 +319,9 @@ three-flag auto-hide behavior remains in place, and a moderator receives an emai
 for every new post, reply, or flag. Review and removal are handled in the Supabase
 Table Editor.
 
+The migration assumes the existing `requests` and `request_replies` tables have
+already been deployed.
+
 Deploy the database migration and alert function:
 
 ```bash
@@ -350,6 +353,8 @@ select vault.create_secret('YOUR_WEBHOOK_SECRET', 'moderation_webhook_secret');
 The alerts contain only the event type and database record ID. They do not send
 community members' content or contact details to the email provider. To change
 the recipient later, update `MODERATION_ALERT_EMAIL` and redeploy the function.
+After setup, create a test post, reply to it, and flag it once. Confirm all three
+emails arrive and check the Supabase Edge Function logs for any delivery errors.
 
 ---
 

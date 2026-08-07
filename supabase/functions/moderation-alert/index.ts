@@ -43,8 +43,12 @@ Deno.serve(async (request) => {
     return jsonResponse({ error: 'Email service is not configured' }, 500);
   }
 
-  const alertEmail = Deno.env.get('MODERATION_ALERT_EMAIL') ||
-    'ivana.rocci131@gmail.com';
+  const alertEmail = Deno.env.get('MODERATION_ALERT_EMAIL');
+  if (!alertEmail) {
+    console.error('MODERATION_ALERT_EMAIL is not configured');
+    return jsonResponse({ error: 'Recipient is not configured' }, 500);
+  }
+
   const senderEmail = Deno.env.get('MODERATION_FROM_EMAIL');
   if (!senderEmail) {
     console.error('MODERATION_FROM_EMAIL is not configured');
